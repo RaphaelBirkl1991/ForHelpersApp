@@ -7,6 +7,7 @@ import 'package:p12_basic_widgets/pin_remember_hint.dart';
 import 'package:p12_basic_widgets/registration.dart';
 import 'package:p12_basic_widgets/registration_fail.dart';
 import 'package:p12_basic_widgets/registration_success.dart';
+import 'package:p12_basic_widgets/splash_screen.dart';
 
 void main() {
   runApp(const MainApp());
@@ -20,7 +21,7 @@ class MainApp extends StatelessWidget {
     return const MaterialApp(
       home: Scaffold(
         body: Center(
-          child: PinAdditionalInfoScreen(),
+          child: SplashScreen(),
         ),
       ),
     );
