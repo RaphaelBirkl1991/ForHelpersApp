@@ -15,13 +15,16 @@ class PinCreationScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Spacer(),
-        Text(
-          "Create your PIN",
-          style: TextStyle(
-            fontWeight: FontWeight.normal,
-            fontSize: 25,
+        FractionallySizedBox(
+          widthFactor: 0.9,
+          child: Text(
+            "Create your PIN",
+            style: TextStyle(
+              fontWeight: FontWeight.normal,
+              fontSize: 25,
+            ),
+            textAlign: TextAlign.left,
           ),
-          textAlign: TextAlign.left,
         ),
         Spacer(),
         FractionallySizedBox(

@@ -12,16 +12,21 @@ class RegistrationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text(
-          "Registration",
-          style: TextStyle(
-            fontWeight: FontWeight.normal,
-            fontSize: 25,
+        Spacer(),
+        FractionallySizedBox(
+          widthFactor: 0.9,
+          child: Text(
+            "Registration",
+            style: TextStyle(
+              fontWeight: FontWeight.normal,
+              fontSize: 25,
+            ),
+            textAlign: TextAlign.left,
           ),
-          textAlign: TextAlign.left,
         ),
+        Spacer(),
         FractionallySizedBox(
           widthFactor: 0.9,
           child: TextField(
@@ -32,6 +37,7 @@ class RegistrationScreen extends StatelessWidget {
             ),
           ),
         ),
+        SizedBox(height: 30),
         FractionallySizedBox(
           widthFactor: 0.9,
           child: TextFormField(
@@ -43,6 +49,7 @@ class RegistrationScreen extends StatelessWidget {
             ),
           ),
         ),
+        Spacer(),
         FractionallySizedBox(
           widthFactor: 0.9,
           child: ElevatedButton(
@@ -58,6 +65,7 @@ class RegistrationScreen extends StatelessWidget {
             ),
           ),
         ),
+        Spacer(),
       ],
     );
   }

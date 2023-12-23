@@ -20,6 +20,7 @@ class PinInfoScreen extends StatelessWidget {
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.normal)),
           Spacer(),
           Spacer(),
+          Spacer(),
         ],
       ),
     );
