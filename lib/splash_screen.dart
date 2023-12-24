@@ -6,10 +6,10 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: MediaQuery.of(context).size.width, // Breite des Bildschirms
-        height: MediaQuery.of(context).size.height, // H
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
         color: Color(int.parse("0xFF010536")),
-        child: Center(
+        child: const Center(
             child: Image(
           image: AssetImage("assets/images/logo.png"),
           width: 130,

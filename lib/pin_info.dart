@@ -6,10 +6,9 @@ class PinInfoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width, // Breite des Bildschirms
-      padding: EdgeInsets.symmetric(
-          horizontal: 20.0), // optional: horizontaler Innenabstand
-      child: Column(
+      width: MediaQuery.of(context).size.width,
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Spacer(),

@@ -14,8 +14,8 @@ class RegistrationScreen extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Spacer(),
-        FractionallySizedBox(
+        const Spacer(),
+        const FractionallySizedBox(
           widthFactor: 0.9,
           child: Text(
             "Registration",
@@ -26,46 +26,43 @@ class RegistrationScreen extends StatelessWidget {
             textAlign: TextAlign.left,
           ),
         ),
-        Spacer(),
-        FractionallySizedBox(
+        const Spacer(),
+        const FractionallySizedBox(
           widthFactor: 0.9,
           child: TextField(
             decoration: InputDecoration(
-              //  icon: Icon(Icons.person),
               labelText: "Idetification number",
               border: OutlineInputBorder(),
             ),
           ),
         ),
-        SizedBox(height: 30),
+        const SizedBox(height: 30),
         FractionallySizedBox(
           widthFactor: 0.9,
           child: TextFormField(
-            decoration: InputDecoration(
-              //       icon: Icon(Icons.lock),
-              //   hintText: "Your provided initial password",
+            decoration: const InputDecoration(
               labelText: "Initial password",
               border: OutlineInputBorder(),
             ),
           ),
         ),
-        Spacer(),
+        const Spacer(),
         FractionallySizedBox(
           widthFactor: 0.9,
           child: ElevatedButton(
             onPressed: () {},
-            child: Text(
-              "Register",
-              style: TextStyle(color: Colors.white),
-            ),
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(
                 hexToColor(hexColor),
               ),
             ),
+            child: const Text(
+              "Register",
+              style: TextStyle(color: Colors.white),
+            ),
           ),
         ),
-        Spacer(),
+        const Spacer(),
       ],
     );
   }

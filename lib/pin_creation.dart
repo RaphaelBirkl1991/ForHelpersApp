@@ -14,8 +14,8 @@ class PinCreationScreen extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Spacer(),
-        FractionallySizedBox(
+        const Spacer(),
+        const FractionallySizedBox(
           widthFactor: 0.9,
           child: Text(
             "Create your PIN",
@@ -26,8 +26,8 @@ class PinCreationScreen extends StatelessWidget {
             textAlign: TextAlign.left,
           ),
         ),
-        Spacer(),
-        FractionallySizedBox(
+        const Spacer(),
+        const FractionallySizedBox(
           widthFactor: 0.9,
           child: TextField(
             decoration: InputDecoration(
@@ -37,35 +37,33 @@ class PinCreationScreen extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 45),
+        const SizedBox(height: 45),
         FractionallySizedBox(
           widthFactor: 0.9,
           child: TextFormField(
-            decoration: InputDecoration(
-              //       icon: Icon(Icons.lock),
-              //   hintText: "Your provided initial password",
+            decoration: const InputDecoration(
               labelText: "Retipe your PIN",
               border: OutlineInputBorder(),
             ),
           ),
         ),
-        Spacer(),
+        const Spacer(),
         FractionallySizedBox(
           widthFactor: 0.9,
           child: ElevatedButton(
             onPressed: () {},
-            child: Text(
-              "Create PIN",
-              style: TextStyle(color: Colors.white),
-            ),
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(
                 hexToColor(hexColor),
               ),
             ),
+            child: const Text(
+              "Create PIN",
+              style: TextStyle(color: Colors.white),
+            ),
           ),
         ),
-        Spacer(),
+        const Spacer(),
       ],
     );
   }
