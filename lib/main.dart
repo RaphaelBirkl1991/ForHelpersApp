@@ -21,7 +21,7 @@ class MainApp extends StatelessWidget {
     return const MaterialApp(
       home: Scaffold(
         body: Center(
-          child: PinAdditionalInfoScreen(),
+          child: SplashScreen(),
         ),
       ),
     );

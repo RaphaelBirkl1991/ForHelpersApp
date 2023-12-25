@@ -15,7 +15,17 @@
 ![figma-login-screens-03](assets/md-assets/figma_login_screens_03.png)
 
 
-## The Login Screens made with in Flutter 
+## The Login Screens made with Flutter 
+
+![splash_screen](assets/md-assets/splashscreen.png)
+![registration_screen](assets/md-assets/registration_screen.png)
+![loading_screen](assets/md-assets/loading_screen.png)
+![registration_success_screen](assets/md-assets/registration_success_screen.png)
+![pin_additional_info_screen](assets/md-assets/pin_additional_info_screen.png)
+![pin_creation_screen](assets/md-assets/pin_creation_screen.png)
+![pin_activated_screen](assets/md-assets/pin_activated_screen.png)
+![additional_info_screen](assets/md-assets/additional_info_screen.png)
+
 
 ## The remaining Figma Screens 
 
@@ -25,3 +35,5 @@
 ## App overview (Wireframes)
 
 ![figma-app-wireframes](assets/md-assets/figma_app-wireframes.png)
+
+### Hint: The wireframes refer an older version of the App. I have switched to a more minimalistic Materials Design. I will adjust the wireframes later on.  
