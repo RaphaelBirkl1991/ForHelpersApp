@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:p12_basic_widgets/loading_screen.dart';
-import 'package:p12_basic_widgets/pin_activated.dart';
-import 'package:p12_basic_widgets/pin_creation.dart';
-import 'package:p12_basic_widgets/pin_info.dart';
-import 'package:p12_basic_widgets/pin_additional_info.dart';
-import 'package:p12_basic_widgets/registration.dart';
-import 'package:p12_basic_widgets/registration_fail.dart';
-import 'package:p12_basic_widgets/registration_success.dart';
-import 'package:p12_basic_widgets/splash_screen.dart';
+import 'package:p12_basic_widgets/screens/loading_screen.dart';
+import 'package:p12_basic_widgets/screens/pin_activated.dart';
+import 'package:p12_basic_widgets/screens/pin_creation.dart';
+import 'package:p12_basic_widgets/screens/pin_info.dart';
+import 'package:p12_basic_widgets/screens/pin_additional_info.dart';
+import 'package:p12_basic_widgets/screens/registration.dart';
+import 'package:p12_basic_widgets/screens/registration_fail.dart';
+import 'package:p12_basic_widgets/screens/registration_success.dart';
+import 'package:p12_basic_widgets/screens/splash_screen.dart';
 
 void main() {
   runApp(const MainApp());
