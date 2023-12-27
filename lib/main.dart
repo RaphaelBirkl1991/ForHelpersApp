@@ -8,6 +8,7 @@ import 'package:p12_basic_widgets/screens/registration.dart';
 import 'package:p12_basic_widgets/screens/registration_fail.dart';
 import 'package:p12_basic_widgets/screens/registration_success.dart';
 import 'package:p12_basic_widgets/screens/splash_screen.dart';
+import 'package:p12_basic_widgets/screens/tabbar_screen.dart';
 
 void main() {
   runApp(const MainApp());
@@ -18,10 +19,14 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      // theme: ThemeData(
+      //   scaffoldBackgroundColor: Colors.white,
+      // ),
       home: Scaffold(
-        body: Center(
-          child: SplashScreen(),
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          child: TabBarScreen(),
         ),
       ),
     );
