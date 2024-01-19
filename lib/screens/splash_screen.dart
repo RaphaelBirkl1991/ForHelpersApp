@@ -8,7 +8,7 @@ class SplashScreen extends StatelessWidget {
     return Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        color: Color(int.parse("0xFF010536")),
+        color: Theme.of(context).primaryColor,
         child: const Center(
             child: Image(
           image: AssetImage("assets/images/logo.png"),

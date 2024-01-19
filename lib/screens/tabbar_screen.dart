@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:p12_basic_widgets/helper_widgets/decumentation_column.dart';
+import 'package:p12_basic_widgets/helper_widgets/documentation_column.dart';
 import 'package:p12_basic_widgets/helper_widgets/settings_column.dart';
 import 'package:p12_basic_widgets/screens/about_screen.dart';
 
@@ -25,8 +25,13 @@ class TabBarExample extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          bottom: const TabBar(
-            tabs: <Widget>[
+          bottom: TabBar(
+            indicatorColor: Theme.of(context).primaryColor,
+            automaticIndicatorColorAdjustment: true,
+            indicatorWeight: 2,
+            dividerColor: Colors.grey,
+            labelColor: Theme.of(context).primaryColor,
+            tabs: const <Widget>[
               Tab(
                 text: "Settings",
               ),

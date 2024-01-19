@@ -79,7 +79,7 @@ class _SettingsColumnState extends State<SettingsColumn> {
         ),
         Spacer(),
         Text(
-          "Retipe PIN",
+          "PIN",
           style: TextStyle(fontSize: 25),
         ),
         Row(
@@ -89,7 +89,7 @@ class _SettingsColumnState extends State<SettingsColumn> {
                 padding: EdgeInsets.all(8.0),
                 child: TextField(
                   decoration: InputDecoration(
-                    hintText: 'Enter Text',
+                    hintText: 'Retipe your PIN',
                     border: OutlineInputBorder(),
                   ),
                 ),
@@ -98,7 +98,10 @@ class _SettingsColumnState extends State<SettingsColumn> {
             SizedBox(width: 8.0),
             ElevatedButton(
               onPressed: () {},
-              child: Text('Button'),
+              child: Text('save', style: TextStyle(color: Colors.white)),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(int.parse("0xFF010536")),
+              ),
             ),
           ],
         ),
