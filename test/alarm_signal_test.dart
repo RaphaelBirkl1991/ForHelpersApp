@@ -1,4 +1,4 @@
-import 'package:p12_basic_widgets/entities/alarm-signal.dart';
+import 'package:p12_basic_widgets/domain/entities/alarm-signal.dart';
 import 'package:test/test.dart';
 
 void main() {

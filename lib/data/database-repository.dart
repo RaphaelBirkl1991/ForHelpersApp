@@ -1,16 +1,16 @@
-import 'package:p12_basic_widgets/entities/user.dart';
-import 'package:p12_basic_widgets/enums/enum_app-state.dart';
-import 'package:p12_basic_widgets/enums/enum_language.dart';
-import 'package:p12_basic_widgets/enums/enum_mode.dart';
+import 'package:p12_basic_widgets/domain/entities/user.dart';
+import 'package:p12_basic_widgets/domain/enums/enum_app-state.dart';
+import 'package:p12_basic_widgets/domain/enums/enum_language.dart';
+import 'package:p12_basic_widgets/domain/enums/enum_mode.dart';
 
 class DatabaseRepository {
-  List<User> _users;
-  List<AppState> _appStates;
-  AppState _currentAppstate;
+  final List<User> _users;
+  final List<AppState> _appStates;
+  final AppState _currentAppstate;
   bool _onDuty;
   bool _smokeActive;
   bool _alarmActive;
-  Language _language;
+  final Language _language;
 
   DatabaseRepository(this._users, this._appStates, this._currentAppstate,
       this._onDuty, this._smokeActive, this._alarmActive, this._language);

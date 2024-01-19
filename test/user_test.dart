@@ -1,4 +1,4 @@
-import 'package:p12_basic_widgets/entities/user.dart';
+import 'package:p12_basic_widgets/domain/entities/user.dart';
 import 'package:test/test.dart';
 
 void main() {

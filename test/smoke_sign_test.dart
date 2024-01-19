@@ -1,4 +1,4 @@
-import 'package:p12_basic_widgets/entities/smoke-sign.dart';
+import 'package:p12_basic_widgets/domain/entities/smoke-sign.dart';
 import 'package:test/test.dart';
 
 void main() {

@@ -1,5 +1,5 @@
-import 'package:p12_basic_widgets/enums/enum_language.dart';
-import 'package:p12_basic_widgets/enums/enum_mode.dart';
+import 'package:p12_basic_widgets/domain/enums/enum_language.dart';
+import 'package:p12_basic_widgets/domain/enums/enum_mode.dart';
 
 class Settings {
   Mode mode;
