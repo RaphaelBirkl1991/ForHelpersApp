@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SettingsColumn extends StatefulWidget {
-  const SettingsColumn({Key? key});
+  const SettingsColumn({super.key});
 
   @override
   State<SettingsColumn> createState() => _SettingsColumnState();
@@ -15,13 +15,13 @@ class _SettingsColumnState extends State<SettingsColumn> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Spacer(),
-        Text(
+        const Spacer(),
+        const Text(
           "Language",
           style: TextStyle(fontSize: 25),
         ),
         RadioListTile(
-          title: Text('English'),
+          title: const Text('English'),
           value: 1,
           groupValue: _selectedValue,
           onChanged: (value) {
@@ -32,7 +32,7 @@ class _SettingsColumnState extends State<SettingsColumn> {
           controlAffinity: ListTileControlAffinity.trailing,
         ),
         RadioListTile(
-          title: Text('German'),
+          title: const Text('German'),
           value: 2, // Wert für den zweiten RadioButton ändern
           groupValue: _selectedValue,
           onChanged: (value) {
@@ -43,7 +43,7 @@ class _SettingsColumnState extends State<SettingsColumn> {
           controlAffinity: ListTileControlAffinity.trailing,
         ),
         RadioListTile(
-          title: Text('Bavarian'),
+          title: const Text('Bavarian'),
           value: 3, // Wert für den dritten RadioButton ändern
           groupValue: _selectedValue,
           onChanged: (value) {
@@ -53,10 +53,10 @@ class _SettingsColumnState extends State<SettingsColumn> {
           },
           controlAffinity: ListTileControlAffinity.trailing,
         ),
-        Spacer(),
-        Text("Color Schemes", style: TextStyle(fontSize: 25)),
+        const Spacer(),
+        const Text("Color Schemes", style: TextStyle(fontSize: 25)),
         RadioListTile(
-          title: Text('Default'),
+          title: const Text('Default'),
           value: 4, // Wert für den vierten RadioButton ändern
           groupValue: _selectedValue,
           onChanged: (value) {
@@ -67,7 +67,7 @@ class _SettingsColumnState extends State<SettingsColumn> {
           controlAffinity: ListTileControlAffinity.trailing,
         ),
         RadioListTile(
-          title: Text('Darkmode'),
+          title: const Text('Darkmode'),
           value: 5, // Wert für den fünften RadioButton ändern
           groupValue: _selectedValue,
           onChanged: (value) {
@@ -77,14 +77,14 @@ class _SettingsColumnState extends State<SettingsColumn> {
           },
           controlAffinity: ListTileControlAffinity.trailing,
         ),
-        Spacer(),
-        Text(
+        const Spacer(),
+        const Text(
           "PIN",
           style: TextStyle(fontSize: 25),
         ),
         Row(
           children: [
-            Expanded(
+            const Expanded(
               child: Padding(
                 padding: EdgeInsets.all(8.0),
                 child: TextField(
@@ -95,17 +95,17 @@ class _SettingsColumnState extends State<SettingsColumn> {
                 ),
               ),
             ),
-            SizedBox(width: 8.0),
+            const SizedBox(width: 8.0),
             ElevatedButton(
               onPressed: () {},
-              child: Text('save', style: TextStyle(color: Colors.white)),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(int.parse("0xFF010536")),
               ),
+              child: const Text('save', style: TextStyle(color: Colors.white)),
             ),
           ],
         ),
-        Spacer(),
+        const Spacer(),
       ],
     );
   }
