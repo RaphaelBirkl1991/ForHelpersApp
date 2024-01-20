@@ -11,6 +11,7 @@ class _SmokeSignalScreenState extends State<SmokeSignalScreen> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const Spacer(),
         Text("Precautionary Signal",
@@ -18,11 +19,21 @@ class _SmokeSignalScreenState extends State<SmokeSignalScreen> {
         const Spacer(),
         const Spacer(),
         const Spacer(),
-        const Text(
-            "Specify Signal and \nkeep trigger pressed \nto set smokesign"),
+        Center(
+          child: Text(
+            "Specify Signal and \nkeep trigger pressed \nto set smokesign",
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+        ),
         const Spacer(),
-        ElevatedButton(
-            onPressed: () {}, child: const Text("prepare smokesign")),
+        Center(
+          child: ElevatedButton(
+              onPressed: () {},
+              child: const Text(
+                "prepare smokesign",
+                style: TextStyle(color: Colors.white),
+              )),
+        ),
         const Spacer(),
         const Spacer(),
       ],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:p12_basic_widgets/presentation/precautionary_screen.dart';
-import 'package:p12_basic_widgets/presentation/registration_success.dart';
-import 'package:p12_basic_widgets/presentation/splash_screen.dart';
+import 'package:p12_basic_widgets/presentation/alarm_screen.dart';
+import 'package:p12_basic_widgets/presentation/map_screen.dart';
+import 'package:p12_basic_widgets/presentation/smoke_screen.dart';
 import 'package:p12_basic_widgets/presentation/tabbar_screen.dart';
 
 void main() {
@@ -16,14 +16,19 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         textTheme: const TextTheme(
-          headlineMedium: TextStyle(fontSize: 25),
+          headlineMedium: TextStyle(fontSize: 32),
           displayMedium: TextStyle(fontSize: 25, fontWeight: FontWeight.normal),
-          bodyMedium: TextStyle(fontSize: 13),
+          bodyMedium: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
         ),
         primaryColor: Color(int.parse("0xFF010536")),
+        hintColor: Colors.white,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(const Color(0xFF010536)),
+            textStyle: MaterialStateProperty.all<TextStyle>(
+              const TextStyle(color: Colors.white),
+            ),
+            backgroundColor:
+                MaterialStateProperty.all<Color>(const Color(0xFF010536)),
           ),
         ),
         scaffoldBackgroundColor: Colors.white,
@@ -45,9 +50,9 @@ class _MainAppState extends State<MainAppScreen> {
 
   // Widgets für jede Seite, die durch die Bottom Navigation Bar angezeigt wird
   final List<Widget> _pages = [
-    const SplashScreen(),
+    const MapScreen(),
     const SmokeSignalScreen(),
-    const RegistrationSuccessScreen(),
+    const AlarmSignalScreen(),
     const TabBarScreen()
   ];
 
