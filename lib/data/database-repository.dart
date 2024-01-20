@@ -15,32 +15,59 @@ class DatabaseRepository {
   DatabaseRepository(this._users, this._appStates, this._currentAppstate,
       this._onDuty, this._smokeActive, this._alarmActive, this._language);
 
-  void setAppState(AppState appState) {
+  Future<void> setAppState(AppState appState) async {
+    Future.delayed(const Duration(seconds: 2));
     AppState currentAppstate = appState;
   }
 
-  void addUser(User user) => _users.add(user);
+  Future<void> addUser(User user) async {
+    Future.delayed(const Duration(seconds: 2));
+    _users.add(user);
+  }
 
-  void deleteUser(User user) => _users.remove(user);
+  Future<void> deleteUser(User user) async {
+    Future.delayed(const Duration(seconds: 2));
+    _users.remove(user);
+  }
 
-  void setOnDuty() => _onDuty = true;
+  Future<void> setOnDuty() async {
+    Future.delayed(const Duration(seconds: 2));
+    _onDuty = true;
+  }
 
-  void setOffDuty() => _onDuty = false;
+  Future<void> setOffDuty() async {
+    Future.delayed(const Duration(seconds: 2));
+    _onDuty = false;
+  }
 
-  void setSmokeActive() => _smokeActive = true;
+  Future<void> setSmokeActive() async {
+    Future.delayed(const Duration(seconds: 2));
+    _smokeActive = true;
+  }
 
-  void setSmokeNonActive() => _smokeActive = false;
+  Future<void> setSmokeNonActive() async {
+    Future.delayed(const Duration(seconds: 2));
+    _smokeActive = false;
+  }
 
-  void setAlarmActive() => _alarmActive = true;
+  Future<void> setAlarmActive() async {
+    Future.delayed(const Duration(seconds: 2));
+    _alarmActive = true;
+  }
 
-  void setAlarmNonActive() => _alarmActive = false;
+  Future<void> setAlarmNonActive() async {
+    Future.delayed(const Duration(seconds: 2));
+    _alarmActive = false;
+  }
 
-  void setLanguage(Language language) {
+  Future<void> setLanguage(Language language) async {
+    Future.delayed(const Duration(seconds: 2));
     Language currentLanguage;
     currentLanguage = language;
   }
 
-  void setColorMode(Mode colorMode) {
+  Future<void> setColorMode(Mode colorMode) async {
+    Future.delayed(const Duration(seconds: 2));
     Mode currentMode;
     currentMode = colorMode;
   }
