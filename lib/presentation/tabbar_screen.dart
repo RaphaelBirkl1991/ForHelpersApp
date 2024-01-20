@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:p12_basic_widgets/application/services/documentation_column.dart';
-import 'package:p12_basic_widgets/application/services/settings_column.dart';
+import 'package:p12_basic_widgets/application/services/provide_documentation_column.dart';
+import 'package:p12_basic_widgets/application/services/provide_settings_column.dart';
 import 'package:p12_basic_widgets/presentation/about_screen.dart';
 
 class TabBarScreen extends StatelessWidget {
