@@ -6,21 +6,24 @@ class DocumentationColumn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Spacer(),
-        Text("How to use this App",
-            style: Theme.of(context).textTheme.headlineMedium),
-        const Spacer(),
-        const ProvideLoremIpsum(),
-        const Spacer(),
-        Text("Different Signal Modes",
-            style: Theme.of(context).textTheme.headlineMedium),
-        const Spacer(),
-        const ProvideLoremIpsum(),
-        const Spacer(),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Spacer(),
+          Text("How to use this App",
+              style: Theme.of(context).textTheme.headlineMedium),
+          const Spacer(),
+          const ProvideLoremIpsum(),
+          const Spacer(),
+          Text("Different Signal Modes",
+              style: Theme.of(context).textTheme.headlineMedium),
+          const Spacer(),
+          const ProvideLoremIpsum(),
+          const Spacer(),
+        ],
+      ),
     );
   }
 }
