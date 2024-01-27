@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:p12_basic_widgets/application/provide_custom_navbar.dart';
+import 'package:p12_basic_widgets/application/services/provide_custom_navbar.dart';
+import 'package:p12_basic_widgets/config/app_theme.dart';
 import 'package:p12_basic_widgets/presentation/alarm_screen.dart';
 import 'package:p12_basic_widgets/presentation/map_screen.dart';
 import 'package:p12_basic_widgets/presentation/smoke_screen.dart';
@@ -15,25 +16,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        textTheme: const TextTheme(
-          headlineMedium: TextStyle(fontSize: 32),
-          displayMedium: TextStyle(fontSize: 25, fontWeight: FontWeight.normal),
-          bodyMedium: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
-        ),
-        primaryColor: Color(int.parse("0xFF010536")),
-        hintColor: Colors.white,
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ButtonStyle(
-            textStyle: MaterialStateProperty.all<TextStyle>(
-              const TextStyle(color: Colors.white),
-            ),
-            backgroundColor:
-                MaterialStateProperty.all<Color>(const Color(0xFF010536)),
-          ),
-        ),
-        scaffoldBackgroundColor: Colors.white,
-      ),
+      theme: AppTheme.themeData,
       home: const MainAppScreen(),
     );
   }
