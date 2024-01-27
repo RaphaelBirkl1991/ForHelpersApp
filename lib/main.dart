@@ -64,22 +64,23 @@ class _MainAppState extends State<MainAppScreen> {
         children: _pages,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Theme.of(context).primaryColor,
         items: [
           BottomNavigationBarItem(
               icon: Icon(Icons.map_outlined,
                   color: Theme.of(context).primaryColor),
-              label: ""),
+              label: "map"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.warning_outlined,
+              icon: Icon(Icons.warning_amber_outlined,
                   color: Theme.of(context).primaryColor),
-              label: ""),
+              label: "smoke"),
           BottomNavigationBarItem(
               icon: Icon(Icons.alarm, color: Theme.of(context).primaryColor),
-              label: ""),
+              label: "alarm"),
           BottomNavigationBarItem(
               icon:
                   Icon(Icons.more_vert, color: Theme.of(context).primaryColor),
-              label: ""),
+              label: "settings"),
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
