@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
 
-class DrawerSmokeScreen extends StatelessWidget {
+class DrawerSmokeScreen extends StatefulWidget {
   const DrawerSmokeScreen({super.key});
+
+  @override
+  State<DrawerSmokeScreen> createState() => _DrawerSmokeScreenState();
+}
+
+class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
+  int selectedValue = -1;
+  bool isDelinquentsChecked = false;
+  bool isDrugAbuseChecked = false;
+  bool isWeaponsInvolvedChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -15,68 +25,77 @@ class DrawerSmokeScreen extends StatelessWidget {
               style: TextStyle(fontSize: 25),
             ),
           ),
-          ListTile(
-            leading: IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.radio_button_unchecked)),
-            title: const Text('pending violence'),
-            onTap: () {
-              // Update the state of the app.
-              // ...
+          RadioListTile<int>(
+              title: const Text("pending violence"),
+              value: 1,
+              groupValue: selectedValue,
+              onChanged: (value) {
+                if (value != null) {
+                  setState(() {
+                    selectedValue = value;
+                  });
+                }
+              }),
+          RadioListTile<int>(
+              title: const Text("first aid meassures"),
+              value: 2,
+              groupValue: selectedValue,
+              onChanged: (value) {
+                if (value != null) {
+                  setState(() {
+                    selectedValue = value;
+                  });
+                }
+              }),
+          RadioListTile<int>(
+              title: const Text("evacuation"),
+              value: 3,
+              groupValue: selectedValue,
+              onChanged: (value) {
+                if (value != null) {
+                  setState(() {
+                    selectedValue = value;
+                  });
+                }
+              }),
+          RadioListTile<int>(
+              title: const Text("tracing after crime"),
+              value: 4,
+              groupValue: selectedValue,
+              onChanged: (value) {
+                if (value != null) {
+                  setState(() {
+                    selectedValue = value;
+                  });
+                }
+              }),
+          const Divider(),
+          CheckboxListTile(
+            title: const Text('> 10 delinquents'),
+            value: isDelinquentsChecked,
+            onChanged: (value) {
+              setState(() {
+                isDelinquentsChecked = !isDelinquentsChecked;
+              });
             },
           ),
-          ListTile(
-            leading: IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.radio_button_unchecked)),
-            title: const Text('first aid meassures'),
-            onTap: () {
-              // Update the state of the app.
-              // ...
+          CheckboxListTile(
+            title: const Text('drug abuse'),
+            value: isDrugAbuseChecked,
+            onChanged: (value) {
+              setState(() {
+                isDrugAbuseChecked = !isDrugAbuseChecked;
+              });
             },
           ),
-          ListTile(
-            leading: IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.radio_button_unchecked)),
-            title: const Text('evacuation'),
-            onTap: () {
-              // Update the state of the app.
-              // ...
+          CheckboxListTile(
+            title: const Text('weapons involved'),
+            value: isWeaponsInvolvedChecked,
+            onChanged: (value) {
+              setState(() {
+                isWeaponsInvolvedChecked = !isWeaponsInvolvedChecked;
+              });
             },
-          ),
-          ListTile(
-            leading: IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.radio_button_unchecked)),
-            title: const Text('tracing after crime'),
-            onTap: () {
-              // Update the state of the app.
-              // ...
-            },
-          ),
-          const Spacer(),
-          const Spacer(),
-          ListTile(
-            leading: IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.check_box_outline_blank)),
-            title: const Text("> 10 delinquents"),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.check_box_outline_blank)),
-            title: const Text("drug abuse"),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.check_box_outline_blank)),
-            title: const Text("weapons involved"),
-            onTap: () {},
           ),
           const Divider(),
           Row(
@@ -90,7 +109,9 @@ class DrawerSmokeScreen extends StatelessWidget {
                   )),
               const SizedBox(width: 11),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context);
+                },
                 style: ButtonStyle(
                   backgroundColor:
                       MaterialStateProperty.all<Color>(Colors.white),
