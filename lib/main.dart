@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:p12_basic_widgets/application/provide_custom_navbar.dart';
 import 'package:p12_basic_widgets/presentation/alarm_screen.dart';
 import 'package:p12_basic_widgets/presentation/map_screen.dart';
 import 'package:p12_basic_widgets/presentation/smoke_screen.dart';
@@ -63,32 +64,12 @@ class _MainAppState extends State<MainAppScreen> {
         index: _selectedIndex,
         children: _pages,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Theme.of(context).primaryColor,
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.map_outlined,
-                  color: Theme.of(context).primaryColor),
-              label: "map"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.warning_amber_outlined,
-                  color: Theme.of(context).primaryColor),
-              label: "smoke"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.alarm, color: Theme.of(context).primaryColor),
-              label: "alarm"),
-          BottomNavigationBarItem(
-              icon:
-                  Icon(Icons.more_vert, color: Theme.of(context).primaryColor),
-              label: "settings"),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-      ),
+      bottomNavigationBar: CustomNavBar(
+          selectedIndex: _selectedIndex, onItemTapped: onItemTapped),
     );
   }
 
-  void _onItemTapped(int index) {
+  void onItemTapped(int index) {
     if (index == 4) {
       // Wenn das vierte Element (Index 3) ausgewählt ist, navigiere zum TabBarScreen
       Navigator.pushReplacement(
