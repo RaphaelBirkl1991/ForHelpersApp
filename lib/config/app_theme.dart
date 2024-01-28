@@ -7,6 +7,14 @@ class AppTheme {
       displayMedium: TextStyle(fontSize: 25, fontWeight: FontWeight.normal),
       bodyMedium: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
     ),
+    tabBarTheme: TabBarTheme(
+        indicatorColor: Colors.green,
+        labelColor: Colors.green,
+        //     indicatorColor: Color(int.parse("0xFF010536")),
+        //   labelColor: Color(int.parse("0xFF010536")),
+        indicator: BoxDecoration(
+          color: Color(int.parse("0xFF010536")),
+        )),
     primaryColor: Color(int.parse("0xFF010536")),
     hintColor: Colors.white,
     elevatedButtonTheme: ElevatedButtonThemeData(

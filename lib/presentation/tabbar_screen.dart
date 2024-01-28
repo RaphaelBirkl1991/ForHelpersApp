@@ -26,11 +26,13 @@ class TabBarExample extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           bottom: TabBar(
+            labelStyle: TextStyle(color: Theme.of(context).primaryColor),
+            labelColor: Theme.of(context).primaryColor,
+            unselectedLabelColor: Colors.black,
             indicatorColor: Theme.of(context).primaryColor,
             automaticIndicatorColorAdjustment: true,
             indicatorWeight: 2,
             dividerColor: Colors.grey,
-            labelColor: Theme.of(context).primaryColor,
             tabs: const <Widget>[
               Tab(
                 text: "Settings",

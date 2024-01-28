@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:p12_basic_widgets/domain/enums/enum_smoke_specification.dart';
 
 class DrawerSmokeScreen extends StatefulWidget {
   const DrawerSmokeScreen({super.key});
@@ -9,9 +10,17 @@ class DrawerSmokeScreen extends StatefulWidget {
 
 class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
   int selectedValue = -1;
+  SmokeSpecification? specification;
   bool isDelinquentsChecked = false;
   bool isDrugAbuseChecked = false;
   bool isWeaponsInvolvedChecked = false;
+  late MaterialStatesController buttonStatesController;
+
+  @override
+  void initState() {
+    super.initState();
+    buttonStatesController = MaterialStatesController();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,51 +36,61 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
           ),
           RadioListTile<int>(
               title: const Text("pending violence"),
+              activeColor: Theme.of(context).primaryColor,
               value: 1,
               groupValue: selectedValue,
               onChanged: (value) {
                 if (value != null) {
                   setState(() {
                     selectedValue = value;
+
+                    specification = SmokeSpecification.pending_violence;
                   });
                 }
               }),
           RadioListTile<int>(
               title: const Text("first aid meassures"),
+              activeColor: Theme.of(context).primaryColor,
               value: 2,
               groupValue: selectedValue,
               onChanged: (value) {
                 if (value != null) {
                   setState(() {
                     selectedValue = value;
+                    specification = SmokeSpecification.first_aid;
                   });
                 }
               }),
           RadioListTile<int>(
               title: const Text("evacuation"),
+              activeColor: Theme.of(context).primaryColor,
               value: 3,
               groupValue: selectedValue,
               onChanged: (value) {
                 if (value != null) {
                   setState(() {
                     selectedValue = value;
+                    specification = SmokeSpecification.evacuation;
                   });
                 }
               }),
           RadioListTile<int>(
               title: const Text("tracing after crime"),
+              activeColor: Theme.of(context).primaryColor,
               value: 4,
               groupValue: selectedValue,
               onChanged: (value) {
                 if (value != null) {
                   setState(() {
                     selectedValue = value;
+                    specification = SmokeSpecification.tracing;
                   });
                 }
               }),
           const Divider(),
           CheckboxListTile(
             title: const Text('> 10 delinquents'),
+            activeColor: Theme.of(context).primaryColor,
             value: isDelinquentsChecked,
             onChanged: (value) {
               setState(() {
@@ -81,6 +100,7 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
           ),
           CheckboxListTile(
             title: const Text('drug abuse'),
+            activeColor: Theme.of(context).primaryColor,
             value: isDrugAbuseChecked,
             onChanged: (value) {
               setState(() {
@@ -90,6 +110,7 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
           ),
           CheckboxListTile(
             title: const Text('weapons involved'),
+            activeColor: Theme.of(context).primaryColor,
             value: isWeaponsInvolvedChecked,
             onChanged: (value) {
               setState(() {
@@ -98,18 +119,40 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
             },
           ),
           const Divider(),
+          const SizedBox(height: 15),
           Row(
             children: [
               const Spacer(),
               ElevatedButton(
-                  onPressed: () {},
-                  child: const Text(
-                    "Set Signal",
-                    style: TextStyle(color: Colors.white),
-                  )),
+                onPressed: isSpecificationSelected(specification)
+                    ? () {
+                        print("btn klicked");
+                      }
+                    : null,
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                    (states) {
+                      if (states.contains(MaterialState.disabled)) {
+                        return Colors.grey;
+                      }
+                      return Theme.of(context).primaryColor;
+                    },
+                  ),
+                ),
+                child: const Text(
+                  "Set Signal",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              // child: const Text(
+              //   "Set Signal",
+              //   style: ButtonStyle(),
+              //   TextStyle(color: Colors.white),
+              // )),
               const SizedBox(width: 11),
               ElevatedButton(
                 onPressed: () {
+                  selectedValue = -1;
                   Navigator.pop(context);
                 },
                 style: ButtonStyle(
@@ -119,10 +162,19 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
                 child:
                     const Text("Cancel", style: TextStyle(color: Colors.black)),
               ),
+              const SizedBox(width: 15),
             ],
           )
         ],
       ),
     );
+  }
+
+  static bool isSpecificationSelected(SmokeSpecification? specification) {
+    if (specification != null) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
