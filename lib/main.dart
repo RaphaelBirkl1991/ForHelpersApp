@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/application/provider/custom_navbar.dart';
 import 'package:p12_basic_widgets/config/app_theme.dart';
-import 'package:p12_basic_widgets/presentation/alarm_screen.dart';
-import 'package:p12_basic_widgets/presentation/map_screen.dart';
-import 'package:p12_basic_widgets/presentation/smoke_screen.dart';
-import 'package:p12_basic_widgets/presentation/tabbar_screen.dart';
+import 'package:p12_basic_widgets/presentation/main_screens/alarm_screen.dart';
+import 'package:p12_basic_widgets/presentation/main_screens/map_screen.dart';
+import 'package:p12_basic_widgets/presentation/main_screens/smoke_screen.dart';
+import 'package:p12_basic_widgets/presentation/main_screens/tabbar_screen.dart';
 
 void main() {
   runApp(const MainApp());

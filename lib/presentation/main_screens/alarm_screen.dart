@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:p12_basic_widgets/application/provider/segmented_btn.dart';
+import 'package:p12_basic_widgets/application/provider/alarm_trigger_btn.dart';
 
 class AlarmSignalScreen extends StatefulWidget {
   const AlarmSignalScreen({super.key});
@@ -28,7 +28,7 @@ class _AlarmSignalScreenState extends State<AlarmSignalScreen> {
               "Activate button and \nkeep trigger pressed \n to send alarmsignal"),
         ),
         const Spacer(),
-        const SingleChoice(),
+        const AlarmTriggerBtn(),
         const Spacer(),
       ],
     );

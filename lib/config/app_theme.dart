@@ -17,6 +17,13 @@ class AppTheme {
         )),
     primaryColor: Color(int.parse("0xFF010536")),
     hintColor: Colors.white,
+    segmentedButtonTheme: const SegmentedButtonThemeData(
+      style: ButtonStyle(
+        textStyle: MaterialStatePropertyAll<TextStyle>(
+          TextStyle(backgroundColor: Color(0xFF010536)),
+        ),
+      ),
+    ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
         textStyle: MaterialStateProperty.all<TextStyle>(

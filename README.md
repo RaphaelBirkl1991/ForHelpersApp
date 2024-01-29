@@ -9,10 +9,12 @@
 ## 2. The Tasksheet
 
 ### The main goals are
-### A: create the login screens for the own app in flutter 
+
+### A: create the login screens for the own app in flutter
+
 ### B: simulate the Database with an Database Repository
 
-## 3. The Login / Registration Screens
+## 3. The Screens
 
 ![splash_screen](assets/md-assets/splashscreen.png)
 ![registration_screen](assets/md-assets/registration_screen.png)
@@ -22,6 +24,11 @@
 ![pin_creation_screen](assets/md-assets/pin_creation_screen.png)
 ![pin_activated_screen](assets/md-assets/pin_activated_screen.png)
 ![additional_info_screen](assets/md-assets/additional_info_screen.png)
+![smoke_darwer](assets/md-assets/smoke_drawer.png)
+![smoke_screen](assets/md-assets/smoke_screen.png)
+![documentation_screen](assets/md-assets/documentation_screen.png)
+![settings_screen](assets/md-assets/settings_screen.png)
+![impressum_screen](assets/md-assets/impressum_screen.png)
 
 ## 4. The Database Simulation
 
