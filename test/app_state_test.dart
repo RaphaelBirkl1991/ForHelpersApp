@@ -1,4 +1,4 @@
-import 'package:p12_basic_widgets/domain/entities/app-state.dart';
+import 'package:p12_basic_widgets/domain/entities/app_state.dart';
 import 'package:p12_basic_widgets/domain/enums/enum_app_state.dart';
 import 'package:test/test.dart';
 
