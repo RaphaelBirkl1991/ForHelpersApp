@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:p12_basic_widgets/application/services/provide_documentation_column.dart';
-import 'package:p12_basic_widgets/application/services/provide_settings_column.dart';
+import 'package:p12_basic_widgets/application/provider/documentation_column.dart';
+import 'package:p12_basic_widgets/application/provider/settings_column.dart';
 import 'package:p12_basic_widgets/presentation/about_screen.dart';
 
 class TabBarScreen extends StatelessWidget {
@@ -9,7 +9,11 @@ class TabBarScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(useMaterial3: true),
+      theme: ThemeData(
+        useMaterial3: true,
+        primaryColor: Theme.of(context).primaryColor,
+        indicatorColor: Theme.of(context).primaryColor,
+      ),
       home: const TabBarExample(),
     );
   }

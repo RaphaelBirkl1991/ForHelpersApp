@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/domain/enums/enum_smoke_specification.dart';
 
@@ -44,7 +46,7 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
                   setState(() {
                     selectedValue = value;
 
-                    specification = SmokeSpecification.pending_violence;
+                    specification = SmokeSpecification.pendingViolence;
                   });
                 }
               }),
@@ -57,7 +59,7 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
                 if (value != null) {
                   setState(() {
                     selectedValue = value;
-                    specification = SmokeSpecification.first_aid;
+                    specification = SmokeSpecification.firstAid;
                   });
                 }
               }),
@@ -126,7 +128,7 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
               ElevatedButton(
                 onPressed: isSpecificationSelected(specification)
                     ? () {
-                        print("btn klicked");
+                        log("btn clicked");
                       }
                     : null,
                 style: ButtonStyle(

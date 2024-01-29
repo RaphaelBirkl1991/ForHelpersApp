@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:p12_basic_widgets/application/services/provide_lorem.dart';
+import 'package:p12_basic_widgets/application/provider/provide_lorem.dart';
 
 class DocumentationColumn extends StatelessWidget {
   const DocumentationColumn({super.key});

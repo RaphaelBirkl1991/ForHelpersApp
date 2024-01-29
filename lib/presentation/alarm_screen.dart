@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:p12_basic_widgets/application/services/provide_segmented_btn.dart';
+import 'package:p12_basic_widgets/application/provider/segmented_btn.dart';
 
 class AlarmSignalScreen extends StatefulWidget {
   const AlarmSignalScreen({super.key});

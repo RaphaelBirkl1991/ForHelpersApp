@@ -13,34 +13,34 @@ class PinAdditionalInfoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Spacer(),
-        Text(
+        const Spacer(),
+        const Text(
           "Remember your PIN",
           style: TextStyle(fontSize: 25, fontWeight: FontWeight.normal),
         ),
-        Spacer(),
-        Text(
+        const Spacer(),
+        const Text(
           "To prevent misuse \n you have to unlock\n the App if you use \n more than one \n signal within 24 \n hours.",
           style: TextStyle(fontSize: 25, fontWeight: FontWeight.normal),
           textAlign: TextAlign.center,
         ),
-        Spacer(),
+        const Spacer(),
         FractionallySizedBox(
           widthFactor: 0.9,
           child: ElevatedButton(
             onPressed: () {},
-            child: Text(
-              "Got it",
-              style: TextStyle(color: Colors.white),
-            ),
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(
                 hexToColor(hexColor),
               ),
             ),
+            child: const Text(
+              "Got it",
+              style: TextStyle(color: Colors.white),
+            ),
           ),
         ),
-        Spacer(),
+        const Spacer(),
       ],
     );
   }

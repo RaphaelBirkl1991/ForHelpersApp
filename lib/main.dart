@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:p12_basic_widgets/application/services/provide_custom_navbar.dart';
+import 'package:p12_basic_widgets/application/provider/custom_navbar.dart';
 import 'package:p12_basic_widgets/config/app_theme.dart';
 import 'package:p12_basic_widgets/presentation/alarm_screen.dart';
 import 'package:p12_basic_widgets/presentation/map_screen.dart';
@@ -26,10 +26,10 @@ class MainAppScreen extends StatefulWidget {
   const MainAppScreen({super.key});
 
   @override
-  _MainAppState createState() => _MainAppState();
+  MainAppState createState() => MainAppState();
 }
 
-class _MainAppState extends State<MainAppScreen> {
+class MainAppState extends State<MainAppScreen> {
   int _selectedIndex = 0;
 
   // Widgets für jede Seite, die durch die Bottom Navigation Bar angezeigt wird
