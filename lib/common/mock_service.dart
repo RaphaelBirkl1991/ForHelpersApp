@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:p12_basic_widgets/domain/entities/alarm_signal.dart';
-import 'package:p12_basic_widgets/domain/entities/smoke_sign.dart';
-import 'package:p12_basic_widgets/domain/enums/enum_additional_info.dart';
-import 'package:p12_basic_widgets/domain/enums/enum_smoke_specification.dart';
+import 'package:p12_basic_widgets/features/set_alarm/domain/alarm_signal.dart';
+import 'package:p12_basic_widgets/features/set_smoke/domain/enum_additional_info.dart';
+import 'package:p12_basic_widgets/features/set_smoke/domain/enum_smoke_specification.dart';
+import 'package:p12_basic_widgets/features/set_smoke/domain/smoke_sign.dart';
 
 class MockService {
   //Database

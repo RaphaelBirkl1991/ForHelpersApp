@@ -1,5 +1,5 @@
-import 'package:p12_basic_widgets/domain/enums/enum_additional_info.dart';
-import 'package:p12_basic_widgets/domain/enums/enum_smoke_specification.dart';
+import 'package:p12_basic_widgets/features/set_smoke/domain/enum_additional_info.dart';
+import 'package:p12_basic_widgets/features/set_smoke/domain/enum_smoke_specification.dart';
 
 class SmokeSign {
   bool signActive;
@@ -10,7 +10,7 @@ class SmokeSign {
 
   Map toMap() {
     return {
-      "sign cctive": signActive,
+      "sign active": signActive,
       "specification": specification,
       "additional info": addititonalInfo
     };

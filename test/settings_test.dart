@@ -1,6 +1,6 @@
-import 'package:p12_basic_widgets/domain/entities/settings.dart';
-import 'package:p12_basic_widgets/domain/enums/enum_language.dart';
-import 'package:p12_basic_widgets/domain/enums/enum_mode.dart';
+import 'package:p12_basic_widgets/features/infrastructure/domain/enum_mode.dart';
+import 'package:p12_basic_widgets/features/show_settings/domain/enum_language.dart';
+import 'package:p12_basic_widgets/features/show_settings/domain/settings.dart';
 import 'package:test/test.dart';
 
 void main() {

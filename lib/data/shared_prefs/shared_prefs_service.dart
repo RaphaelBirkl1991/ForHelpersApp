@@ -1,4 +1,4 @@
-import 'package:p12_basic_widgets/domain/entities/smoke_sign.dart';
+import 'package:p12_basic_widgets/features/set_smoke/domain/smoke_sign.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesService {
