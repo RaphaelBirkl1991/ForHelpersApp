@@ -10,6 +10,7 @@ class AlarmSignalScreen extends StatefulWidget {
 class _AlarmSignalScreenState extends State<AlarmSignalScreen> {
   late MaterialStatesController btnStateController;
   bool isTriggerLocked = true;
+  bool isLockBtnLocked = false;
 
   @override
   void initState() {
@@ -38,30 +39,33 @@ class _AlarmSignalScreenState extends State<AlarmSignalScreen> {
         const Spacer(),
         // const AlarmTriggerBtn(),
         OutlinedButton(
-          onPressed: () {
-            switchTriggerBtnState();
-            relockTriggerBtn();
-            setState(() {});
-            print("isTrgiggerLocked: $isTriggerLocked");
-          },
+          onPressed: isLockBtnLocked
+              ? null
+              : () {
+                  switchTriggerBtnState();
+                  relockTriggerBtn();
+                  setState(() {});
+                  print("isTrgiggerLocked: $isTriggerLocked");
+                },
           style: ButtonStyle(
             minimumSize: MaterialStateProperty.all<Size>(
               const Size(300, 38),
             ),
           ),
           child: isTriggerLocked
-              ? const Text(
+              ? Text(
                   "activate Button",
-                  style: TextStyle(color: Colors.black),
+                  style: TextStyle(color: Theme.of(context).primaryColor),
                 )
               : const Text("activate Button",
-                  style: TextStyle(color: Colors.black)),
+                  style: TextStyle(color: Colors.grey)),
         ),
+
         ElevatedButton(
             onPressed: isTriggerLocked
                 ? null
                 : () {
-                    print("alarm active");
+                    print("ALARM ACTIVATED");
                   },
             style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.resolveWith<Color>(
@@ -82,7 +86,8 @@ class _AlarmSignalScreenState extends State<AlarmSignalScreen> {
                   )
                 : const Text(
                     "send alarm",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
                   )),
         const Spacer(),
       ],
@@ -91,9 +96,11 @@ class _AlarmSignalScreenState extends State<AlarmSignalScreen> {
 
   bool switchTriggerBtnState() {
     print(isTriggerLocked);
-    isTriggerLocked = !isTriggerLocked;
+    isTriggerLocked = false;
+    isLockBtnLocked = true;
     setState(() {});
-    print(isTriggerLocked);
+    print(
+        "Lock Butoon Locked: $isLockBtnLocked \nTrigger Button Locked: $isTriggerLocked");
 
     return isTriggerLocked;
   }
@@ -102,6 +109,7 @@ class _AlarmSignalScreenState extends State<AlarmSignalScreen> {
     await Future.delayed(const Duration(seconds: 5));
     setState(() {
       isTriggerLocked = true;
+      isLockBtnLocked = false;
     });
   }
 }
