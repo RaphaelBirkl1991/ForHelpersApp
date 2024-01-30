@@ -1,6 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:p12_basic_widgets/data/mock/mock_service.dart';
+import 'package:p12_basic_widgets/domain/enums/enum_additional_info.dart';
 import 'package:p12_basic_widgets/domain/enums/enum_smoke_specification.dart';
 
 class DrawerSmokeScreen extends StatefulWidget {
@@ -17,6 +17,8 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
   bool isDrugAbuseChecked = false;
   bool isWeaponsInvolvedChecked = false;
   late MaterialStatesController buttonStatesController;
+
+  final MockService mockService = MockService();
 
   @override
   void initState() {
@@ -128,7 +130,10 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
               ElevatedButton(
                 onPressed: isSpecificationSelected(specification)
                     ? () {
-                        log("btn clicked");
+                        mockService.createSmokeSign(
+                            specification!, buildAddInfo());
+                        // buildSpecification();
+                        // buildAddInfo();
                       }
                     : null,
                 style: ButtonStyle(
@@ -146,11 +151,6 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
                   style: TextStyle(color: Colors.white),
                 ),
               ),
-              // child: const Text(
-              //   "Set Signal",
-              //   style: ButtonStyle(),
-              //   TextStyle(color: Colors.white),
-              // )),
               const SizedBox(width: 11),
               ElevatedButton(
                 onPressed: () {
@@ -178,5 +178,24 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
     } else {
       return false;
     }
+  }
+
+  // SmokeSpecification buildSpecification() {
+  //   return const SmokeSpecification();
+  // }
+
+  List<AdditionalInformation> buildAddInfo() {
+    List<AdditionalInformation> addInfoList = [];
+
+    isDelinquentsChecked
+        ? addInfoList.add(AdditionalInformation.outnumbered)
+        : null;
+    isDrugAbuseChecked ? addInfoList.add(AdditionalInformation.drugs) : null;
+    isWeaponsInvolvedChecked
+        ? addInfoList.add(AdditionalInformation.weapons)
+        : null;
+
+    print(addInfoList);
+    return addInfoList;
   }
 }

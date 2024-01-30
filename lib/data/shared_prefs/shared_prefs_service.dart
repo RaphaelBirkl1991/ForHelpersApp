@@ -6,7 +6,7 @@ class SharedPreferencesService {
     final SharedPreferences pref = await SharedPreferences.getInstance();
 
     // Konvertiere die Werte von SmokeSign in einfache Datentypen
-    pref.setBool('smokeActive', smokeSign.smokeActive);
+    pref.setBool('smokeActive', smokeSign.signActive);
     pref.setString('specification', smokeSign.specification?.toString() ?? '');
 
     // Konvertiere die List<AdditionalInformation> in eine List<String> von Enum-Namen

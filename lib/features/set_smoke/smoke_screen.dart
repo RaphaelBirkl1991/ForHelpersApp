@@ -23,7 +23,6 @@ class _SmokeSignalScreenState extends State<SmokeSignalScreen> {
               style: Theme.of(context).textTheme.headlineMedium),
           const Spacer(),
           const Spacer(),
-          const Spacer(),
           Center(
             child: Text(
               "Specify Signal and \nkeep trigger pressed \nto set smokesign",
@@ -35,14 +34,15 @@ class _SmokeSignalScreenState extends State<SmokeSignalScreen> {
             child: ElevatedButton(
                 onPressed: () {
                   _scaffoldKey.currentState?.openDrawer();
-                  // Scaffold.of(context).openDrawer();
                 },
+                style: ButtonStyle(
+                    minimumSize:
+                        MaterialStateProperty.all(const Size(300, 38))),
                 child: const Text(
                   "prepare smokesign",
                   style: TextStyle(color: Colors.white),
                 )),
           ),
-          const Spacer(),
           const Spacer(),
         ],
       ),

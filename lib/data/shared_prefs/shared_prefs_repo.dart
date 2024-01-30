@@ -4,7 +4,7 @@ import 'package:p12_basic_widgets/domain/enums/enum_smoke_specification.dart';
 
 class SharedPreferencesRepository implements DatabaseRepository {
   @override
-  Future<void> unleashSmokeSignal(SmokeSpecification specification,
+  Future<void> createSmokeSignal(SmokeSpecification specification,
       List<AdditionalInformation> additionalInfo) {
     // TODO: implement unleashSmokeSignal
     throw UnimplementedError();

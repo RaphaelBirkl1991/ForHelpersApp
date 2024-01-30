@@ -30,6 +30,12 @@ class MainAppScreen extends StatefulWidget {
 }
 
 class MainAppState extends State<MainAppScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
@@ -41,6 +47,13 @@ class MainAppState extends State<MainAppScreen> {
 
   @override
   Widget build(BuildContext context) {
+    /*
+   if(AuthenticationService.userIsAlreadyRegistered()) {
+    return AuthenticationScreen(); 
+    else return Scaffold....
+   }
+
+    */
     return Scaffold(
       body: IndexedStack(
         index: _selectedIndex,
