@@ -16,17 +16,23 @@ class _CustomNavBarState extends State<CustomNavBar> {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       selectedItemColor: Theme.of(context).primaryColor,
+      showSelectedLabels: false,
+      // selectedIconTheme: const IconThemeData(color: Colors.green),
+      unselectedIconTheme: const IconThemeData(color: Colors.black),
       items: [
-        BottomNavigationBarItem(
-            icon:
-                Icon(Icons.map_outlined, color: Theme.of(context).primaryColor),
-            label: "map"),
+        const BottomNavigationBarItem(
+            icon: Icon(Icons.map_outlined), label: "map"),
         BottomNavigationBarItem(
             icon: Icon(Icons.warning_amber_outlined,
                 color: Theme.of(context).primaryColor),
             label: "smoke"),
         BottomNavigationBarItem(
-            icon: Icon(Icons.alarm, color: Theme.of(context).primaryColor),
+            icon:
+                Icon(Icons.crisis_alert, color: Theme.of(context).primaryColor),
+            activeIcon: const Icon(
+              Icons.crisis_alert,
+              color: Colors.red,
+            ),
             label: "alarm"),
         BottomNavigationBarItem(
             icon: Icon(Icons.more_vert, color: Theme.of(context).primaryColor),

@@ -1,9 +1,9 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:p12_basic_widgets/application/provider/language_section.dart';
-import 'package:p12_basic_widgets/application/provider/pin_section.dart';
-import 'package:p12_basic_widgets/application/provider/scheme_section.dart';
+import 'package:p12_basic_widgets/features/show_settings/language_section.dart';
+import 'package:p12_basic_widgets/features/show_settings/pin_section.dart';
+import 'package:p12_basic_widgets/features/show_settings/scheme_section.dart';
 
 class SettingsColumn extends StatefulWidget {
   const SettingsColumn({super.key});

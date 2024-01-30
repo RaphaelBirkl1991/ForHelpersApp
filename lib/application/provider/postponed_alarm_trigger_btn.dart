@@ -16,14 +16,14 @@ class _AlarmTriggerBtnState extends State<AlarmTriggerBtn> {
 
   bool toggleLockBtn() {
     isLockBtnEnabled = !isLockBtnEnabled;
-    print("lock-btn pressed");
+    //print("lock-btn pressed");
     //  setState(() {});
     return isLockBtnEnabled;
   }
 
   void toggleTriggerBtn() {
     isTriggerBtnEnabled = !isTriggerBtnEnabled;
-    print("btn cklicked");
+    // print("btn cklicked");
     setState(() {});
   }
 

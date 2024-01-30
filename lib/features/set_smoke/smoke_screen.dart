@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:p12_basic_widgets/application/provider/smoke_drawer.dart';
+import 'package:p12_basic_widgets/features/set_smoke/smoke_drawer.dart';
 
 class SmokeSignalScreen extends StatefulWidget {
   const SmokeSignalScreen({super.key});

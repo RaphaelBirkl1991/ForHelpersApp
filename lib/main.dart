@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:p12_basic_widgets/application/provider/custom_navbar.dart';
 import 'package:p12_basic_widgets/config/app_theme.dart';
-import 'package:p12_basic_widgets/presentation/main_screens/alarm_screen.dart';
-import 'package:p12_basic_widgets/presentation/main_screens/map_screen.dart';
-import 'package:p12_basic_widgets/presentation/main_screens/smoke_screen.dart';
-import 'package:p12_basic_widgets/presentation/main_screens/tabbar_screen.dart';
+import 'package:p12_basic_widgets/features/infrastructure/custom_navbar.dart';
+import 'package:p12_basic_widgets/features/set_alarm/alarm_screen.dart';
+import 'package:p12_basic_widgets/features/set_smoke/smoke_screen.dart';
+import 'package:p12_basic_widgets/features/show_map/map_screen.dart';
+import 'package:p12_basic_widgets/features/show_settings/tabbar_screen.dart';
 
 void main() {
   runApp(const MainApp());
@@ -32,7 +32,6 @@ class MainAppScreen extends StatefulWidget {
 class MainAppState extends State<MainAppScreen> {
   int _selectedIndex = 0;
 
-  // Widgets für jede Seite, die durch die Bottom Navigation Bar angezeigt wird
   final List<Widget> _pages = [
     const MapScreen(),
     const SmokeSignalScreen(),
@@ -54,7 +53,6 @@ class MainAppState extends State<MainAppScreen> {
 
   void onItemTapped(int index) {
     if (index == 4) {
-      // Wenn das vierte Element (Index 3) ausgewählt ist, navigiere zum TabBarScreen
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const TabBarScreen()),
