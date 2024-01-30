@@ -45,7 +45,7 @@ class _AlarmSignalScreenState extends State<AlarmSignalScreen> {
                   switchTriggerBtnState();
                   relockTriggerBtn();
                   setState(() {});
-                  print("isTrgiggerLocked: $isTriggerLocked");
+                  debugPrint("isTrgiggerLocked: $isTriggerLocked");
                 },
           style: ButtonStyle(
             minimumSize: MaterialStateProperty.all<Size>(
@@ -95,11 +95,11 @@ class _AlarmSignalScreenState extends State<AlarmSignalScreen> {
   }
 
   bool switchTriggerBtnState() {
-    print(isTriggerLocked);
+    debugPrint("$isTriggerLocked");
     isTriggerLocked = false;
     isLockBtnLocked = true;
     setState(() {});
-    print(
+    debugPrint(
         "Lock Butoon Locked: $isLockBtnLocked \nTrigger Button Locked: $isTriggerLocked");
 
     return isTriggerLocked;

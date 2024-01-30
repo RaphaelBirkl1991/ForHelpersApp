@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:p12_basic_widgets/config/palette.dart';
 
 class AppTheme {
   static final ThemeData themeData = ThemeData(
@@ -7,32 +8,31 @@ class AppTheme {
       displayMedium: TextStyle(fontSize: 25, fontWeight: FontWeight.normal),
       bodyMedium: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
     ),
-    tabBarTheme: TabBarTheme(
-        indicatorColor: Colors.green,
-        labelColor: Colors.green,
+    tabBarTheme: const TabBarTheme(
+        indicatorColor: customGreen,
+        labelColor: customGreen,
         //     indicatorColor: Color(int.parse("0xFF010536")),
         //   labelColor: Color(int.parse("0xFF010536")),
         indicator: BoxDecoration(
-          color: Color(int.parse("0xFF010536")),
+          color: customBlue,
         )),
-    primaryColor: Color(int.parse("0xFF010536")),
-    hintColor: Colors.white,
+    primaryColor: customBlue,
+    hintColor: customWhite,
     segmentedButtonTheme: const SegmentedButtonThemeData(
       style: ButtonStyle(
         textStyle: MaterialStatePropertyAll<TextStyle>(
-          TextStyle(backgroundColor: Color(0xFF010536)),
+          TextStyle(backgroundColor: customBlue),
         ),
       ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
         textStyle: MaterialStateProperty.all<TextStyle>(
-          const TextStyle(color: Colors.white),
+          const TextStyle(color: customWhite),
         ),
-        backgroundColor:
-            MaterialStateProperty.all<Color>(const Color(0xFF010536)),
+        backgroundColor: MaterialStateProperty.all<Color>(customBlue),
       ),
     ),
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: customWhite,
   );
 }

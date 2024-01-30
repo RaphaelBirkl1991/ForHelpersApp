@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:p12_basic_widgets/data/mock/mock_service.dart';
 import 'package:p12_basic_widgets/domain/enums/enum_additional_info.dart';
 import 'package:p12_basic_widgets/domain/enums/enum_smoke_specification.dart';
+import 'package:p12_basic_widgets/features/set_smoke/data/database_set_smoke_repository.dart';
 
 class DrawerSmokeScreen extends StatefulWidget {
-  const DrawerSmokeScreen({super.key});
+  final DatabaseSetSmokeRepository databaseSetSmokeRepository;
+  const DrawerSmokeScreen({
+    super.key,
+    required this.databaseSetSmokeRepository,
+  });
 
   @override
   State<DrawerSmokeScreen> createState() => _DrawerSmokeScreenState();
@@ -18,7 +22,7 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
   bool isWeaponsInvolvedChecked = false;
   late MaterialStatesController buttonStatesController;
 
-  final MockService mockService = MockService();
+  // final MockService mockService = MockService();
 
   @override
   void initState() {
@@ -130,10 +134,8 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
               ElevatedButton(
                 onPressed: isSpecificationSelected(specification)
                     ? () {
-                        mockService.createSmokeSign(
-                            specification!, buildAddInfo());
-                        // buildSpecification();
-                        // buildAddInfo();
+                        widget.databaseSetSmokeRepository
+                            .createSmokeSignal(specification!, buildAddInfo());
                       }
                     : null,
                 style: ButtonStyle(
@@ -195,7 +197,7 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
         ? addInfoList.add(AdditionalInformation.weapons)
         : null;
 
-    print(addInfoList);
+    debugPrint("$addInfoList");
     return addInfoList;
   }
 }
