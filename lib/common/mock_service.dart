@@ -18,6 +18,7 @@ class MockService {
       smokeEntry = SmokeSign(true, specification, infoList);
     }
     smokeList.add(smokeEntry);
-    debugPrint("The Smoke List: ${smokeList.map((e) => e.toMap()).toList()}");
+    debugPrint(
+        "\n\nTHE SMOKE SIGNAL LIST:\n\n ${smokeList.map((e) => e.toMap()).toList()}");
   }
 }

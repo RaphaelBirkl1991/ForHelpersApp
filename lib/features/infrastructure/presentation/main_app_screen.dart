@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/custom_navbar.dart';
-import 'package:p12_basic_widgets/features/set_alarm/alarm_screen.dart';
+import 'package:p12_basic_widgets/features/set_alarm/presentation/alarm_screen.dart';
 import 'package:p12_basic_widgets/features/set_smoke/data/database_set_smoke_repository.dart';
 import 'package:p12_basic_widgets/features/set_smoke/presentation/smoke_screen.dart';
 import 'package:p12_basic_widgets/features/show_map/map_screen.dart';

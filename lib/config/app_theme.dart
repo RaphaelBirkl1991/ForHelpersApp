@@ -9,30 +9,30 @@ class AppTheme {
       bodyMedium: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
     ),
     tabBarTheme: const TabBarTheme(
-        indicatorColor: customGreen,
-        labelColor: customGreen,
+        indicatorColor: dutyGreen,
+        labelColor: dutyGreen,
         //     indicatorColor: Color(int.parse("0xFF010536")),
         //   labelColor: Color(int.parse("0xFF010536")),
         indicator: BoxDecoration(
-          color: customBlue,
+          color: dutyBlue,
         )),
-    primaryColor: customBlue,
-    hintColor: customWhite,
+    primaryColor: dutyBlue,
+    hintColor: dutyWhite,
     segmentedButtonTheme: const SegmentedButtonThemeData(
       style: ButtonStyle(
         textStyle: MaterialStatePropertyAll<TextStyle>(
-          TextStyle(backgroundColor: customBlue),
+          TextStyle(backgroundColor: dutyBlue),
         ),
       ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
         textStyle: MaterialStateProperty.all<TextStyle>(
-          const TextStyle(color: customWhite),
+          const TextStyle(color: dutyWhite),
         ),
-        backgroundColor: MaterialStateProperty.all<Color>(customBlue),
+        backgroundColor: MaterialStateProperty.all<Color>(dutyBlue),
       ),
     ),
-    scaffoldBackgroundColor: customWhite,
+    scaffoldBackgroundColor: dutyWhite,
   );
 }

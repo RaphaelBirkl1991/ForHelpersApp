@@ -13,6 +13,7 @@ class _LanguageSection extends State<LanguageSection> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
           "Language",
@@ -42,17 +43,14 @@ class _LanguageSection extends State<LanguageSection> {
           },
           controlAffinity: ListTileControlAffinity.trailing,
         ),
-        RadioListTile(
-          title: const Text('Bavarian'),
-          activeColor: Theme.of(context).primaryColor,
-          value: 3,
-          groupValue: _selectedValue,
-          onChanged: (value) {
-            setState(() {
-              _selectedValue = value as int;
-            });
-          },
-          controlAffinity: ListTileControlAffinity.trailing,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            OutlinedButton(
+              onPressed: () {},
+              child: const Text("save"),
+            ),
+          ],
         ),
       ],
     );
