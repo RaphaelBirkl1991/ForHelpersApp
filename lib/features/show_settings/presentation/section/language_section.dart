@@ -20,6 +20,7 @@ class _LanguageSection extends State<LanguageSection> {
     } else if (settingsService.currentLanguage == Language.german) {
       _selectedValue = 2;
     }
+    super.initState();
   }
 
   @override
@@ -59,7 +60,7 @@ class _LanguageSection extends State<LanguageSection> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             ElevatedButton(
-              onPressed: btnEnabled()
+              onPressed: languageBtnEnabled()
                   ? null
                   : () {
                       // selVal 1 = english
@@ -93,7 +94,7 @@ class _LanguageSection extends State<LanguageSection> {
     );
   }
 
-  bool btnEnabled() {
+  bool languageBtnEnabled() {
     if (_selectedValue == 1 &&
         settingsService.currentLanguage == Language.german) {
       return false;

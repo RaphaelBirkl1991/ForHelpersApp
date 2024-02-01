@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:p12_basic_widgets/config/palette.dart';
+import 'package:p12_basic_widgets/features/show_settings/application/settings_service.dart';
+import 'package:p12_basic_widgets/features/show_settings/domain/enum_color_sheme.dart';
 
 class SchemeSection extends StatefulWidget {
   const SchemeSection({super.key});
@@ -9,6 +12,18 @@ class SchemeSection extends StatefulWidget {
 
 class _SchemeSection extends State<SchemeSection> {
   int _selectedValue = 1;
+  SettingsService settingsService = SettingsService();
+
+  @override
+  void initState() {
+    if (settingsService.currentMode == ColorMode.lightmode) {
+      _selectedValue = 1;
+    } else if (settingsService.currentMode == ColorMode.darkmode) {
+      _selectedValue = 2;
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -42,13 +57,48 @@ class _SchemeSection extends State<SchemeSection> {
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            OutlinedButton(
-              onPressed: () {},
-              child: const Text("save"),
+            ElevatedButton(
+              onPressed: schmeBtnEnabled()
+                  ? null
+                  : () {
+                      if (_selectedValue == 2) {
+                        settingsService.setColorMode(ColorMode.darkmode);
+                        setState(() {});
+                      } else {
+                        settingsService.setColorMode(ColorMode.lightmode);
+                        setState(() {});
+                      }
+                    },
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                  (states) {
+                    if (states.contains(MaterialState.disabled)) {
+                      return Colors.grey;
+                    }
+                    return Theme.of(context).primaryColor;
+                  },
+                ),
+              ),
+              child: const Text(
+                "save",
+                style: TextStyle(color: dutyWhite),
+              ),
             ),
           ],
         ),
       ],
     );
+  }
+
+  bool schmeBtnEnabled() {
+    if (_selectedValue == 1 &&
+        settingsService.currentMode == ColorMode.darkmode) {
+      return false;
+    } else if (_selectedValue == 2 &&
+        settingsService.currentMode == ColorMode.lightmode) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
