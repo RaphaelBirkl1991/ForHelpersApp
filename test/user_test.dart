@@ -5,7 +5,7 @@ void main() {
   late User user;
 
   setUp(() {
-    user = User(1, true, 123, "Company A");
+    user = User(1, 1234, true, 123, "Company A");
   });
 
   test('Benutzer ist standardmäßig im Dienst', () {

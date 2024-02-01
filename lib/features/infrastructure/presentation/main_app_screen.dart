@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/custom_navbar.dart';
+import 'package:p12_basic_widgets/features/infrastructure/presentation/splash_screen.dart';
 import 'package:p12_basic_widgets/features/set_alarm/presentation/alarm_screen.dart';
 import 'package:p12_basic_widgets/features/set_smoke/data/database_set_smoke_repository.dart';
 import 'package:p12_basic_widgets/features/set_smoke/presentation/smoke_screen.dart';
@@ -32,8 +33,8 @@ class MainAppState extends State<MainAppScreen> {
   }
 
   int _selectedIndex = 0;
-
   List<Widget> pages = [];
+  bool isAuthenticated = false;
 
   @override
   Widget build(BuildContext context) {
@@ -42,16 +43,20 @@ class MainAppState extends State<MainAppScreen> {
     return AuthenticationScreen(); 
     else return Scaffold....
    }
-
     */
-    return Scaffold(
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: pages,
-      ),
-      bottomNavigationBar: CustomNavBar(
-          selectedIndex: _selectedIndex, onItemTapped: onItemTapped),
-    );
+
+    if (isAuthenticated) {
+      return const SplashScreen();
+    } else {
+      return Scaffold(
+        body: IndexedStack(
+          index: _selectedIndex,
+          children: pages,
+        ),
+        bottomNavigationBar: CustomNavBar(
+            selectedIndex: _selectedIndex, onItemTapped: onItemTapped),
+      );
+    }
   }
 
   void onItemTapped(int index) {

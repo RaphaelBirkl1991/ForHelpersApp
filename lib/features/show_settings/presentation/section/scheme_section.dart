@@ -12,6 +12,7 @@ class _SchemeSection extends State<SchemeSection> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text("Color Schemes", style: TextStyle(fontSize: 25)),
         RadioListTile(
@@ -37,6 +38,15 @@ class _SchemeSection extends State<SchemeSection> {
             });
           },
           controlAffinity: ListTileControlAffinity.trailing,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            OutlinedButton(
+              onPressed: () {},
+              child: const Text("save"),
+            ),
+          ],
         ),
       ],
     );

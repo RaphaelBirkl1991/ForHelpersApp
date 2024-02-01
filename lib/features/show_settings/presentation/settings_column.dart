@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/features/show_settings/presentation/section/language_section.dart';
-import 'package:p12_basic_widgets/features/show_settings/presentation/section/pin_section.dart';
 import 'package:p12_basic_widgets/features/show_settings/presentation/section/scheme_section.dart';
 
 class SettingsColumn extends StatefulWidget {
@@ -27,8 +26,8 @@ class _SettingsColumnState extends State<SettingsColumn> {
           Spacer(),
           SchemeSection(),
           Spacer(),
-          PinSection(),
-          Spacer(),
+          //  PinSection(),
+          //  Spacer(),
         ],
       ),
     );
