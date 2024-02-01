@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
-import 'package:p12_basic_widgets/features/show_settings/application/settings_service.dart';
-import 'package:p12_basic_widgets/features/show_settings/domain/enum_color_sheme.dart';
+import 'package:p12_basic_widgets/features/show_settings/data/database_settings_repository.dart';
 
 class SchemeSection extends StatefulWidget {
-  const SchemeSection({super.key});
+  final DatabaseSettingsRepository databaseSettingsRepository;
+
+  const SchemeSection({super.key, required this.databaseSettingsRepository});
 
   @override
   State<SchemeSection> createState() => _SchemeSection();
@@ -12,17 +13,6 @@ class SchemeSection extends StatefulWidget {
 
 class _SchemeSection extends State<SchemeSection> {
   int _selectedValue = 1;
-  SettingsService settingsService = SettingsService();
-
-  @override
-  void initState() {
-    if (settingsService.currentMode == ColorMode.lightmode) {
-      _selectedValue = 1;
-    } else if (settingsService.currentMode == ColorMode.darkmode) {
-      _selectedValue = 2;
-    }
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,17 +48,18 @@ class _SchemeSection extends State<SchemeSection> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             ElevatedButton(
-              onPressed: schmeBtnEnabled()
-                  ? null
-                  : () {
-                      if (_selectedValue == 2) {
-                        settingsService.setColorMode(ColorMode.darkmode);
-                        setState(() {});
-                      } else {
-                        settingsService.setColorMode(ColorMode.lightmode);
-                        setState(() {});
-                      }
-                    },
+              onPressed: null,
+              // schmeBtnEnabled()
+              //     ? null
+              //     : () {
+              //         if (_selectedValue == 2) {
+              //           settingsService.setColorMode(ColorMode.darkmode);
+              //           setState(() {});
+              //         } else {
+              //           settingsService.setColorMode(ColorMode.lightmode);
+              //           setState(() {});
+              //         }
+              //       },
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.resolveWith<Color>(
                   (states) {
@@ -90,15 +81,15 @@ class _SchemeSection extends State<SchemeSection> {
     );
   }
 
-  bool schmeBtnEnabled() {
-    if (_selectedValue == 1 &&
-        settingsService.currentMode == ColorMode.darkmode) {
-      return false;
-    } else if (_selectedValue == 2 &&
-        settingsService.currentMode == ColorMode.lightmode) {
-      return false;
-    } else {
-      return true;
-    }
-  }
+  // bool schmeBtnEnabled() {
+  //   if (_selectedValue == 1 &&
+  //       settingsService.currentMode == ColorMode.darkmode) {
+  //     return false;
+  //   } else if (_selectedValue == 2 &&
+  //       settingsService.currentMode == ColorMode.lightmode) {
+  //     return false;
+  //   } else {
+  //     return true;
+  //   }
+  // }
 }

@@ -1,10 +1,13 @@
+import 'package:p12_basic_widgets/features/set_alarm/domain/position.dart';
+
 class AlarmSignal {
-  String description;
-  bool alarmActive;
+  int? id;
+  bool? isSignalActive;
+  Position? currentPosition;
 
-  AlarmSignal(this.description, this.alarmActive);
+  AlarmSignal();
 
-  void activateAlarm() => alarmActive = true;
+  void activateAlarm() => isSignalActive = true;
 
-  void cancelAlarm() => alarmActive = false;
+  void cancelAlarm() => isSignalActive = false;
 }

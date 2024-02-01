@@ -5,14 +5,16 @@ import 'package:p12_basic_widgets/features/set_alarm/presentation/alarm_screen.d
 import 'package:p12_basic_widgets/features/set_smoke/data/database_set_smoke_repository.dart';
 import 'package:p12_basic_widgets/features/set_smoke/presentation/smoke_screen.dart';
 import 'package:p12_basic_widgets/features/show_map/map_screen.dart';
+import 'package:p12_basic_widgets/features/show_settings/data/database_settings_repository.dart';
 import 'package:p12_basic_widgets/features/show_settings/presentation/tabbar_screen.dart';
 
 class MainAppScreen extends StatefulWidget {
   final DatabaseSetSmokeRepository databaseSetSmokeRepository;
-
+  final DatabaseSettingsRepository databaseSettingsRepository;
   const MainAppScreen({
     super.key,
     required this.databaseSetSmokeRepository,
+    required this.databaseSettingsRepository,
   });
 
   @override
@@ -28,7 +30,8 @@ class MainAppState extends State<MainAppScreen> {
       SmokeSignalScreen(
           databaseSetSmokeRepository: widget.databaseSetSmokeRepository),
       const AlarmSignalScreen(),
-      const TabBarScreen()
+      TabBarScreen(
+          databaseSettingsRepository: widget.databaseSettingsRepository)
     ];
   }
 
@@ -63,7 +66,11 @@ class MainAppState extends State<MainAppScreen> {
     if (index == 4) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const TabBarScreen()),
+        MaterialPageRoute(
+          builder: (context) => TabBarScreen(
+            databaseSettingsRepository: widget.databaseSettingsRepository,
+          ),
+        ),
       );
     } else {
       setState(() {

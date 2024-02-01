@@ -3,21 +3,27 @@ import 'package:p12_basic_widgets/config/palette.dart';
 
 class AppTheme {
   static final ThemeData themeData = ThemeData(
+    colorScheme: ColorScheme.fromSeed(
+        seedColor: dutyBlue, primary: dutyBlue, secondary: dutyWhite),
+
+    // TEXT
     textTheme: const TextTheme(
       headlineMedium: TextStyle(fontSize: 32),
       displayMedium: TextStyle(fontSize: 25, fontWeight: FontWeight.normal),
       bodyMedium: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
     ),
-    tabBarTheme: const TabBarTheme(
-        indicatorColor: dutyGreen,
-        labelColor: dutyGreen,
-        //     indicatorColor: Color(int.parse("0xFF010536")),
-        //   labelColor: Color(int.parse("0xFF010536")),
-        indicator: BoxDecoration(
-          color: dutyBlue,
-        )),
+    // NAVBAR
+    navigationBarTheme:
+        const NavigationBarThemeData(backgroundColor: dutyWhite),
+
+    // TABBAR
+    tabBarTheme: const TabBarTheme(indicator: BoxDecoration()),
     primaryColor: dutyBlue,
     hintColor: dutyWhite,
+
+    bottomNavigationBarTheme:
+        const BottomNavigationBarThemeData(backgroundColor: dutyWhite),
+    // SEGMENTED BTN
     segmentedButtonTheme: const SegmentedButtonThemeData(
       style: ButtonStyle(
         textStyle: MaterialStatePropertyAll<TextStyle>(
@@ -25,6 +31,8 @@ class AppTheme {
         ),
       ),
     ),
+
+    // ELEVATED BTN
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
         textStyle: MaterialStateProperty.all<TextStyle>(
@@ -33,6 +41,8 @@ class AppTheme {
         backgroundColor: MaterialStateProperty.all<Color>(dutyBlue),
       ),
     ),
+
+    // SCAFFOLD
     scaffoldBackgroundColor: dutyWhite,
   );
 }
