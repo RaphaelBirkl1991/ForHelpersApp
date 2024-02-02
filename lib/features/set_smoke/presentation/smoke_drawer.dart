@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:p12_basic_widgets/config/palette.dart';
 import 'package:p12_basic_widgets/features/set_smoke/data/database_set_smoke_repository.dart';
 import 'package:p12_basic_widgets/features/set_smoke/domain/enum_additional_info.dart';
 import 'package:p12_basic_widgets/features/set_smoke/domain/enum_smoke_specification.dart';
@@ -37,13 +38,23 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
         padding: EdgeInsets.zero,
         children: [
           const DrawerHeader(
+            margin: EdgeInsets.fromLTRB(0, 0, 0, 30),
+            padding: EdgeInsets.fromLTRB(20, 50, 1, 0),
+            decoration: BoxDecoration(color: dutyBlue),
             child: Text(
               'specify your signal',
-              style: TextStyle(fontSize: 25),
+              maxLines: 1,
+              style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.normal,
+                  color: dutyWhite),
             ),
           ),
           RadioListTile<int>(
-              title: const Text("pending violence"),
+              title: const Text(
+                "pending violence",
+                style: TextStyle(color: dutyBlack),
+              ),
               activeColor: Theme.of(context).primaryColor,
               value: 1,
               groupValue: selectedValue,
@@ -57,7 +68,10 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
                 }
               }),
           RadioListTile<int>(
-              title: const Text("first aid meassures"),
+              title: const Text(
+                "first aid meassures",
+                style: TextStyle(color: dutyBlack),
+              ),
               activeColor: Theme.of(context).primaryColor,
               value: 2,
               groupValue: selectedValue,
@@ -70,7 +84,10 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
                 }
               }),
           RadioListTile<int>(
-              title: const Text("evacuation"),
+              title: const Text(
+                "evacuation",
+                style: TextStyle(color: dutyBlack),
+              ),
               activeColor: Theme.of(context).primaryColor,
               value: 3,
               groupValue: selectedValue,
@@ -83,7 +100,10 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
                 }
               }),
           RadioListTile<int>(
-              title: const Text("tracing after crime"),
+              title: const Text(
+                "tracing after crime",
+                style: TextStyle(color: dutyBlack),
+              ),
               activeColor: Theme.of(context).primaryColor,
               value: 4,
               groupValue: selectedValue,
@@ -97,7 +117,10 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
               }),
           const Divider(),
           CheckboxListTile(
-            title: const Text('> 10 delinquents'),
+            title: const Text(
+              '> 10 delinquents',
+              style: TextStyle(color: dutyBlack),
+            ),
             activeColor: Theme.of(context).primaryColor,
             value: isDelinquentsChecked,
             onChanged: (value) {
@@ -107,7 +130,10 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
             },
           ),
           CheckboxListTile(
-            title: const Text('drug abuse'),
+            title: const Text(
+              'drug abuse',
+              style: TextStyle(color: dutyBlack),
+            ),
             activeColor: Theme.of(context).primaryColor,
             value: isDrugAbuseChecked,
             onChanged: (value) {
@@ -117,7 +143,10 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
             },
           ),
           CheckboxListTile(
-            title: const Text('weapons involved'),
+            title: const Text(
+              'weapons involved',
+              style: TextStyle(color: dutyBlack),
+            ),
             activeColor: Theme.of(context).primaryColor,
             value: isWeaponsInvolvedChecked,
             onChanged: (value) {
@@ -163,8 +192,10 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
                   backgroundColor:
                       MaterialStateProperty.all<Color>(Colors.white),
                 ),
-                child:
-                    const Text("Cancel", style: TextStyle(color: Colors.black)),
+                child: const Text(
+                  "Cancel",
+                  style: TextStyle(color: dutyBlack),
+                ),
               ),
               const SizedBox(width: 15),
             ],
