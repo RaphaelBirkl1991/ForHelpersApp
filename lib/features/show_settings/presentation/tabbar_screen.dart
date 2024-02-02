@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:p12_basic_widgets/config/palette.dart';
 import 'package:p12_basic_widgets/features/show_settings/data/database_settings_repository.dart';
 import 'package:p12_basic_widgets/features/show_settings/presentation/section/about_section.dart';
 import 'package:p12_basic_widgets/features/show_settings/presentation/section/doc_section.dart';
@@ -20,6 +21,7 @@ class TabBarScreen extends StatelessWidget {
         length: 3,
         child: Scaffold(
           appBar: AppBar(
+            backgroundColor: dutyWhite,
             bottom: const TabBar(
               tabs: [
                 Tab(
