@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:p12_basic_widgets/config/palette.dart';
+import 'package:p12_basic_widgets/features/infrastructure/presentation/duty_dialogs.dart';
 
 class AlarmSignalScreen extends StatefulWidget {
   const AlarmSignalScreen({super.key});
@@ -10,6 +10,7 @@ class AlarmSignalScreen extends StatefulWidget {
 
 class _AlarmSignalScreenState extends State<AlarmSignalScreen> {
   late MaterialStatesController btnStateController;
+  DutyDialogs dutyDialogs = DutyDialogs();
   bool isTriggerLocked = true;
   bool isLockBtnLocked = false;
 
@@ -67,7 +68,7 @@ class _AlarmSignalScreenState extends State<AlarmSignalScreen> {
                 ? null
                 : () {
                     print("ALARM ACTIVATED");
-                    _showBasicDialog(context);
+                    dutyDialogs.alarmActive(context);
                   },
             style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.resolveWith<Color>(
@@ -113,31 +114,5 @@ class _AlarmSignalScreenState extends State<AlarmSignalScreen> {
       isTriggerLocked = true;
       isLockBtnLocked = false;
     });
-  }
-
-  Future<void> _showBasicDialog(BuildContext context) async {
-    return showDialog<void>(
-      context: context,
-      builder: ((context) {
-        return AlertDialog(
-            icon: Icon(
-              Icons.mobile_friendly,
-              color: Theme.of(context).primaryColor,
-            ),
-            title: const Text("Signal active!"),
-            content: const Text(
-                "Your fellows are beeing notified. You´ll be updated when someone is hitting the road."),
-            actions: <Widget>[
-              TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text(
-                    "Got it!",
-                    style: TextStyle(color: dutyGreen),
-                  ))
-            ]);
-      }),
-    );
   }
 }
