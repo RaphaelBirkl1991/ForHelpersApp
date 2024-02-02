@@ -8,18 +8,15 @@ class AppTheme {
 
     // TEXT
     textTheme: const TextTheme(
+      headlineSmall: TextStyle(fontSize: 23),
       headlineMedium: TextStyle(fontSize: 32),
       displayMedium: TextStyle(fontSize: 25, fontWeight: FontWeight.normal),
       bodyMedium: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
+      bodySmall: TextStyle(fontSize: 15),
     ),
     // NAVBAR
     navigationBarTheme:
         const NavigationBarThemeData(backgroundColor: dutyWhite),
-
-    // TABBAR
-    tabBarTheme: const TabBarTheme(indicator: BoxDecoration()),
-    primaryColor: dutyBlue,
-    hintColor: dutyWhite,
 
     bottomNavigationBarTheme:
         const BottomNavigationBarThemeData(backgroundColor: dutyWhite),

@@ -17,8 +17,6 @@ class SettingsColumn extends StatefulWidget {
 class _SettingsColumnState extends State<SettingsColumn> {
   @override
   Widget build(BuildContext context) {
-    // to do padding: 16
-    // ignore: prefer_const_constructors
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -31,19 +29,8 @@ class _SettingsColumnState extends State<SettingsColumn> {
           SchemeSection(
               databaseSettingsRepository: widget.databaseSettingsRepository),
           const Spacer(),
-          //  PinSection(),
-          //  Spacer(),
         ],
       ),
     );
-
-    //Column(
-    // crossAxisAlignment: CrossAxisAlignment.start,
-    // children: [
-    //   const LanguageSection(),
-    //   const SchemeSection(),
-    //   const PinSection(),
-    // ],
-    //  );
   }
 }

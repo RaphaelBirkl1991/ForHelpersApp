@@ -5,7 +5,9 @@ class ProvideLoremIpsum extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Nullam eget felis eget odio tincidunt gravida. Fusce euismodnisl ut dui vulputate, in malesuada justo luctus. Quisque rhoncusvelit ut interdum dictum, elit augue auctor urna, a consequat dui nequenon lectus. Curabitur nec quam nec justo hendrerit faucibus.");
+    return Text(
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Nullam eget feliseget odio tincidunt gravida. Fusce euismodnisl ut dui vulputate, in malesuadajusto luctus. Quisque rhoncusvelit ut interdum dictum, elit augue auctor urna,a consequat dui nequenon lectus. Curabitur nec quam nec justo hendrerit faucibus.",
+      style: Theme.of(context).textTheme.bodySmall,
+    );
   }
 }

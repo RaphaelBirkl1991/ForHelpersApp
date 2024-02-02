@@ -33,11 +33,13 @@ class _LanguageSection extends State<LanguageSection> {
             } else {
               final language = snapshot.data!;
               return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
                     "Language",
                     style: TextStyle(fontSize: 25),
                   ),
+                  const SizedBox(height: 15),
                   RadioListTile(
                     title: const Text('English'),
                     activeColor: Theme.of(context).primaryColor,
@@ -62,6 +64,7 @@ class _LanguageSection extends State<LanguageSection> {
                     },
                     controlAffinity: ListTileControlAffinity.trailing,
                   ),
+                  const SizedBox(height: 15),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [

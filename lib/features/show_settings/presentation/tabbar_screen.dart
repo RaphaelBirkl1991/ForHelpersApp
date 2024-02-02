@@ -20,15 +20,8 @@ class TabBarScreen extends StatelessWidget {
         length: 3,
         child: Scaffold(
           appBar: AppBar(
-            bottom: TabBar(
-              labelStyle: TextStyle(color: Theme.of(context).primaryColor),
-              labelColor: Theme.of(context).primaryColor,
-              unselectedLabelColor: Colors.black,
-              indicatorColor: Theme.of(context).primaryColor,
-              automaticIndicatorColorAdjustment: true,
-              indicatorWeight: 2,
-              dividerColor: Colors.grey,
-              tabs: const [
+            bottom: const TabBar(
+              tabs: [
                 Tab(
                   text: "Settings",
                 ),

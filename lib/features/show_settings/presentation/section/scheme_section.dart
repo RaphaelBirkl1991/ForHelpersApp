@@ -20,6 +20,7 @@ class _SchemeSection extends State<SchemeSection> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text("Color Schemes", style: TextStyle(fontSize: 25)),
+        const SizedBox(height: 15),
         RadioListTile(
           title: const Text('Default'),
           activeColor: Theme.of(context).primaryColor,
@@ -44,6 +45,7 @@ class _SchemeSection extends State<SchemeSection> {
           },
           controlAffinity: ListTileControlAffinity.trailing,
         ),
+        const SizedBox(height: 15),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
