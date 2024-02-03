@@ -29,7 +29,7 @@ class _LanguageSection extends State<LanguageSection> {
                 child: CircularProgressIndicator(),
               );
             } else if (snapshot.hasError) {
-              return const Text("Es gab einen Fehler");
+              return const Text("An error occured");
             } else {
               final language = snapshot.data!;
               return Column(
