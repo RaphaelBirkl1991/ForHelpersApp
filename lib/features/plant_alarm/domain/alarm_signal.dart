@@ -6,8 +6,4 @@ class AlarmSignal {
   Position? currentPosition;
 
   AlarmSignal();
-
-  void activateAlarm() => isSignalActive = true;
-
-  void cancelAlarm() => isSignalActive = false;
 }

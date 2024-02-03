@@ -14,6 +14,7 @@ class MockSettingsRepository implements DatabaseSettingsRepository {
 
   @override
   Future<void> setLanguage(Language language) async {
+    Future.delayed(const Duration(seconds: 2));
     _mockSettingsService.language = language;
   }
 

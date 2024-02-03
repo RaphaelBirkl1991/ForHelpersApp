@@ -10,8 +10,9 @@ class MockSmokeService {
       List<AdditionalInformation> infoList) async {
     await Future.delayed(const Duration(seconds: 2));
     smokeSign = SmokeSign(true, specification, infoList);
+    Map smokeMap = smokeSign.toMap();
 
-    debugPrint("\nSMOKE SIGN CREATED: \t$smokeSign");
+    debugPrint("\nSMOKE SIGN CREATED: \t$smokeMap");
   }
 
   Future<void> deleteSmoke() async {

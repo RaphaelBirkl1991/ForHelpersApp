@@ -166,16 +166,13 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
               ElevatedButton(
                 onPressed: isSpecificationSelected(specification)
                     ? () async {
-                        // TODO: show loading indicator
                         setState(() {
-                          // loading state Material button?
                           isLoading = true;
                         });
                         try {
                           await widget.databaseSmokeRepository
                               .createSmokeSign(specification!, buildAddInfo());
                         } finally {
-                          // remove loading state material button
                           setState(() {
                             isLoading = false;
                           });

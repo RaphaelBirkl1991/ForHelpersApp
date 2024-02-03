@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:p12_basic_widgets/config/palette.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/duty_dialogs.dart';
+import 'package:p12_basic_widgets/features/plant_alarm/data/database_alarm_repository.dart';
 
 class AlarmSignalScreen extends StatefulWidget {
-  const AlarmSignalScreen({super.key});
+  final DatabaseAlarmRepository databaseAlarmRepository;
+  const AlarmSignalScreen({super.key, required this.databaseAlarmRepository});
 
   @override
   State<AlarmSignalScreen> createState() => _AlarmSignalScreenState();
@@ -10,9 +13,11 @@ class AlarmSignalScreen extends StatefulWidget {
 
 class _AlarmSignalScreenState extends State<AlarmSignalScreen> {
   late MaterialStatesController btnStateController;
+
   DutyDialogs dutyDialogs = DutyDialogs();
   bool isTriggerLocked = true;
   bool isLockBtnLocked = false;
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -39,7 +44,6 @@ class _AlarmSignalScreenState extends State<AlarmSignalScreen> {
               "Activate button and \nkeep trigger pressed \n to send alarmsignal"),
         ),
         const Spacer(),
-        // const AlarmTriggerBtn(),
         OutlinedButton(
           onPressed: isLockBtnLocked
               ? null
@@ -62,13 +66,28 @@ class _AlarmSignalScreenState extends State<AlarmSignalScreen> {
               : const Text("activate Button",
                   style: TextStyle(color: Colors.grey)),
         ),
-
         ElevatedButton(
             onPressed: isTriggerLocked
                 ? null
-                : () {
-                    debugPrint("ALARM ACTIVATED");
+                : () async {
+                    setState(() {
+                      isLoading = true;
+                    });
+                    try {
+                      TODO:
+                      await widget.databaseAlarmRepository.createAlarmSignal();
+                    } catch (error) {
+                      const Text("An error occured!");
+                    } finally {
+                      await relockTriggerBtn();
+                      setState(() {
+                        isLoading = false;
+                      });
+                    }
+
                     dutyDialogs.alarmActive(context);
+                    isLockBtnLocked = false;
+                    isTriggerLocked = true;
                   },
             style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.resolveWith<Color>(
@@ -82,11 +101,8 @@ class _AlarmSignalScreenState extends State<AlarmSignalScreen> {
                 minimumSize: MaterialStateProperty.all<Size>(
                   const Size(300, 38),
                 )),
-            child: isTriggerLocked
-                ? const Text(
-                    "send alarm",
-                    style: TextStyle(color: Colors.white),
-                  )
+            child: isLoading
+                ? const CircularProgressIndicator(color: dutyWhite)
                 : const Text(
                     "send alarm",
                     style: TextStyle(
