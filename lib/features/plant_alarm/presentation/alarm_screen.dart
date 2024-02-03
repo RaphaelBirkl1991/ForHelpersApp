@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/duty_dialogs.dart';
+import 'package:p12_basic_widgets/features/infrastructure/presentation/text_provider.dart';
 import 'package:p12_basic_widgets/features/plant_alarm/data/database_alarm_repository.dart';
 
 class AlarmSignalScreen extends StatefulWidget {
@@ -15,9 +16,11 @@ class _AlarmSignalScreenState extends State<AlarmSignalScreen> {
   late MaterialStatesController btnStateController;
 
   DutyDialogs dutyDialogs = DutyDialogs();
+  final text = TextProvider();
   bool isTriggerLocked = true;
   bool isLockBtnLocked = false;
   bool isLoading = false;
+  bool isAlarmActive = false;
 
   @override
   void initState() {
@@ -74,7 +77,6 @@ class _AlarmSignalScreenState extends State<AlarmSignalScreen> {
                       isLoading = true;
                     });
                     try {
-                      TODO:
                       await widget.databaseAlarmRepository.createAlarmSignal();
                     } catch (error) {
                       const Text("An error occured!");
@@ -125,7 +127,7 @@ class _AlarmSignalScreenState extends State<AlarmSignalScreen> {
   }
 
   Future<void> relockTriggerBtn() async {
-    await Future.delayed(const Duration(seconds: 5));
+    await Future.delayed(const Duration(seconds: 2));
     setState(() {
       isTriggerLocked = true;
       isLockBtnLocked = false;
