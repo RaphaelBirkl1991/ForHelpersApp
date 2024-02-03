@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
-import 'package:p12_basic_widgets/features/set_smoke/data/database_set_smoke_repository.dart';
-import 'package:p12_basic_widgets/features/set_smoke/domain/enum_additional_info.dart';
-import 'package:p12_basic_widgets/features/set_smoke/domain/enum_smoke_specification.dart';
+import 'package:p12_basic_widgets/features/infrastructure/presentation/duty_dialogs.dart';
+import 'package:p12_basic_widgets/features/plant_smoke/data/database_smoke_repository.dart';
+import 'package:p12_basic_widgets/features/plant_smoke/domain/enum_additional_info.dart';
+import 'package:p12_basic_widgets/features/plant_smoke/domain/enum_smoke_specification.dart';
 
 class DrawerSmokeScreen extends StatefulWidget {
-  final DatabaseSetSmokeRepository databaseSetSmokeRepository;
+  final DatabaseSmokeRepository databaseSmokeRepository;
   const DrawerSmokeScreen({
     super.key,
-    required this.databaseSetSmokeRepository,
+    required this.databaseSmokeRepository,
   });
 
   @override
@@ -22,6 +23,8 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
   bool isDrugAbuseChecked = false;
   bool isWeaponsInvolvedChecked = false;
   late MaterialStatesController buttonStatesController;
+  final dutyDialog = DutyDialogs();
+  bool isLoading = false;
 
   // final MockService mockService = MockService();
 
@@ -162,9 +165,23 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
               const Spacer(),
               ElevatedButton(
                 onPressed: isSpecificationSelected(specification)
-                    ? () {
-                        widget.databaseSetSmokeRepository
-                            .createSmokeSignal(specification!, buildAddInfo());
+                    ? () async {
+                        // TODO: show loading indicator
+                        setState(() {
+                          // loading state Material button?
+                          isLoading = true;
+                        });
+                        try {
+                          await widget.databaseSmokeRepository
+                              .createSmokeSign(specification!, buildAddInfo());
+                        } finally {
+                          // remove loading state material button
+                          setState(() {
+                            isLoading = false;
+                          });
+                          Navigator.pop(context);
+                          dutyDialog.smokePlanted(context);
+                        }
                       }
                     : null,
                 style: ButtonStyle(
@@ -177,10 +194,12 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
                     },
                   ),
                 ),
-                child: const Text(
-                  "Set Signal",
-                  style: TextStyle(color: Colors.white),
-                ),
+                child: isLoading
+                    ? const CircularProgressIndicator(color: dutyWhite)
+                    : const Text(
+                        "Set Signal",
+                        style: TextStyle(color: Colors.white),
+                      ),
               ),
               const SizedBox(width: 11),
               ElevatedButton(
@@ -212,10 +231,6 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
       return false;
     }
   }
-
-  // SmokeSpecification buildSpecification() {
-  //   return const SmokeSpecification();
-  // }
 
   List<AdditionalInformation> buildAddInfo() {
     List<AdditionalInformation> addInfoList = [];

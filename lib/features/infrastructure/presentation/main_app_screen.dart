@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/custom_navbar.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/splash_screen.dart';
-import 'package:p12_basic_widgets/features/set_alarm/presentation/alarm_screen.dart';
-import 'package:p12_basic_widgets/features/set_smoke/data/database_set_smoke_repository.dart';
-import 'package:p12_basic_widgets/features/set_smoke/presentation/smoke_screen.dart';
+import 'package:p12_basic_widgets/features/plant_alarm/presentation/alarm_screen.dart';
+import 'package:p12_basic_widgets/features/plant_smoke/data/database_smoke_repository.dart';
+import 'package:p12_basic_widgets/features/plant_smoke/presentation/smoke_screen.dart';
 import 'package:p12_basic_widgets/features/show_map/map_screen.dart';
 import 'package:p12_basic_widgets/features/show_settings/data/database_settings_repository.dart';
 import 'package:p12_basic_widgets/features/show_settings/presentation/tabbar_screen.dart';
 
 class MainAppScreen extends StatefulWidget {
-  final DatabaseSetSmokeRepository databaseSetSmokeRepository;
+  final DatabaseSmokeRepository databaseSetSmokeRepository;
   final DatabaseSettingsRepository databaseSettingsRepository;
   const MainAppScreen({
     super.key,

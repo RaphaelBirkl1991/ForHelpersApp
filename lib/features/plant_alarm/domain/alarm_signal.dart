@@ -1,4 +1,4 @@
-import 'package:p12_basic_widgets/features/set_alarm/domain/position.dart';
+import 'package:p12_basic_widgets/features/plant_alarm/domain/position.dart';
 
 class AlarmSignal {
   int? id;

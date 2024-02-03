@@ -1,4 +1,4 @@
-import 'package:p12_basic_widgets/features/set_alarm/domain/alarm_signal.dart';
+import 'package:p12_basic_widgets/features/plant_alarm/domain/alarm_signal.dart';
 
 class AlarmService {
   int id = 0;

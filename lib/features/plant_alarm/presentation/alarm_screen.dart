@@ -67,7 +67,7 @@ class _AlarmSignalScreenState extends State<AlarmSignalScreen> {
             onPressed: isTriggerLocked
                 ? null
                 : () {
-                    print("ALARM ACTIVATED");
+                    debugPrint("ALARM ACTIVATED");
                     dutyDialogs.alarmActive(context);
                   },
             style: ButtonStyle(

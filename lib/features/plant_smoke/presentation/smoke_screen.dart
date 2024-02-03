@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:p12_basic_widgets/features/set_smoke/data/database_set_smoke_repository.dart';
-import 'package:p12_basic_widgets/features/set_smoke/presentation/smoke_drawer.dart';
+import 'package:p12_basic_widgets/features/plant_smoke/data/database_smoke_repository.dart';
+import 'package:p12_basic_widgets/features/plant_smoke/presentation/smoke_drawer.dart';
 
 class SmokeSignalScreen extends StatefulWidget {
-  final DatabaseSetSmokeRepository databaseSetSmokeRepository;
+  final DatabaseSmokeRepository databaseSetSmokeRepository;
 
   const SmokeSignalScreen({
     super.key,
@@ -21,7 +21,7 @@ class _SmokeSignalScreenState extends State<SmokeSignalScreen> {
     return Scaffold(
       key: _scaffoldKey,
       drawer: DrawerSmokeScreen(
-        databaseSetSmokeRepository: widget.databaseSetSmokeRepository,
+        databaseSmokeRepository: widget.databaseSetSmokeRepository,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
