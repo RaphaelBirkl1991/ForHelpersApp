@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class RegistrationScreen extends StatelessWidget {
-  const RegistrationScreen({super.key});
+class InitRegistrationScreen extends StatelessWidget {
+  const InitRegistrationScreen({super.key});
 
   final String hexColor = "#010536";
 
