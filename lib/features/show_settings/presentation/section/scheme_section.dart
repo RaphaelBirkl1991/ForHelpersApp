@@ -14,6 +14,7 @@ class SchemeSection extends StatefulWidget {
 
 class _SchemeSection extends State<SchemeSection> {
   int _selectedValue = 1;
+  bool isSchmeBtnLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -73,15 +74,7 @@ class _SchemeSection extends State<SchemeSection> {
                         onPressed: schmeBtnEnabled(scheme)
                             ? null
                             : () {
-                                if (_selectedValue == 2) {
-                                  widget.databaseSettingsRepository
-                                      .setColorMode(ColorMode.darkmode);
-                                  setState(() {});
-                                } else {
-                                  widget.databaseSettingsRepository
-                                      .setColorMode(ColorMode.lightmode);
-                                  setState(() {});
-                                }
+                                saveScheme();
                               },
                         style: ButtonStyle(
                           backgroundColor:
@@ -94,10 +87,12 @@ class _SchemeSection extends State<SchemeSection> {
                             },
                           ),
                         ),
-                        child: const Text(
-                          "save",
-                          style: TextStyle(color: dutyWhite),
-                        ),
+                        child: isSchmeBtnLoading
+                            ? const CircularProgressIndicator(color: dutyWhite)
+                            : const Text(
+                                "save",
+                                style: TextStyle(color: dutyWhite),
+                              ),
                       ),
                     ],
                   ),
@@ -108,6 +103,24 @@ class _SchemeSection extends State<SchemeSection> {
         ),
       ],
     );
+  }
+
+  saveScheme() async {
+    setState(() {
+      isSchmeBtnLoading = true;
+    });
+    await Future.delayed(const Duration(seconds: 1));
+    if (_selectedValue == 2) {
+      widget.databaseSettingsRepository.setColorMode(ColorMode.darkmode);
+      setState(() {
+        isSchmeBtnLoading = false;
+      });
+    } else {
+      widget.databaseSettingsRepository.setColorMode(ColorMode.lightmode);
+      setState(() {
+        isSchmeBtnLoading = false;
+      });
+    }
   }
 
   bool schmeBtnEnabled(ColorMode currentMode) {

@@ -14,6 +14,7 @@ class LanguageSection extends StatefulWidget {
 
 class _LanguageSection extends State<LanguageSection> {
   int _selectedValue = 1;
+  bool isLangBtnLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -72,17 +73,7 @@ class _LanguageSection extends State<LanguageSection> {
                         onPressed: _languageBtnEnabled(language)
                             ? null
                             : () {
-                                // selVal 1 = english
-                                // selVal 2 = deutsch
-                                if (_selectedValue == 2) {
-                                  widget.databaseSettingsRepository
-                                      .setLanguage(Language.german);
-                                  setState(() {});
-                                } else {
-                                  widget.databaseSettingsRepository
-                                      .setLanguage(Language.english);
-                                  setState(() {});
-                                }
+                                saveLanguage();
                               },
                         style: ButtonStyle(
                           backgroundColor:
@@ -95,10 +86,12 @@ class _LanguageSection extends State<LanguageSection> {
                             },
                           ),
                         ),
-                        child: const Text(
-                          "save",
-                          style: TextStyle(color: dutyWhite),
-                        ),
+                        child: isLangBtnLoading
+                            ? const CircularProgressIndicator(color: dutyWhite)
+                            : const Text(
+                                "save",
+                                style: TextStyle(color: dutyWhite),
+                              ),
                       ),
                     ],
                   ),
@@ -109,6 +102,24 @@ class _LanguageSection extends State<LanguageSection> {
         ),
       ],
     );
+  }
+
+  saveLanguage() async {
+    setState(() {
+      isLangBtnLoading = true;
+    });
+    await Future.delayed(const Duration(seconds: 1));
+    if (_selectedValue == 2) {
+      setState(() {
+        widget.databaseSettingsRepository.setLanguage(Language.german);
+        isLangBtnLoading = false;
+      });
+    } else {
+      setState(() {
+        widget.databaseSettingsRepository.setLanguage(Language.english);
+        isLangBtnLoading = false;
+      });
+    }
   }
 
   bool _languageBtnEnabled(Language currentLanguage) {
