@@ -82,15 +82,49 @@ class _AlarmSignalScreenState extends State<AlarmSignalScreen> {
               ),
               provider.isSignalAlarmActive
                   ? ElevatedButton(
-                      onPressed: () {
-                        provider.stopSendingMode();
-                        debugPrint("cncl btn pressed");
-                        setState(() {});
-                      },
-                      child: const Text(
-                        "Cancel Alarm",
-                        style: TextStyle(color: dutyWhite),
-                      ),
+                      onPressed: isTriggerLocked
+                          ? null
+                          : () async {
+                              setState(() {
+                                isLoading = true;
+                              });
+                              try {
+                                await widget.databaseAlarmRepository
+                                    .deleteAlarmSignal();
+                              } catch (error) {
+                                const Text("An error occured!");
+                              } finally {
+                                await relockTriggerBtn();
+                                setState(() {
+                                  isLoading = false;
+                                });
+                                provider.stopSendingMode();
+                                debugPrint("cncl btn pressed");
+                                setState(() {});
+                                dutyDialogs.alarmDropped(context);
+                              }
+                            },
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.resolveWith<Color>(
+                            (states) {
+                              if (states.contains(MaterialState.disabled)) {
+                                return Colors.grey;
+                              }
+                              return Theme.of(context).primaryColor;
+                            },
+                          ),
+                          minimumSize: MaterialStateProperty.all<Size>(
+                            const Size(300, 38),
+                          )),
+                      child: isLoading
+                          ? const CircularProgressIndicator(color: dutyWhite)
+                          : const Text(
+                              "Cancel Alarm",
+                              style: TextStyle(
+                                  color: dutyWhite,
+                                  fontWeight: FontWeight.bold),
+                            ),
                     )
                   : ElevatedButton(
                       onPressed: isTriggerLocked
