@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:p12_basic_widgets/config/palette.dart';
+import 'package:p12_basic_widgets/features/plant_smoke/application/smoke_provider.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/data/database_smoke_repository.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/presentation/smoke_drawer.dart';
+import 'package:provider/provider.dart';
 
 class SmokeSignalScreen extends StatefulWidget {
   final DatabaseSmokeRepository databaseSetSmokeRepository;
@@ -18,42 +21,47 @@ class _SmokeSignalScreenState extends State<SmokeSignalScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      drawer: DrawerSmokeScreen(
-        databaseSmokeRepository: widget.databaseSetSmokeRepository,
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const Spacer(),
-          Text("Precautionary Signal",
-              style: Theme.of(context).textTheme.headlineMedium),
-          const Spacer(),
-          const Spacer(),
-          Center(
-            child: Text(
-              "Specify Signal and \nkeep trigger pressed \nto set smokesign",
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
+    return Consumer<SmokeProvider>(
+      builder: (BuildContext context, SmokeProvider provider, Widget? child) {
+        return Scaffold(
+          key: _scaffoldKey,
+          drawer: DrawerSmokeScreen(
+            databaseSmokeRepository: widget.databaseSetSmokeRepository,
           ),
-          const Spacer(),
-          Center(
-            child: ElevatedButton(
-                onPressed: () {
-                  _scaffoldKey.currentState?.openDrawer();
-                },
-                style: ButtonStyle(
-                    minimumSize:
-                        MaterialStateProperty.all(const Size(300, 38))),
-                child: const Text(
-                  "prepare smokesign",
-                  style: TextStyle(color: Colors.white),
-                )),
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Spacer(),
+              Text("Precautionary Signal",
+                  style: Theme.of(context).textTheme.headlineMedium),
+              const Spacer(),
+              const Spacer(),
+              Center(
+                child: Text(
+                  "Specify Signal and \nkeep trigger pressed \nto set smokesign",
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              ),
+              const Spacer(),
+              Center(
+                child: ElevatedButton(
+                    onPressed: () {
+                      _scaffoldKey.currentState?.openDrawer();
+                    },
+                    style: ButtonStyle(
+                        minimumSize:
+                            MaterialStateProperty.all(const Size(300, 38))),
+                    child: const Text(
+                      "prepare smokesign",
+                      style: TextStyle(color: Colors.white),
+                    )),
+              ),
+              const Spacer(),
+            ],
           ),
-          const Spacer(),
-        ],
-      ),
+          backgroundColor: provider.isSmokeActive ? dutyBgYellow : dutyWhite,
+        );
+      },
     );
   }
 }

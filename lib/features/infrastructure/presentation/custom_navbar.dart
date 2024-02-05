@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
-import 'package:p12_basic_widgets/features/plant_alarm/presentation/alarm_provider.dart';
+import 'package:p12_basic_widgets/features/plant_alarm/application/alarm_provider.dart';
+import 'package:p12_basic_widgets/features/plant_smoke/application/smoke_provider.dart';
 import 'package:provider/provider.dart';
 
 class CustomNavBar extends StatefulWidget {
@@ -15,47 +16,66 @@ class CustomNavBar extends StatefulWidget {
 }
 
 class _CustomNavBarState extends State<CustomNavBar> {
-  late bool isSignalActive;
+  late bool isAlarmActive;
+  late bool isSmokeActive;
 
   @override
   void initState() {
     super.initState();
 
-    isSignalActive =
-        Provider.of<AlarmProvider>(context, listen: false).isSignalAlarmActive;
+    isAlarmActive =
+        Provider.of<AlarmProvider>(context, listen: false).isAlarmActive;
+
+    isSmokeActive =
+        Provider.of<SmokeProvider>(context, listen: false).isSmokeActive;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AlarmProvider>(
-      builder: (BuildContext context, AlarmProvider provider, Widget? child) {
+    return Consumer2<AlarmProvider, SmokeProvider>(
+      builder: (BuildContext context, AlarmProvider alarmProvider,
+          SmokeProvider smokeProvider, Widget? child) {
         return BottomNavigationBar(
           selectedItemColor: Theme.of(context).primaryColor,
           showSelectedLabels: false,
           unselectedIconTheme: const IconThemeData(color: dutyUnselectedGrey),
-          backgroundColor: provider.isSignalAlarmActive ? dutyBgRed : dutyWhite,
+          backgroundColor: smokeProvider.isSmokeActive
+              ? dutyBgYellow
+              : (alarmProvider.isAlarmActive ? dutyBgRed : dutyWhite),
           items: [
             BottomNavigationBarItem(
-                icon: const Icon(Icons.map_outlined),
-                label: "map",
-                backgroundColor:
-                    provider.isSignalAlarmActive ? dutyBgRed : dutyWhite),
+              icon: const Icon(Icons.map_outlined),
+              label: "map",
+              backgroundColor: smokeProvider.isSmokeActive
+                  ? dutyBgYellow
+                  : (alarmProvider.isAlarmActive ? dutyBgRed : dutyWhite),
+            ),
+            //  alarmProvider.isAlarmActive ? dutyBgRed : dutyWhite),
             BottomNavigationBarItem(
-                icon: const Icon(Icons.warning_amber_outlined),
-                label: "smoke",
-                backgroundColor:
-                    provider.isSignalAlarmActive ? dutyBgRed : dutyWhite),
+              icon: const Icon(Icons.warning_amber_outlined),
+              activeIcon:
+                  const Icon(Icons.warning_amber_outlined, color: dutyYellow),
+              label: "smoke",
+              backgroundColor: smokeProvider.isSmokeActive
+                  ? dutyBgYellow
+                  : (alarmProvider.isAlarmActive ? dutyBgRed : dutyWhite),
+            ),
+            // backgroundColor: alarmProvider.isAlarmActive ? dutyBgRed : dutyWhite),
             BottomNavigationBarItem(
-                icon: const Icon(
-                  Icons.crisis_alert,
-                ),
-                activeIcon: const Icon(
-                  Icons.crisis_alert,
-                  color: dutyRed,
-                ),
-                backgroundColor:
-                    provider.isSignalAlarmActive ? dutyBgRed : dutyWhite,
-                label: "alarm"),
+              icon: const Icon(
+                Icons.crisis_alert,
+              ),
+              activeIcon: const Icon(
+                Icons.crisis_alert,
+                color: dutyRed,
+              ),
+              label: "alarm",
+              backgroundColor: smokeProvider.isSmokeActive
+                  ? dutyBgYellow
+                  : (alarmProvider.isAlarmActive ? dutyBgRed : dutyWhite),
+            ),
+            //   backgroundColor: alarmProvider.isAlarmActive ? dutyBgRed : dutyWhite,
+
             const BottomNavigationBarItem(
                 icon: Icon(Icons.more_vert), label: "settings"),
           ],

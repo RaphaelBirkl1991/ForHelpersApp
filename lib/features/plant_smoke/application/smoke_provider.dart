@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class AlarmProvider extends ChangeNotifier {
-  bool isSignalAlarmActive = false;
+class SmokeProvider extends ChangeNotifier {
+  bool isSmokeActive = false;
 
   void activateSendingMode() {
-    isSignalAlarmActive = true;
+    isSmokeActive = true;
     notifyListeners();
   }
 
   void stopSendingMode() {
-    isSignalAlarmActive = false;
+    isSmokeActive = false;
     notifyListeners();
   }
 }

@@ -3,8 +3,8 @@ import 'package:p12_basic_widgets/config/palette.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/custom_navbar.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/duty_dialogs.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/text_provider.dart';
+import 'package:p12_basic_widgets/features/plant_alarm/application/alarm_provider.dart';
 import 'package:p12_basic_widgets/features/plant_alarm/data/database_alarm_repository.dart';
-import 'package:p12_basic_widgets/features/plant_alarm/presentation/alarm_provider.dart';
 import 'package:provider/provider.dart';
 
 class AlarmSignalScreen extends StatefulWidget {
@@ -40,7 +40,7 @@ class _AlarmSignalScreenState extends State<AlarmSignalScreen> {
     return Consumer<AlarmProvider>(
       builder: (BuildContext context, AlarmProvider provider, Widget? child) {
         return Scaffold(
-          backgroundColor: provider.isSignalAlarmActive ? dutyBgRed : dutyWhite,
+          backgroundColor: provider.isAlarmActive ? dutyBgRed : dutyWhite,
           body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -80,7 +80,7 @@ class _AlarmSignalScreenState extends State<AlarmSignalScreen> {
                     : const Text("activate Button",
                         style: TextStyle(color: Colors.grey)),
               ),
-              provider.isSignalAlarmActive
+              provider.isAlarmActive
                   ? ElevatedButton(
                       onPressed: isTriggerLocked
                           ? null

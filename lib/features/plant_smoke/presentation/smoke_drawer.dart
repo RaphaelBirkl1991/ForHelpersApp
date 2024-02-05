@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/duty_dialogs.dart';
+import 'package:p12_basic_widgets/features/plant_smoke/application/smoke_provider.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/data/database_smoke_repository.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/domain/enum_additional_info.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/domain/enum_smoke_specification.dart';
+import 'package:provider/provider.dart';
 
 class DrawerSmokeScreen extends StatefulWidget {
   final DatabaseSmokeRepository databaseSmokeRepository;
@@ -26,8 +28,6 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
   final dutyDialog = DutyDialogs();
   bool isLoading = false;
 
-  // final MockService mockService = MockService();
-
   @override
   void initState() {
     super.initState();
@@ -36,188 +36,194 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          const DrawerHeader(
-            margin: EdgeInsets.fromLTRB(0, 0, 0, 30),
-            padding: EdgeInsets.fromLTRB(20, 50, 1, 0),
-            decoration: BoxDecoration(color: dutyBlue),
-            child: Text(
-              'specify your signal',
-              maxLines: 1,
-              style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.normal,
-                  color: dutyWhite),
-            ),
-          ),
-          RadioListTile<int>(
-              title: const Text(
-                "pending violence",
-                style: TextStyle(color: dutyBlack),
-              ),
-              activeColor: Theme.of(context).primaryColor,
-              value: 1,
-              groupValue: selectedValue,
-              onChanged: (value) {
-                if (value != null) {
-                  setState(() {
-                    selectedValue = value;
-
-                    specification = SmokeSpecification.pendingViolence;
-                  });
-                }
-              }),
-          RadioListTile<int>(
-              title: const Text(
-                "first aid meassures",
-                style: TextStyle(color: dutyBlack),
-              ),
-              activeColor: Theme.of(context).primaryColor,
-              value: 2,
-              groupValue: selectedValue,
-              onChanged: (value) {
-                if (value != null) {
-                  setState(() {
-                    selectedValue = value;
-                    specification = SmokeSpecification.firstAid;
-                  });
-                }
-              }),
-          RadioListTile<int>(
-              title: const Text(
-                "evacuation",
-                style: TextStyle(color: dutyBlack),
-              ),
-              activeColor: Theme.of(context).primaryColor,
-              value: 3,
-              groupValue: selectedValue,
-              onChanged: (value) {
-                if (value != null) {
-                  setState(() {
-                    selectedValue = value;
-                    specification = SmokeSpecification.evacuation;
-                  });
-                }
-              }),
-          RadioListTile<int>(
-              title: const Text(
-                "tracing after crime",
-                style: TextStyle(color: dutyBlack),
-              ),
-              activeColor: Theme.of(context).primaryColor,
-              value: 4,
-              groupValue: selectedValue,
-              onChanged: (value) {
-                if (value != null) {
-                  setState(() {
-                    selectedValue = value;
-                    specification = SmokeSpecification.tracing;
-                  });
-                }
-              }),
-          const Divider(),
-          CheckboxListTile(
-            title: const Text(
-              '> 10 delinquents',
-              style: TextStyle(color: dutyBlack),
-            ),
-            activeColor: Theme.of(context).primaryColor,
-            value: isDelinquentsChecked,
-            onChanged: (value) {
-              setState(() {
-                isDelinquentsChecked = !isDelinquentsChecked;
-              });
-            },
-          ),
-          CheckboxListTile(
-            title: const Text(
-              'drug abuse',
-              style: TextStyle(color: dutyBlack),
-            ),
-            activeColor: Theme.of(context).primaryColor,
-            value: isDrugAbuseChecked,
-            onChanged: (value) {
-              setState(() {
-                isDrugAbuseChecked = !isDrugAbuseChecked;
-              });
-            },
-          ),
-          CheckboxListTile(
-            title: const Text(
-              'weapons involved',
-              style: TextStyle(color: dutyBlack),
-            ),
-            activeColor: Theme.of(context).primaryColor,
-            value: isWeaponsInvolvedChecked,
-            onChanged: (value) {
-              setState(() {
-                isWeaponsInvolvedChecked = !isWeaponsInvolvedChecked;
-              });
-            },
-          ),
-          const Divider(),
-          const SizedBox(height: 15),
-          Row(
+    return Consumer<SmokeProvider>(
+      builder: (BuildContext context, SmokeProvider provider, Widget? child) {
+        return Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
             children: [
-              const Spacer(),
-              ElevatedButton(
-                onPressed: isSpecificationSelected(specification)
-                    ? () async {
-                        setState(() {
-                          isLoading = true;
-                        });
-                        try {
-                          await widget.databaseSmokeRepository
-                              .createSmokeSign(specification!, buildAddInfo());
-                        } finally {
-                          setState(() {
-                            isLoading = false;
-                          });
-                          Navigator.pop(context);
-                          dutyDialog.smokePlanted(context);
-                        }
-                      }
-                    : null,
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                    (states) {
-                      if (states.contains(MaterialState.disabled)) {
-                        return Colors.grey;
-                      }
-                      return Theme.of(context).primaryColor;
-                    },
-                  ),
+              const DrawerHeader(
+                margin: EdgeInsets.fromLTRB(0, 0, 0, 30),
+                padding: EdgeInsets.fromLTRB(20, 50, 1, 0),
+                decoration: BoxDecoration(color: dutyBlue),
+                child: Text(
+                  'specify your signal',
+                  maxLines: 1,
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.normal,
+                      color: dutyWhite),
                 ),
-                child: isLoading
-                    ? const CircularProgressIndicator(color: dutyWhite)
-                    : const Text(
-                        "Set Signal",
-                        style: TextStyle(color: Colors.white),
-                      ),
               ),
-              const SizedBox(width: 11),
-              ElevatedButton(
-                onPressed: () {
-                  selectedValue = -1;
-                  Navigator.pop(context);
-                },
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
-                ),
-                child: const Text(
-                  "Cancel",
+              RadioListTile<int>(
+                  title: const Text(
+                    "pending violence",
+                    style: TextStyle(color: dutyBlack),
+                  ),
+                  activeColor: Theme.of(context).primaryColor,
+                  value: 1,
+                  groupValue: selectedValue,
+                  onChanged: (value) {
+                    if (value != null) {
+                      setState(() {
+                        selectedValue = value;
+
+                        specification = SmokeSpecification.pendingViolence;
+                      });
+                    }
+                  }),
+              RadioListTile<int>(
+                  title: const Text(
+                    "first aid meassures",
+                    style: TextStyle(color: dutyBlack),
+                  ),
+                  activeColor: Theme.of(context).primaryColor,
+                  value: 2,
+                  groupValue: selectedValue,
+                  onChanged: (value) {
+                    if (value != null) {
+                      setState(() {
+                        selectedValue = value;
+                        specification = SmokeSpecification.firstAid;
+                      });
+                    }
+                  }),
+              RadioListTile<int>(
+                  title: const Text(
+                    "evacuation",
+                    style: TextStyle(color: dutyBlack),
+                  ),
+                  activeColor: Theme.of(context).primaryColor,
+                  value: 3,
+                  groupValue: selectedValue,
+                  onChanged: (value) {
+                    if (value != null) {
+                      setState(() {
+                        selectedValue = value;
+                        specification = SmokeSpecification.evacuation;
+                      });
+                    }
+                  }),
+              RadioListTile<int>(
+                  title: const Text(
+                    "tracing after crime",
+                    style: TextStyle(color: dutyBlack),
+                  ),
+                  activeColor: Theme.of(context).primaryColor,
+                  value: 4,
+                  groupValue: selectedValue,
+                  onChanged: (value) {
+                    if (value != null) {
+                      setState(() {
+                        selectedValue = value;
+                        specification = SmokeSpecification.tracing;
+                      });
+                    }
+                  }),
+              const Divider(),
+              CheckboxListTile(
+                title: const Text(
+                  '> 10 delinquents',
                   style: TextStyle(color: dutyBlack),
                 ),
+                activeColor: Theme.of(context).primaryColor,
+                value: isDelinquentsChecked,
+                onChanged: (value) {
+                  setState(() {
+                    isDelinquentsChecked = !isDelinquentsChecked;
+                  });
+                },
               ),
-              const SizedBox(width: 15),
+              CheckboxListTile(
+                title: const Text(
+                  'drug abuse',
+                  style: TextStyle(color: dutyBlack),
+                ),
+                activeColor: Theme.of(context).primaryColor,
+                value: isDrugAbuseChecked,
+                onChanged: (value) {
+                  setState(() {
+                    isDrugAbuseChecked = !isDrugAbuseChecked;
+                  });
+                },
+              ),
+              CheckboxListTile(
+                title: const Text(
+                  'weapons involved',
+                  style: TextStyle(color: dutyBlack),
+                ),
+                activeColor: Theme.of(context).primaryColor,
+                value: isWeaponsInvolvedChecked,
+                onChanged: (value) {
+                  setState(() {
+                    isWeaponsInvolvedChecked = !isWeaponsInvolvedChecked;
+                  });
+                },
+              ),
+              const Divider(),
+              const SizedBox(height: 15),
+              Row(
+                children: [
+                  const Spacer(),
+                  ElevatedButton(
+                    onPressed: isSpecificationSelected(specification)
+                        ? () async {
+                            setState(() {
+                              isLoading = true;
+                            });
+                            try {
+                              await widget.databaseSmokeRepository
+                                  .createSmokeSign(
+                                      specification!, buildAddInfo());
+                            } finally {
+                              setState(() {
+                                isLoading = false;
+                              });
+                              provider.activateSendingMode();
+                              Navigator.pop(context);
+                              dutyDialog.smokePlanted(context);
+                            }
+                          }
+                        : null,
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                        (states) {
+                          if (states.contains(MaterialState.disabled)) {
+                            return Colors.grey;
+                          }
+                          return Theme.of(context).primaryColor;
+                        },
+                      ),
+                    ),
+                    child: isLoading
+                        ? const CircularProgressIndicator(color: dutyWhite)
+                        : const Text(
+                            "Set Signal",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                  ),
+                  const SizedBox(width: 11),
+                  ElevatedButton(
+                    onPressed: () {
+                      selectedValue = -1;
+                      Navigator.pop(context);
+                    },
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.white),
+                    ),
+                    child: const Text(
+                      "Cancel",
+                      style: TextStyle(color: dutyBlack),
+                    ),
+                  ),
+                  const SizedBox(width: 15),
+                ],
+              )
             ],
-          )
-        ],
-      ),
+          ),
+        );
+      },
     );
   }
 
