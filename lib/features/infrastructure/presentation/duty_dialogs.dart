@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
+import 'package:p12_basic_widgets/features/plant_smoke/application/smoke_provider.dart';
+import 'package:provider/provider.dart';
 
 class DutyDialogs {
   // SMOKE PLANTED
@@ -34,34 +36,40 @@ class DutyDialogs {
     return showDialog<void>(
       context: context,
       builder: ((context) {
-        return AlertDialog(
-            icon: Icon(
-              Icons.mobile_friendly,
-              color: Theme.of(context).primaryColor,
-            ),
-            title: const Text("Are you sure?"),
-            content: const Text(
-                "You are deleting the current sign. Is that what you want?"),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text(
-                  "Delete sign",
-                  style: TextStyle(color: dutyRed),
+        return Consumer<SmokeProvider>(
+          builder:
+              (BuildContext context, SmokeProvider provider, Widget? child) {
+            return AlertDialog(
+                icon: Icon(
+                  Icons.mobile_friendly,
+                  color: Theme.of(context).primaryColor,
                 ),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text(
-                  "Wait...",
-                  style: TextStyle(color: dutyGreen),
-                ),
-              ),
-            ]);
+                title: const Text("Are you sure?"),
+                content: const Text(
+                    "You are deleting the current sign. Is that what you want?"),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      provider.stopSendingMode();
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text(
+                      "Delete sign",
+                      style: TextStyle(color: dutyRed),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text(
+                      "Wait...",
+                      style: TextStyle(color: dutyGreen),
+                    ),
+                  ),
+                ]);
+          },
+        );
       }),
     );
   }

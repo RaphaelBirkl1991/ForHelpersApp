@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
+import 'package:p12_basic_widgets/features/infrastructure/presentation/duty_dialogs.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/application/smoke_provider.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/data/database_smoke_repository.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/presentation/smoke_drawer.dart';
@@ -18,6 +19,8 @@ class SmokeSignalScreen extends StatefulWidget {
 }
 
 class _SmokeSignalScreenState extends State<SmokeSignalScreen> {
+  final dutyDialog = DutyDialogs();
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
@@ -44,17 +47,29 @@ class _SmokeSignalScreenState extends State<SmokeSignalScreen> {
               ),
               const Spacer(),
               Center(
-                child: ElevatedButton(
-                    onPressed: () {
-                      _scaffoldKey.currentState?.openDrawer();
-                    },
-                    style: ButtonStyle(
-                        minimumSize:
-                            MaterialStateProperty.all(const Size(300, 38))),
-                    child: const Text(
-                      "prepare smokesign",
-                      style: TextStyle(color: Colors.white),
-                    )),
+                child: provider.isSmokeActive
+                    ? ElevatedButton(
+                        onPressed: () {
+                          dutyDialog.confirmSmokeDeletetion(context);
+                        },
+                        style: ButtonStyle(
+                            minimumSize:
+                                MaterialStateProperty.all(const Size(300, 38))),
+                        child: const Text(
+                          "Cancel Smokesignal",
+                          style: TextStyle(color: dutyWhite),
+                        ))
+                    : ElevatedButton(
+                        onPressed: () {
+                          _scaffoldKey.currentState?.openDrawer();
+                        },
+                        style: ButtonStyle(
+                            minimumSize:
+                                MaterialStateProperty.all(const Size(300, 38))),
+                        child: const Text(
+                          "prepare smokesign",
+                          style: TextStyle(color: Colors.white),
+                        )),
               ),
               const Spacer(),
             ],

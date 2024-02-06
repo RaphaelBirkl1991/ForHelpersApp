@@ -50,7 +50,6 @@ class _CustomNavBarState extends State<CustomNavBar> {
                   ? dutyBgYellow
                   : (alarmProvider.isAlarmActive ? dutyBgRed : dutyWhite),
             ),
-            //  alarmProvider.isAlarmActive ? dutyBgRed : dutyWhite),
             BottomNavigationBarItem(
               icon: const Icon(Icons.warning_amber_outlined),
               activeIcon:
@@ -60,7 +59,6 @@ class _CustomNavBarState extends State<CustomNavBar> {
                   ? dutyBgYellow
                   : (alarmProvider.isAlarmActive ? dutyBgRed : dutyWhite),
             ),
-            // backgroundColor: alarmProvider.isAlarmActive ? dutyBgRed : dutyWhite),
             BottomNavigationBarItem(
               icon: const Icon(
                 Icons.crisis_alert,
@@ -74,8 +72,6 @@ class _CustomNavBarState extends State<CustomNavBar> {
                   ? dutyBgYellow
                   : (alarmProvider.isAlarmActive ? dutyBgRed : dutyWhite),
             ),
-            //   backgroundColor: alarmProvider.isAlarmActive ? dutyBgRed : dutyWhite,
-
             const BottomNavigationBarItem(
                 icon: Icon(Icons.more_vert), label: "settings"),
           ],

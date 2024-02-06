@@ -47,6 +47,7 @@ class _LanguageSection extends State<LanguageSection> {
                     value: 1,
                     groupValue: _selectedValue,
                     onChanged: (value) async {
+                      Future.delayed(const Duration(seconds: 1));
                       setState(() {
                         _selectedValue = value as int;
                       });
