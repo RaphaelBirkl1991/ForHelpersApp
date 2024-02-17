@@ -1,4 +1,5 @@
 class Configuration {
+  static bool isFirstUse = false;
   static bool isSignalAlarmActive = false;
   static late Function(bool) onStateChanged;
 
