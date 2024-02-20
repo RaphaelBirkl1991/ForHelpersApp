@@ -5,6 +5,7 @@ class SmokeSign {
   bool signActive;
   SmokeSpecification? specification;
   List<AdditionalInformation>? addititonalInfo;
+  // Position position;
 
   SmokeSign(this.signActive, this.specification, this.addititonalInfo);
 

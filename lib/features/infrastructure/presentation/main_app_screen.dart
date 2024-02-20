@@ -29,7 +29,9 @@ class MainAppState extends State<MainAppScreen> {
   void initState() {
     super.initState();
     pages = [
-      const MapScreen(),
+      MapScreen(
+        databaseSetSmokeRepository: widget.databaseSetSmokeRepository,
+      ),
       SmokeSignalScreen(
           databaseSetSmokeRepository: widget.databaseSetSmokeRepository),
       AlarmSignalScreen(

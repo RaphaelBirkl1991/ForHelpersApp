@@ -5,9 +5,12 @@ import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/duty_dialogs.dart';
+import 'package:p12_basic_widgets/features/plant_smoke/data/database_smoke_repository.dart';
+import 'package:p12_basic_widgets/features/plant_smoke/presentation/smoke_screen.dart';
 
 class MapScreen extends StatefulWidget {
-  const MapScreen({super.key});
+  final DatabaseSmokeRepository databaseSetSmokeRepository;
+  const MapScreen({super.key, required this.databaseSetSmokeRepository});
 
   @override
   State<MapScreen> createState() => _MapScreenState();
@@ -140,10 +143,15 @@ class _MapScreenState extends State<MapScreen> {
                             actions: [
                               TextButton(
                                   onPressed: () {
-                                    Navigator.pushNamed(context, "/smoke");
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: ((context) => SmokeSignalScreen(
+                                                databaseSetSmokeRepository: widget
+                                                    .databaseSetSmokeRepository))));
                                   },
                                   child: const Text(
-                                    "Set Smoke",
+                                    "set Smoke",
                                     style: TextStyle(color: dutyYellow),
                                   )),
                               TextButton(
@@ -151,7 +159,7 @@ class _MapScreenState extends State<MapScreen> {
                                     destroyGeoMarker();
                                     Navigator.of(context).pop();
                                   },
-                                  child: const Text("Destroy GeoPoint",
+                                  child: const Text("destroy GeoPoint",
                                       style: TextStyle(color: dutyRed))),
                               TextButton(
                                 onPressed: () {
@@ -212,14 +220,14 @@ class _MapScreenState extends State<MapScreen> {
                               ? const Icon(Icons.location_on, color: dutyGreen)
                               : const Icon(Icons.location_off,
                                   color: dutyUnselectedGrey)),
-                      GestureDetector(
-                          onTap: () {
-                            destroyGeoMarker();
-                          },
-                          child: Icon(
-                            Icons.exposure_minus_1_sharp,
-                            color: isGeoMarkerActive ? dutyRed : null,
-                          )),
+                      // GestureDetector(
+                      //     onTap: () {
+                      //       destroyGeoMarker();
+                      //     },
+                      //     child: Icon(
+                      //       Icons.exposure_minus_1_sharp,
+                      //       color: isGeoMarkerActive ? dutyRed : null,
+                      //     )),
                       GestureDetector(
                         onTap: () {},
                         child: const Icon(Icons.turn_right_outlined,
