@@ -43,15 +43,17 @@ class SplashScreen extends StatelessWidget {
       }
     });
 
-    return Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        color: Theme.of(context).primaryColor,
-        child: const Center(
-            child: Image(
-          image: AssetImage("assets/images/logo.png"),
-          width: 130,
-          height: 130,
-        )));
+    return MaterialApp(
+      home: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          color: Theme.of(context).primaryColor,
+          child: const Center(
+              child: Image(
+            image: AssetImage("assets/images/logo.png"),
+            width: 130,
+            height: 130,
+          ))),
+    );
   }
 }

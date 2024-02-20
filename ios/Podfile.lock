@@ -1,5 +1,7 @@
 PODS:
   - Flutter (1.0.0)
+  - flutter_compass (0.0.1):
+    - Flutter
   - geolocator_apple (1.2.0):
     - Flutter
   - location (0.0.1):
@@ -13,6 +15,7 @@ PODS:
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
+  - flutter_compass (from `.symlinks/plugins/flutter_compass/ios`)
   - geolocator_apple (from `.symlinks/plugins/geolocator_apple/ios`)
   - location (from `.symlinks/plugins/location/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
@@ -21,6 +24,8 @@ DEPENDENCIES:
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
+  flutter_compass:
+    :path: ".symlinks/plugins/flutter_compass/ios"
   geolocator_apple:
     :path: ".symlinks/plugins/geolocator_apple/ios"
   location:
@@ -32,6 +37,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  flutter_compass: cbbd285cea1584c7ac9c4e0c3e1f17cbea55e855
   geolocator_apple: 9157311f654584b9bb72686c55fc02a97b73f461
   location: d5cf8598915965547c3f36761ae9cc4f4e87d22e
   path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943

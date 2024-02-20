@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:p12_basic_widgets/config/app_theme.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/splash_screen.dart';
 
 class App extends StatelessWidget {
@@ -19,14 +18,11 @@ class App extends StatelessWidget {
     // DatabaseSettingsRepository databaseSettingsRepository =
     //     MockSettingsRepository(mockSettingsService);
 
-    return MaterialApp(
-      theme: AppTheme.themeData,
-      home: const SplashScreen(),
-      // MainAppScreen(
-      //   databaseSetSmokeRepository: databaseSetSmokeRepository,
-      //   databaseSettingsRepository: databaseSettingsRepository,
-      //   databaseAlarmRepository: databaseAlarmRepository,
-      // ),
-    );
+    return const SplashScreen();
+    // MainAppScreen(
+    //   databaseSetSmokeRepository: databaseSetSmokeRepository,
+    //   databaseSettingsRepository: databaseSettingsRepository,
+    //   databaseAlarmRepository: databaseAlarmRepository,
+    // ),
   }
 }
