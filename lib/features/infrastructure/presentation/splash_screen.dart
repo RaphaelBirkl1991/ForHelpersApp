@@ -5,8 +5,7 @@ import 'package:p12_basic_widgets/features/initial_use/presentation/init_registr
 import 'package:p12_basic_widgets/features/plant_alarm/data/database_alarm_repository.dart';
 import 'package:p12_basic_widgets/features/plant_alarm/data/mock/mock_alarm_repository.dart';
 import 'package:p12_basic_widgets/features/plant_alarm/data/mock/mock_alarm_service.dart';
-import 'package:p12_basic_widgets/features/plant_smoke/data/database_smoke_repository.dart';
-import 'package:p12_basic_widgets/features/plant_smoke/data/mock/mock_smoke_repository.dart';
+import 'package:p12_basic_widgets/features/plant_smoke/data/firebase/firebase_smoke_repository.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/data/mock/mock_smoke_service.dart';
 import 'package:p12_basic_widgets/features/show_settings/data/database_settings_repository.dart';
 import 'package:p12_basic_widgets/features/show_settings/data/mock/mock_settings_repository.dart';
@@ -18,8 +17,8 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mockSmokeService = MockSmokeService();
-    DatabaseSmokeRepository databaseSetSmokeRepository =
-        MockSmokeRepository(mockSmokeService);
+    FirebaseSmokeRepository databaseSetSmokeRepository =
+        FirebaseSmokeRepository();
 
     final mockAlarmService = MockAlarmService();
     DatabaseAlarmRepository databaseAlarmRepository =

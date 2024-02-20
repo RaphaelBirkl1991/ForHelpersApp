@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/duty_dialogs.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/application/smoke_provider.dart';
-import 'package:p12_basic_widgets/features/plant_smoke/data/database_smoke_repository.dart';
+import 'package:p12_basic_widgets/features/plant_smoke/data/firebase/firebase_smoke_repository.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/domain/enum_additional_info.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/domain/enum_smoke_specification.dart';
 import 'package:provider/provider.dart';
 
 class DrawerSmokeScreen extends StatefulWidget {
-  final DatabaseSmokeRepository databaseSmokeRepository;
+  final FirebaseSmokeRepository databaseSmokeRepository;
   const DrawerSmokeScreen({
     super.key,
     required this.databaseSmokeRepository,

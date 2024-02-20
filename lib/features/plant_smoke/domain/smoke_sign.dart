@@ -9,11 +9,13 @@ class SmokeSign {
 
   SmokeSign(this.signActive, this.specification, this.addititonalInfo);
 
-  Map toMap() {
+  Map<String, dynamic> toMap() {
     return {
-      "sign active": signActive,
-      "specification": specification,
-      "additional info": addititonalInfo
+      "sign_active": signActive,
+      "specification": specification.toString(),
+      "additional_info": addititonalInfo != null
+          ? addititonalInfo!.map((e) => e.toString()).toList()
+          : []
     };
   }
 }

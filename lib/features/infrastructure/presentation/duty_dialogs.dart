@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/application/smoke_provider.dart';
+import 'package:p12_basic_widgets/features/plant_smoke/data/firebase/firebase_smoke_repository.dart';
 import 'package:provider/provider.dart';
 
 class DutyDialogs {
@@ -32,7 +33,8 @@ class DutyDialogs {
   }
 
   // CONFIRM SIGN DELETION
-  Future<void> confirmSmokeDeletetion(BuildContext context) async {
+  Future<void> confirmSmokeDeletetion(BuildContext context,
+      FirebaseSmokeRepository firebaseSmokeRepository) async {
     return showDialog<void>(
       context: context,
       builder: ((context) {
@@ -49,8 +51,9 @@ class DutyDialogs {
                     "You are deleting the current sign. Is that what you want?"),
                 actions: <Widget>[
                   TextButton(
-                    onPressed: () {
+                    onPressed: () async {
                       provider.stopSendingMode();
+                      await firebaseSmokeRepository.deleteSmokeSign();
                       Navigator.of(context).pop();
                     },
                     child: const Text(

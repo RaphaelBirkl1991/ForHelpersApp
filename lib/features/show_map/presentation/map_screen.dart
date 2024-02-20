@@ -5,11 +5,11 @@ import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/duty_dialogs.dart';
-import 'package:p12_basic_widgets/features/plant_smoke/data/database_smoke_repository.dart';
+import 'package:p12_basic_widgets/features/plant_smoke/data/firebase/firebase_smoke_repository.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/presentation/smoke_screen.dart';
 
 class MapScreen extends StatefulWidget {
-  final DatabaseSmokeRepository databaseSetSmokeRepository;
+  final FirebaseSmokeRepository databaseSetSmokeRepository;
   const MapScreen({super.key, required this.databaseSetSmokeRepository});
 
   @override
@@ -188,7 +188,10 @@ class _MapScreenState extends State<MapScreen> {
                 //         ),),
                 //   ]
                 //   ),
-                CurrentLocationLayer(),
+                CurrentLocationLayer(
+                  alignPositionOnUpdate: AlignOnUpdate.never,
+                  alignDirectionOnUpdate: AlignOnUpdate.never,
+                ),
               ],
             ),
             Positioned(

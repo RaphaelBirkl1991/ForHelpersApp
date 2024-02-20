@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/duty_dialogs.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/application/smoke_provider.dart';
-import 'package:p12_basic_widgets/features/plant_smoke/data/database_smoke_repository.dart';
+import 'package:p12_basic_widgets/features/plant_smoke/data/firebase/firebase_smoke_repository.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/presentation/smoke_drawer.dart';
 import 'package:provider/provider.dart';
 
 class SmokeSignalScreen extends StatefulWidget {
-  final DatabaseSmokeRepository databaseSetSmokeRepository;
+  final FirebaseSmokeRepository databaseSetSmokeRepository;
 
   const SmokeSignalScreen({
     super.key,
@@ -50,7 +50,8 @@ class _SmokeSignalScreenState extends State<SmokeSignalScreen> {
                 child: provider.isSmokeActive
                     ? ElevatedButton(
                         onPressed: () {
-                          dutyDialog.confirmSmokeDeletetion(context);
+                          dutyDialog.confirmSmokeDeletetion(
+                              context, widget.databaseSetSmokeRepository);
                         },
                         style: ButtonStyle(
                             minimumSize:
