@@ -36,8 +36,8 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<SmokeProvider>(
-      builder: (BuildContext context, SmokeProvider provider, Widget? child) {
+    return Consumer<SmokeController>(
+      builder: (BuildContext context, SmokeController provider, Widget? child) {
         return Drawer(
           child: ListView(
             padding: EdgeInsets.zero,

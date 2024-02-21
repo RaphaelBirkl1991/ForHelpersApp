@@ -4,11 +4,11 @@ import 'package:p12_basic_widgets/features/plant_alarm/domain/position.dart';
 
 class MockAlarmService {
   final alarmSignal = AlarmSignal();
-  final northPole = Position(latitude: 000.000, longitude: 000.000);
+  final northPole = DutyPosition(latitude: 000.000, longitude: 000.000);
 
   Future<void> createAlarm() async {
     int i = 0;
-    final dummyPosition = Position(latitude: 37.7749, longitude: -122.4194);
+    final dummyPosition = DutyPosition(latitude: 37.7749, longitude: -122.4194);
     i++;
     alarmSignal.id = i;
     alarmSignal.currentPosition = dummyPosition;

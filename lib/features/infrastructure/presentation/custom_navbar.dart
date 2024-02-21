@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
-import 'package:p12_basic_widgets/features/plant_alarm/application/alarm_provider.dart';
+import 'package:p12_basic_widgets/features/plant_alarm/application/alarm_controller.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/application/smoke_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -24,17 +24,17 @@ class _CustomNavBarState extends State<CustomNavBar> {
     super.initState();
 
     isAlarmActive =
-        Provider.of<AlarmProvider>(context, listen: false).isAlarmActive;
+        Provider.of<AlarmController>(context, listen: false).isAlarmActive;
 
     isSmokeActive =
-        Provider.of<SmokeProvider>(context, listen: false).isSmokeActive;
+        Provider.of<SmokeController>(context, listen: false).isSmokeActive;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer2<AlarmProvider, SmokeProvider>(
-      builder: (BuildContext context, AlarmProvider alarmProvider,
-          SmokeProvider smokeProvider, Widget? child) {
+    return Consumer2<AlarmController, SmokeController>(
+      builder: (BuildContext context, AlarmController alarmProvider,
+          SmokeController smokeProvider, Widget? child) {
         return BottomNavigationBar(
           selectedItemColor: Theme.of(context).primaryColor,
           showSelectedLabels: false,

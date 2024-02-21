@@ -38,9 +38,9 @@ class DutyDialogs {
     return showDialog<void>(
       context: context,
       builder: ((context) {
-        return Consumer<SmokeProvider>(
+        return Consumer<SmokeController>(
           builder:
-              (BuildContext context, SmokeProvider provider, Widget? child) {
+              (BuildContext context, SmokeController provider, Widget? child) {
             return AlertDialog(
                 icon: Icon(
                   Icons.mobile_friendly,

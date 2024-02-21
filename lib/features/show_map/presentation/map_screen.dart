@@ -6,7 +6,7 @@ import 'package:location/location.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/duty_dialogs.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/data/firebase/firebase_smoke_repository.dart';
-import 'package:p12_basic_widgets/features/plant_smoke/presentation/smoke_screen.dart';
+import 'package:p12_basic_widgets/features/plant_smoke/presentation/smoke_drawer.dart';
 
 class MapScreen extends StatefulWidget {
   final FirebaseSmokeRepository databaseSetSmokeRepository;
@@ -143,12 +143,15 @@ class _MapScreenState extends State<MapScreen> {
                             actions: [
                               TextButton(
                                   onPressed: () {
+                                    Navigator.pop(context);
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: ((context) => SmokeSignalScreen(
-                                                databaseSetSmokeRepository: widget
-                                                    .databaseSetSmokeRepository))));
+                                            builder: ((context) =>
+                                                (DrawerSmokeScreen(
+                                                  databaseSmokeRepository:
+                                                      FirebaseSmokeRepository(),
+                                                )))));
                                   },
                                   child: const Text(
                                     "set Smoke",

@@ -6,7 +6,7 @@ import 'package:p12_basic_widgets/features/plant_smoke/domain/smoke_sign.dart';
 
 class MockSmokeService {
   late SmokeSign smokeSign;
-  final position = Position;
+  final position = DutyPosition;
 
   Future<void> createSmoke(SmokeSpecification specification,
       List<AdditionalInformation> infoList) async {

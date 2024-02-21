@@ -36,6 +36,7 @@ class MainAppState extends State<MainAppScreen> {
           databaseSetSmokeRepository: widget.databaseSetSmokeRepository),
       AlarmSignalScreen(
         databaseAlarmRepository: widget.databaseAlarmRepository,
+        databaseSetAlarmRepository: widget.databaseAlarmRepository,
       ),
       TabBarScreen(
           databaseSettingsRepository: widget.databaseSettingsRepository)

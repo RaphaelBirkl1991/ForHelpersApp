@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
+import 'package:p12_basic_widgets/features/infrastructure/presentation/custom_navbar.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/duty_dialogs.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/application/smoke_provider.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/data/firebase/firebase_smoke_repository.dart';
@@ -20,12 +21,16 @@ class SmokeSignalScreen extends StatefulWidget {
 
 class _SmokeSignalScreenState extends State<SmokeSignalScreen> {
   final dutyDialog = DutyDialogs();
+  CustomNavBar customNavBar = CustomNavBar(
+    selectedIndex: 0,
+    onItemTapped: (value) {},
+  );
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    return Consumer<SmokeProvider>(
-      builder: (BuildContext context, SmokeProvider provider, Widget? child) {
+    return Consumer<SmokeController>(
+      builder: (BuildContext context, SmokeController provider, Widget? child) {
         return Scaffold(
           key: _scaffoldKey,
           drawer: DrawerSmokeScreen(
