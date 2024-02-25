@@ -11,6 +11,7 @@ class FirebaseSmokeRepository implements DatabaseSmokeRepository {
   Future<void> createSmokeSign(SmokeSpecification specification,
       List<AdditionalInformation> additionalInfo) async {
     final smokeSign = SmokeSign(true, specification, additionalInfo);
+
     Map<String, dynamic> smokeMap = smokeSign.toMap();
     print(smokeMap);
     DocumentReference docRef =

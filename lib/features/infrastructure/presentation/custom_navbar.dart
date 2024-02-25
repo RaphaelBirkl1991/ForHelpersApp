@@ -27,14 +27,14 @@ class _CustomNavBarState extends State<CustomNavBar> {
         Provider.of<AlarmController>(context, listen: false).isAlarmActive;
 
     isSmokeActive =
-        Provider.of<SmokeController>(context, listen: false).isSmokeActive;
+        Provider.of<SmokeProvider>(context, listen: false).isSmokeActive;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer2<AlarmController, SmokeController>(
+    return Consumer2<AlarmController, SmokeProvider>(
       builder: (BuildContext context, AlarmController alarmProvider,
-          SmokeController smokeProvider, Widget? child) {
+          SmokeProvider smokeProvider, Widget? child) {
         return BottomNavigationBar(
           selectedItemColor: Theme.of(context).primaryColor,
           showSelectedLabels: false,

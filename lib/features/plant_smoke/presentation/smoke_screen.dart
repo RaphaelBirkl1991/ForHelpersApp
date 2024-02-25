@@ -29,8 +29,8 @@ class _SmokeSignalScreenState extends State<SmokeSignalScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    return Consumer<SmokeController>(
-      builder: (BuildContext context, SmokeController provider, Widget? child) {
+    return Consumer<SmokeProvider>(
+      builder: (BuildContext context, SmokeProvider provider, Widget? child) {
         return Scaffold(
           key: _scaffoldKey,
           drawer: DrawerSmokeScreen(

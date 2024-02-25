@@ -5,12 +5,15 @@ import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/duty_dialogs.dart';
-import 'package:p12_basic_widgets/features/plant_smoke/data/firebase/firebase_smoke_repository.dart';
-import 'package:p12_basic_widgets/features/plant_smoke/presentation/smoke_drawer.dart';
+import 'package:p12_basic_widgets/features/plant_smoke/application/smoke_provider.dart';
+import 'package:p12_basic_widgets/features/plant_smoke/domain/enum_additional_info.dart';
+import 'package:p12_basic_widgets/features/plant_smoke/domain/enum_smoke_specification.dart';
+import 'package:p12_basic_widgets/features/show_map/application/map_provider.dart';
+import 'package:provider/provider.dart';
 
 class MapScreen extends StatefulWidget {
-  final FirebaseSmokeRepository databaseSetSmokeRepository;
-  const MapScreen({super.key, required this.databaseSetSmokeRepository});
+  // final FirebaseSmokeRepository databaseSetSmokeRepository;
+  const MapScreen({super.key});
 
   @override
   State<MapScreen> createState() => _MapScreenState();
@@ -53,7 +56,8 @@ class _MapScreenState extends State<MapScreen> {
     setState(() {});
   }
 
-  void _moveToCurrentLocation() {
+  void _moveToCurrentLocation() async {
+    _locationData = await location.getLocation();
     if (_locationData != null) {
       mapController.move(
         LatLng(_locationData!.latitude!, _locationData!.longitude!),
@@ -74,8 +78,18 @@ class _MapScreenState extends State<MapScreen> {
     });
   }
 
+  Future<void> showSmokePlantedDialog() async {
+    debugPrint("BAAAAAAAAMMMM");
+    bool? success = await dutyDialog.smokePlanted(context);
+    if (success ?? false) {
+      setState(() {});
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final SmokeProvider smokeProvider = Provider.of<SmokeProvider>(context);
+    final MapProvider mapProvider = Provider.of<MapProvider>(context);
     if (_locationData == null) {
       return Scaffold(
         appBar: AppBar(
@@ -94,7 +108,7 @@ class _MapScreenState extends State<MapScreen> {
           children: [
             FlutterMap(
               mapController: mapController,
-              // OPTIONS
+              // MAPOPTIONS MARKER CENTER ZOOM
               options: MapOptions(
                 initialCenter: _locationData != null
                     ? LatLng(_locationData!.latitude ?? 48.137154,
@@ -106,14 +120,15 @@ class _MapScreenState extends State<MapScreen> {
                     flags: InteractiveFlag.all & ~InteractiveFlag.rotate),
                 onLongPress: isGeoMarkerActive
                     ? (tapPosition, point) {
-                        setState(() {});
+                        _saveMarkerCoordinates(
+                            point.latitude, point.longitude, mapProvider);
                         tapMarker = Marker(
                           point: point,
                           width: 80,
                           height: 80,
-                          child: const Icon(
+                          child: Icon(
                             Icons.location_on,
-                            color: dutyBlue,
+                            color: mapProvider.markerColor,
                             size: 45,
                           ),
                         );
@@ -133,46 +148,7 @@ class _MapScreenState extends State<MapScreen> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: const Text('Customize GeoPoint'),
-                            content: const Text(
-                                'You can create an Smokesignal here or destroy this GeoPoint'),
-                            actions: [
-                              TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: ((context) =>
-                                                (DrawerSmokeScreen(
-                                                  databaseSmokeRepository:
-                                                      FirebaseSmokeRepository(),
-                                                )))));
-                                  },
-                                  child: const Text(
-                                    "set Smoke",
-                                    style: TextStyle(color: dutyYellow),
-                                  )),
-                              TextButton(
-                                  onPressed: () {
-                                    destroyGeoMarker();
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: const Text("destroy GeoPoint",
-                                      style: TextStyle(color: dutyRed))),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: const Text('close'),
-                              ),
-                            ],
-                          );
-                        });
+                    dutyDialog.showSmokeDialog(destroyGeoMarker, context);
                   },
                   child: MarkerLayer(
                     markers: tapMarker != null ? [tapMarker!] : [],
@@ -242,6 +218,9 @@ class _MapScreenState extends State<MapScreen> {
                       GestureDetector(
                         onTap: () {
                           _moveToCurrentLocation();
+                          smokeProvider.createSmokeSingal(
+                              SmokeSpecification.evacuation,
+                              [AdditionalInformation.drugs]);
                         },
                         child: const Icon(Icons.adjust, color: dutyBlack),
                       )
@@ -258,5 +237,13 @@ class _MapScreenState extends State<MapScreen> {
     isOnDuty ? dutyDialog.offDuty(context) : dutyDialog.onDuty(context);
     isOnDuty = !isOnDuty;
     setState(() {});
+  }
+
+  void _saveMarkerCoordinates(
+      double latitude, double longitude, MapProvider mapProvider) {
+    debugPrint("\nNo Provider: \tlat: $latitude \tlong: $longitude");
+    mapProvider.updateMarkerCoordinates(latitude, longitude);
+    debugPrint(
+        "Provider: \tlat: ${mapProvider.markerLat} \tlong: ${mapProvider.markerLong}\n");
   }
 }

@@ -4,6 +4,7 @@ import 'package:p12_basic_widgets/app.dart';
 import 'package:p12_basic_widgets/config/app_theme.dart';
 import 'package:p12_basic_widgets/features/plant_alarm/application/alarm_controller.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/application/smoke_provider.dart';
+import 'package:p12_basic_widgets/features/show_map/application/map_provider.dart';
 import 'package:p12_basic_widgets/firebase_options.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +15,8 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => AlarmController()),
-        ChangeNotifierProvider(create: (context) => SmokeController()),
+        ChangeNotifierProvider(create: (context) => SmokeProvider()),
+        ChangeNotifierProvider(create: (context) => MapProvider())
       ],
       child: MaterialApp(theme: AppTheme.themeData, home: const App()),
     ),
