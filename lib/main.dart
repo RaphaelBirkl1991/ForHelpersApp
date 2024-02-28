@@ -6,6 +6,7 @@ import 'package:p12_basic_widgets/config/configuration_porvider.dart';
 import 'package:p12_basic_widgets/features/plant_alarm/application/alarm_provider.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/application/smoke_provider.dart';
 import 'package:p12_basic_widgets/features/show_map/application/map_provider.dart';
+import 'package:p12_basic_widgets/features/show_settings/application/settings_provider.dart';
 import 'package:p12_basic_widgets/firebase_options.dart';
 import 'package:provider/provider.dart';
 
@@ -19,6 +20,7 @@ void main() async {
         ChangeNotifierProvider(create: (context) => SmokeProvider()),
         ChangeNotifierProvider(create: (context) => MapProvider()),
         ChangeNotifierProvider(create: (context) => ConfigurationProvider()),
+        ChangeNotifierProvider(create: (context) => SettingsProvider()),
       ],
       child: MaterialApp(theme: AppTheme.themeData, home: const App()),
     ),

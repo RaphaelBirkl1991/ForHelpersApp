@@ -4,15 +4,13 @@ import 'package:p12_basic_widgets/features/infrastructure/presentation/custom_na
 import 'package:p12_basic_widgets/features/infrastructure/presentation/duty_dialogs.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/text_provider.dart';
 import 'package:p12_basic_widgets/features/plant_alarm/application/alarm_provider.dart';
-import 'package:p12_basic_widgets/features/plant_alarm/data/database_alarm_repository.dart';
 import 'package:provider/provider.dart';
 
 class AlarmSignalScreen extends StatefulWidget {
-  final DatabaseAlarmRepository databaseAlarmRepository;
-  const AlarmSignalScreen(
-      {super.key,
-      required this.databaseAlarmRepository,
-      required databaseSetAlarmRepository});
+  // final DatabaseAlarmRepository databaseAlarmRepository;
+  const AlarmSignalScreen({super.key});
+  // required this.databaseAlarmRepository,
+  // required databaseSetAlarmRepository
 
   @override
   State<AlarmSignalScreen> createState() => _AlarmSignalScreenState();
@@ -41,9 +39,10 @@ class _AlarmSignalScreenState extends State<AlarmSignalScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer<AlarmProvider>(
-      builder: (BuildContext context, AlarmProvider provider, Widget? child) {
+      builder:
+          (BuildContext context, AlarmProvider alarmProvider, Widget? child) {
         return Scaffold(
-          backgroundColor: provider.isAlarmActive ? dutyBgRed : dutyWhite,
+          backgroundColor: alarmProvider.isAlarmActive ? dutyBgRed : dutyWhite,
           body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -83,7 +82,7 @@ class _AlarmSignalScreenState extends State<AlarmSignalScreen> {
                     : const Text("activate Button",
                         style: TextStyle(color: Colors.grey)),
               ),
-              provider.isAlarmActive
+              alarmProvider.isAlarmActive
                   ? ElevatedButton(
                       onPressed: isTriggerLocked
                           ? null
@@ -92,8 +91,8 @@ class _AlarmSignalScreenState extends State<AlarmSignalScreen> {
                                 isLoading = true;
                               });
                               try {
-                                await widget.databaseAlarmRepository
-                                    .deleteAlarmSignal();
+                                // await widget.databaseAlarmRepository.deleteAlarmSignal();
+                                alarmProvider.stopSendingMode();
                               } catch (error) {
                                 const Text("An error occured!");
                               } finally {
@@ -101,7 +100,7 @@ class _AlarmSignalScreenState extends State<AlarmSignalScreen> {
                                 setState(() {
                                   isLoading = false;
                                 });
-                                provider.stopSendingMode();
+                                alarmProvider.stopSendingMode();
                                 debugPrint("cncl btn pressed");
                                 setState(() {});
                                 dutyDialogs.alarmDropped(context);
@@ -137,8 +136,8 @@ class _AlarmSignalScreenState extends State<AlarmSignalScreen> {
                                 isLoading = true;
                               });
                               try {
-                                await widget.databaseAlarmRepository
-                                    .createAlarmSignal();
+                                // await widget.databaseAlarmRepository.createAlarmSignal();
+                                alarmProvider.activateSendingMode();
                               } catch (error) {
                                 const Text("An error occured!");
                               } finally {
@@ -146,7 +145,7 @@ class _AlarmSignalScreenState extends State<AlarmSignalScreen> {
                                 setState(() {
                                   isLoading = false;
                                 });
-                                provider.activateSendingMode();
+                                alarmProvider.activateSendingMode();
                                 setState(() {});
                               }
 

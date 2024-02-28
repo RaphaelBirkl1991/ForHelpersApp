@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ConfigurationProvider extends ChangeNotifier {
-  static bool isFirstUse = false;
+  static bool isFirstUse = true;
 //   static bool isSignalAlarmActive = false;
 
 //   static late Function(bool) onStateChanged;
