@@ -32,8 +32,8 @@ class MainAppState extends State<MainAppScreen> {
       const MapScreen(
           // databaseSetSmokeRepository: widget.databaseSetSmokeRepository,
           ),
-      SmokeSignalScreen(
-          databaseSetSmokeRepository: widget.databaseSetSmokeRepository),
+      const SmokeSignalScreen(),
+      //  databaseSetSmokeRepository: widget.databaseSetSmokeRepository
       AlarmSignalScreen(
         databaseAlarmRepository: widget.databaseAlarmRepository,
         databaseSetAlarmRepository: widget.databaseAlarmRepository,

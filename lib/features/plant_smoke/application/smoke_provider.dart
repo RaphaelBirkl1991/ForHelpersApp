@@ -17,9 +17,14 @@ class SmokeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void createSmokeSingal(SmokeSpecification specification,
-      List<AdditionalInformation> additionalInfo) {
+  Future<void> createSmokeSingal(SmokeSpecification specification,
+      List<AdditionalInformation> additionalInfo) async {
     debugPrint("\nSMOKE PROVIDER CREATE SMOKESIGNAL\n");
     repository.createSmokeSign(specification, additionalInfo);
+  }
+
+  Future<void> deleteSmokeSignal() async {
+    debugPrint("\nSMOKE PROVIDER DELETE SMOKESIGNAL\n");
+    repository.deleteSmokeSign();
   }
 }

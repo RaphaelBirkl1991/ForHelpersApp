@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AlarmController extends ChangeNotifier {
+class AlarmProvider extends ChangeNotifier {
   bool isAlarmActive = false;
 
   void activateSendingMode() {

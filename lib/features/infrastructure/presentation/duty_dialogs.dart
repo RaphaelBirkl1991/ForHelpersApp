@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/application/smoke_provider.dart';
-import 'package:p12_basic_widgets/features/plant_smoke/data/firebase/firebase_smoke_repository.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/presentation/smoke_drawer.dart';
 import 'package:p12_basic_widgets/features/show_map/application/map_provider.dart';
 import 'package:provider/provider.dart';
@@ -41,8 +40,10 @@ class DutyDialogs {
   // );
 
   // CONFIRM SMOKE DELETION
-  Future<void> confirmSmokeDeletetion(BuildContext context,
-      FirebaseSmokeRepository firebaseSmokeRepository) async {
+  Future<void> confirmSmokeDeletetion(
+    BuildContext context,
+    // FirebaseSmokeRepository firebaseSmokeRepository
+  ) async {
     return showDialog<void>(
       context: context,
       builder: ((context) {
@@ -62,8 +63,9 @@ class DutyDialogs {
                     onPressed: () async {
                       smokeProvider.stopSendingMode();
                       mapProvider.setMarkerColorBlue();
-                      await firebaseSmokeRepository.deleteSmokeSign();
+                      // await firebaseSmokeRepository.deleteSmokeSign();
                       //  mapProvider.setMarkerColorBlue();
+                      smokeProvider.deleteSmokeSignal();
                       Navigator.of(context).pop();
                     },
                     child: const Text(
@@ -271,9 +273,8 @@ class DutyDialogs {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: ((context) => (DrawerSmokeScreen(
-                                  databaseSmokeRepository:
-                                      FirebaseSmokeRepository(),
+                            builder: ((context) => (const DrawerSmokeScreen(
+                                // databaseSmokeRepository: FirebaseSmokeRepository(),
                                 )))));
                   },
                   child: const Text(

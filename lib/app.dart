@@ -6,23 +6,6 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final mockSmokeService = MockSmokeService();
-    // DatabaseSmokeRepository databaseSetSmokeRepository =
-    //     MockSmokeRepository(mockSmokeService);
-
-    // final mockAlarmService = MockAlarmService();
-    // DatabaseAlarmRepository databaseAlarmRepository =
-    //     MockAlarmRepository(mockAlarmService);
-
-    // final mockSettingsService = MockSettingsService();
-    // DatabaseSettingsRepository databaseSettingsRepository =
-    //     MockSettingsRepository(mockSettingsService);
-
     return const SplashScreen();
-    // MainAppScreen(
-    //   databaseSetSmokeRepository: databaseSetSmokeRepository,
-    //   databaseSettingsRepository: databaseSettingsRepository,
-    //   databaseAlarmRepository: databaseAlarmRepository,
-    // ),
   }
 }

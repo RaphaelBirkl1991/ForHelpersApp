@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:p12_basic_widgets/config/configuration.dart';
+import 'package:p12_basic_widgets/config/configuration_porvider.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/main_app_screen.dart';
 import 'package:p12_basic_widgets/features/initial_use/presentation/init_registration.dart';
 import 'package:p12_basic_widgets/features/plant_alarm/data/database_alarm_repository.dart';
@@ -29,7 +29,7 @@ class SplashScreen extends StatelessWidget {
         MockSettingsRepository(mockSettingsService);
 
     Future.delayed(const Duration(seconds: 1), () {
-      if (Configuration.isFirstUse) {
+      if (ConfigurationProvider.isFirstUse) {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
             builder: (context) => const InitRegistrationScreen()));
       } else {

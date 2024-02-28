@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/duty_dialogs.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/application/smoke_provider.dart';
-import 'package:p12_basic_widgets/features/plant_smoke/data/firebase/firebase_smoke_repository.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/domain/enum_additional_info.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/domain/enum_smoke_specification.dart';
 import 'package:p12_basic_widgets/features/show_map/application/map_provider.dart';
 import 'package:provider/provider.dart';
 
 class DrawerSmokeScreen extends StatefulWidget {
-  final FirebaseSmokeRepository databaseSmokeRepository;
+  // final FirebaseSmokeRepository databaseSmokeRepository;
   const DrawerSmokeScreen({
     super.key,
-    required this.databaseSmokeRepository,
+    // required this.databaseSmokeRepository,
   });
 
   @override
@@ -174,8 +173,10 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
                           isLoading = true;
                         });
                         try {
-                          await widget.databaseSmokeRepository
-                              .createSmokeSign(specification!, buildAddInfo());
+                          // await widget.databaseSmokeRepository.createSmokeSign(specification!, buildAddInfo());
+
+                          smokeProvider.createSmokeSingal(
+                              specification!, buildAddInfo());
                         } finally {
                           setState(() {
                             isLoading = false;
