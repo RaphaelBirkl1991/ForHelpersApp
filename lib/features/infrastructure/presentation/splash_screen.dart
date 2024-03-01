@@ -8,29 +8,13 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final mockSmokeService = MockSmokeService();
-    // FirebaseSmokeRepository databaseSetSmokeRepository =
-    //     FirebaseSmokeRepository();
-
-    // final mockAlarmService = MockAlarmService();
-    // DatabaseAlarmRepository databaseAlarmRepository =
-    //     MockAlarmRepository(mockAlarmService);
-
-    // final mockSettingsService = MockSettingsService();
-    // DatabaseSettingsRepository databaseSettingsRepository =
-    //     MockSettingsRepository(mockSettingsService);
-
     Future.delayed(const Duration(seconds: 1), () {
       if (ConfigurationProvider.isFirstUse) {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
             builder: (context) => const InitRegistrationScreen()));
       } else {
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (context) => const MainAppScreen(
-                // databaseSetSmokeRepository: databaseSetSmokeRepository,
-                // databaseSettingsRepository: databaseSettingsRepository,
-                // databaseAlarmRepository: databaseAlarmRepository,
-                )));
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => const MainAppScreen()));
       }
     });
 

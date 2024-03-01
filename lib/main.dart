@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/app.dart';
 import 'package:p12_basic_widgets/config/app_theme.dart';
 import 'package:p12_basic_widgets/config/configuration_porvider.dart';
+import 'package:p12_basic_widgets/features/initial_use/applicatiopn/init_use_provider.dart';
 import 'package:p12_basic_widgets/features/plant_alarm/application/alarm_provider.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/application/smoke_provider.dart';
 import 'package:p12_basic_widgets/features/show_map/application/map_provider.dart';
@@ -16,6 +17,7 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (context) => InitialUseProvider()),
         ChangeNotifierProvider(create: (context) => AlarmProvider()),
         ChangeNotifierProvider(create: (context) => SmokeProvider()),
         ChangeNotifierProvider(create: (context) => MapProvider()),
