@@ -73,7 +73,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
                   : (alarmProvider.isAlarmActive ? dutyBgRed : dutyWhite),
             ),
             const BottomNavigationBarItem(
-                icon: Icon(Icons.more_vert), label: "settings"),
+                icon: Icon(Icons.settings_outlined), label: "settings"),
           ],
           currentIndex: widget.selectedIndex,
           onTap: widget.onItemTapped,

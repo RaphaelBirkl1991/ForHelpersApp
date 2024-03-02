@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
+import 'package:p12_basic_widgets/features/infrastructure/presentation/custom_navbar.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/duty_dialogs.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/application/smoke_provider.dart';
-import 'package:p12_basic_widgets/features/plant_smoke/data/database_smoke_repository.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/presentation/smoke_drawer.dart';
 import 'package:provider/provider.dart';
 
 class SmokeSignalScreen extends StatefulWidget {
-  final DatabaseSmokeRepository databaseSetSmokeRepository;
+  //  final FirebaseSmokeRepository databaseSetSmokeRepository;
 
   const SmokeSignalScreen({
     super.key,
-    required this.databaseSetSmokeRepository,
+    //  required this.databaseSetSmokeRepository,
   });
 
   @override
@@ -20,17 +20,22 @@ class SmokeSignalScreen extends StatefulWidget {
 
 class _SmokeSignalScreenState extends State<SmokeSignalScreen> {
   final dutyDialog = DutyDialogs();
+  CustomNavBar customNavBar = CustomNavBar(
+    selectedIndex: 0,
+    onItemTapped: (value) {},
+  );
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Consumer<SmokeProvider>(
-      builder: (BuildContext context, SmokeProvider provider, Widget? child) {
+      builder:
+          (BuildContext context, SmokeProvider smokeProvider, Widget? child) {
         return Scaffold(
           key: _scaffoldKey,
-          drawer: DrawerSmokeScreen(
-            databaseSmokeRepository: widget.databaseSetSmokeRepository,
-          ),
+          drawer: const DrawerSmokeScreen(
+              // databaseSmokeRepository: widget.databaseSetSmokeRepository,
+              ),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -47,10 +52,12 @@ class _SmokeSignalScreenState extends State<SmokeSignalScreen> {
               ),
               const Spacer(),
               Center(
-                child: provider.isSmokeActive
+                child: smokeProvider.isSmokeActive
                     ? ElevatedButton(
                         onPressed: () {
                           dutyDialog.confirmSmokeDeletetion(context);
+                          //context
+                          // widget.databaseSetSmokeRepository
                         },
                         style: ButtonStyle(
                             minimumSize:
@@ -74,7 +81,8 @@ class _SmokeSignalScreenState extends State<SmokeSignalScreen> {
               const Spacer(),
             ],
           ),
-          backgroundColor: provider.isSmokeActive ? dutyBgYellow : dutyWhite,
+          backgroundColor:
+              smokeProvider.isSmokeActive ? dutyBgYellow : dutyWhite,
         );
       },
     );

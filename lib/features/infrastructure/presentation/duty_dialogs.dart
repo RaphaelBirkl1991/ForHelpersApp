@@ -1,44 +1,55 @@
 import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/application/smoke_provider.dart';
+import 'package:p12_basic_widgets/features/plant_smoke/presentation/smoke_drawer.dart';
+import 'package:p12_basic_widgets/features/show_map/application/map_provider.dart';
 import 'package:provider/provider.dart';
 
 class DutyDialogs {
   // SMOKE PLANTED
-  Future<void> smokePlanted(BuildContext context) async {
-    return showDialog<void>(
-      context: context,
-      builder: ((context) {
-        return AlertDialog(
-            icon: Icon(
-              Icons.mobile_friendly,
-              color: Theme.of(context).primaryColor,
-            ),
-            title: const Text("Smoke planted!"),
-            content: const Text(
-                "Your fellows are beeing notified. You´ll be updated when someone is hitting the road."),
-            actions: <Widget>[
-              TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text(
-                    "Got it!",
-                    style: TextStyle(color: dutyGreen),
-                  ))
-            ]);
-      }),
-    );
+  Future<bool?> smokePlanted(BuildContext context) async {
+    final mapProvider = Provider.of<MapProvider>(context, listen: false);
+    return showDialog<bool>(
+        context: context,
+        builder: ((context) {
+          // return Consumer<MapProvider>(builder:
+          //     (BuildContext context, MapProvider mapProvider, Widget? child) {
+          return AlertDialog(
+              icon: Icon(
+                Icons.mobile_friendly,
+                color: Theme.of(context).primaryColor,
+              ),
+              title: const Text("Smoke planted!"),
+              content: const Text(
+                  "Your fellows are beeing notified. You´ll be updated when someone is hitting the road."),
+              actions: <Widget>[
+                TextButton(
+                    onPressed: () {
+                      mapProvider.setMarkerColorYellow();
+                      debugPrint("BEFORE POP");
+                      Navigator.of(context).pop(true);
+                    },
+                    child: const Text(
+                      "Got it!",
+                      style: TextStyle(color: dutyGreen),
+                    ))
+              ]);
+        }));
   }
+  //   ),
+  // );
 
-  // CONFIRM SIGN DELETION
-  Future<void> confirmSmokeDeletetion(BuildContext context) async {
+  // CONFIRM SMOKE DELETION
+  Future<void> confirmSmokeDeletetion(
+    BuildContext context,
+    // FirebaseSmokeRepository firebaseSmokeRepository
+  ) async {
     return showDialog<void>(
       context: context,
       builder: ((context) {
-        return Consumer<SmokeProvider>(
-          builder:
-              (BuildContext context, SmokeProvider provider, Widget? child) {
+        return Consumer2<SmokeProvider, MapProvider>(
+          builder: (BuildContext context, SmokeProvider smokeProvider,
+              MapProvider mapProvider, Widget? child) {
             return AlertDialog(
                 icon: Icon(
                   Icons.mobile_friendly,
@@ -49,8 +60,12 @@ class DutyDialogs {
                     "You are deleting the current sign. Is that what you want?"),
                 actions: <Widget>[
                   TextButton(
-                    onPressed: () {
-                      provider.stopSendingMode();
+                    onPressed: () async {
+                      smokeProvider.stopSendingMode();
+                      mapProvider.setMarkerColorBlue();
+                      // await firebaseSmokeRepository.deleteSmokeSign();
+                      //  mapProvider.setMarkerColorBlue();
+                      smokeProvider.deleteSmokeSignal(context);
                       Navigator.of(context).pop();
                     },
                     child: const Text(
@@ -240,5 +255,47 @@ class DutyDialogs {
             ]);
       }),
     );
+  }
+
+  Future<void> showSmokeDialog(
+      Function destroyGeoMarker, BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Customize GeoPoint'),
+            content: const Text(
+                'You can create an Smokesignal here or destroy this GeoPoint'),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: ((context) => (const DrawerSmokeScreen(
+                                // databaseSmokeRepository: FirebaseSmokeRepository(),
+                                )))));
+                  },
+                  child: const Text(
+                    "set Smoke",
+                    style: TextStyle(color: dutyYellow),
+                  )),
+              TextButton(
+                  onPressed: () {
+                    destroyGeoMarker();
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text("destroy GeoPoint",
+                      style: TextStyle(color: dutyRed))),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('close'),
+              ),
+            ],
+          );
+        });
   }
 }

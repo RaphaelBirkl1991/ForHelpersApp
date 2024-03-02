@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class AlarmProvider extends ChangeNotifier {
   bool isAlarmActive = false;
 
-  void activateSendingMode() {
+  Future<void> activateSendingMode() async {
     isAlarmActive = true;
     notifyListeners();
   }
 
-  void stopSendingMode() {
+  Future<void> stopSendingMode() async {
     isAlarmActive = false;
     notifyListeners();
   }

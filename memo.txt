@@ -1,0 +1,7 @@
+SmokeSign 
+
+1 class SmokeSignal erweitern mit GeoPoint und UserId 
+2 an die Datenbank schicken mit dem GeoPoint und UserId 
+3 andere User subscriben 
+4 erhalten Signal (man kann filtern durch firebase)
+ 
