@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/duty_dialogs.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/application/smoke_provider.dart';
@@ -10,10 +12,8 @@ import 'package:p12_basic_widgets/features/show_map/application/map_provider.dar
 import 'package:provider/provider.dart';
 
 class DrawerSmokeScreen extends StatefulWidget {
-  // final FirebaseSmokeRepository databaseSmokeRepository;
   const DrawerSmokeScreen({
     super.key,
-    // required this.databaseSmokeRepository,
   });
 
   @override
@@ -38,16 +38,9 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final mapProvider = Provider.of<MapProvider>(context);
-    final smokeProvider = Provider.of<SmokeProvider>(context);
-    final dummySmokeSign = SmokeSign(
-        "123456",
-        12.00,
-        12.00,
-        SmokeSpecification.tracing,
-        [AdditionalInformation.drugs, AdditionalInformation.weapons],
-        "nices Sign o.O",
-        Timestamp.now());
+    final mapProvider = Provider.of<MapProvider>(context, listen: false);
+    final smokeProvider = Provider.of<SmokeProvider>(context, listen: false);
+    final SmokeSign smokeSign;
 
     return Drawer(
       child: ListView(
@@ -185,7 +178,7 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
                         try {
                           // await widget.databaseSmokeRepository.createSmokeSign(specification!, buildAddInfo());
 
-                          smokeProvider.createSmokeSingal(dummySmokeSign);
+                          await smokeProvider.createSmokeSingal(equipSign());
                         } finally {
                           setState(() {
                             isLoading = false;
@@ -258,5 +251,68 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
 
     debugPrint("$addInfoList");
     return addInfoList;
+  }
+
+  String getCurrentUserId() {
+    User? user = FirebaseAuth.instance.currentUser;
+    return user?.uid ?? "";
+  }
+
+  Future<double?> getCurrentLongitude() async {
+    Location location = Location();
+    bool serviceEnabled;
+    PermissionStatus permission;
+    serviceEnabled = await location.serviceEnabled();
+    if (!serviceEnabled) {
+      serviceEnabled = await location.requestService();
+    }
+    if (!serviceEnabled) {
+      return null;
+    }
+    permission = await location.hasPermission();
+    if (permission == PermissionStatus.denied) {
+      permission = await location.requestPermission();
+      if (permission != PermissionStatus.granted) {
+        return null;
+      }
+    }
+    return null;
+  }
+
+  Future<double?> getCurrentLatitude() async {
+    Location location = Location();
+    bool serviceEnabled;
+    PermissionStatus permission;
+    serviceEnabled = await location.serviceEnabled();
+    if (!serviceEnabled) {
+      serviceEnabled = await location.requestService();
+    }
+    if (!serviceEnabled) {
+      return null;
+    }
+    permission = await location.hasPermission();
+    if (permission == PermissionStatus.denied) {
+      permission = await location.requestPermission();
+      if (permission != PermissionStatus.granted) {
+        return null;
+      }
+    }
+    return null;
+  }
+
+  SmokeSpecification? getCurrentSpecification() {
+    return specification;
+  }
+
+  SmokeSign equipSign() {
+    final userId = getCurrentUserId();
+    final longitude = getCurrentLongitude();
+    final latitude = getCurrentLatitude();
+    final specification = getCurrentSpecification();
+    final addititonalInfo = buildAddInfo();
+    const message = "";
+    final timestamp = Timestamp.now();
+    return SmokeSign(userId, longitude, latitude, specification,
+        addititonalInfo, message, timestamp);
   }
 }

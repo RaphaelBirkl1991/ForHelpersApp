@@ -1,1 +1,1 @@
-enum SmokeSpecification { pendingViolence, firstAid, evacuation, tracing }
+enum SmokeSpecification { pendingViolence, firstAid, evacuation, tracing, none }

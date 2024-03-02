@@ -21,8 +21,8 @@ class SmokeProvider extends ChangeNotifier {
     repository.createSmokeSign(smokeSign);
   }
 
-  Future<void> deleteSmokeSignal() async {
+  Future<void> deleteSmokeSignal(context) async {
     debugPrint("\nSMOKE PROVIDER DELETE SMOKESIGNAL\n");
-    repository.deleteSmokeSign();
+    repository.deleteSmokeSign(context);
   }
 }

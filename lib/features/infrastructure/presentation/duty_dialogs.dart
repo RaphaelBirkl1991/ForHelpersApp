@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 class DutyDialogs {
   // SMOKE PLANTED
   Future<bool?> smokePlanted(BuildContext context) async {
-    final mapProvider = Provider.of<MapProvider>(context);
+    final mapProvider = Provider.of<MapProvider>(context, listen: false);
     return showDialog<bool>(
         context: context,
         builder: ((context) {
@@ -65,7 +65,7 @@ class DutyDialogs {
                       mapProvider.setMarkerColorBlue();
                       // await firebaseSmokeRepository.deleteSmokeSign();
                       //  mapProvider.setMarkerColorBlue();
-                      smokeProvider.deleteSmokeSignal();
+                      smokeProvider.deleteSmokeSignal(context);
                       Navigator.of(context).pop();
                     },
                     child: const Text(

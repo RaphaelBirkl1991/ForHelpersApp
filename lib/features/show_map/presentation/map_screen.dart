@@ -86,7 +86,8 @@ class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     final SmokeProvider smokeProvider = Provider.of<SmokeProvider>(context);
-    final MapProvider mapProvider = Provider.of<MapProvider>(context);
+    final MapProvider mapProvider =
+        Provider.of<MapProvider>(context, listen: false);
     if (_locationData == null) {
       return Scaffold(
         appBar: AppBar(
