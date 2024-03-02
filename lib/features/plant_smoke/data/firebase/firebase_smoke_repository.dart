@@ -22,14 +22,18 @@ class FirebaseSmokeRepository implements DatabaseSmokeRepository {
   @override
   Future<void> deleteSmokeSign(context) async {
     try {
+      print("DELETE SMOKESIGNAL FB SMOKE_REPO");
       String currentUserId =
           Provider.of<ConfigurationProvider>(context, listen: false).userId;
       final querySnapshot = await _instance
           .collection("SmokeSign")
-          .where("userId", isEqualTo: currentUserId)
+          .where("user_id", isEqualTo: currentUserId)
           .get();
+
       if (querySnapshot.docs.isNotEmpty) {
-        await _instance.collection("SmokeSign").doc().delete();
+        final docId = querySnapshot.docs.first.id;
+        await _instance.collection("SmokeSign").doc(docId).delete();
+        print("QUERY SNAP IS NOT EMPTY");
       } else {
         print("KEIN ENTSPRECHENDEN EINTRAG IN DER DB GEFUNDEN");
       }
