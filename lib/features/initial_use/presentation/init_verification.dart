@@ -4,21 +4,21 @@ import 'package:p12_basic_widgets/config/palette.dart';
 import 'package:p12_basic_widgets/features/initial_use/applicatiopn/init_use_provider.dart';
 import 'package:p12_basic_widgets/features/initial_use/applicatiopn/registration_validation.dart';
 import 'package:p12_basic_widgets/features/initial_use/data/firebase_auth_repo.dart';
-import 'package:p12_basic_widgets/features/initial_use/presentation/init_registration_fail.dart';
-import 'package:p12_basic_widgets/features/initial_use/presentation/init_registration_success.dart';
 import 'package:provider/provider.dart';
 
-class InitRegistrationScreen extends StatefulWidget {
-  const InitRegistrationScreen({super.key});
+class VerificationScreen extends StatefulWidget {
+  const VerificationScreen({super.key});
 
   @override
-  State<InitRegistrationScreen> createState() => _InitRegistrationScreenState();
+  State<VerificationScreen> createState() => _VerificationScreenState();
 }
 
-class _InitRegistrationScreenState extends State<InitRegistrationScreen> {
+class _VerificationScreenState extends State<VerificationScreen> {
   final _formKey = GlobalKey<FormState>();
   final RegistrationValidation validation = RegistrationValidation();
-
+  // bool isBtnEnabled = false;
+  // bool isEmailFilled = false;
+  // bool isPasswordFilled = false;
   late final TextEditingController emailController;
   late final TextEditingController passwordController;
 
@@ -49,7 +49,7 @@ class _InitRegistrationScreenState extends State<InitRegistrationScreen> {
                 const FractionallySizedBox(
                   widthFactor: 0.9,
                   child: Text(
-                    "Registration",
+                    "Verify your Account",
                     style: TextStyle(
                       fontWeight: FontWeight.normal,
                       fontSize: 25,
@@ -99,22 +99,13 @@ class _InitRegistrationScreenState extends State<InitRegistrationScreen> {
 
                         final result =
                             await firebaseAuthRepo.verifyUser(email, password);
+                        // await Future.delayed(const Duration(seconds: 2));
                         if (result) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const RegistrationSuccessScreen(),
-                            ),
-                          );
+                          Navigator.of(context)
+                              .pushReplacementNamed("/verification_success");
                         } else {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const RegistrationFailScreen(),
-                            ),
-                          );
+                          Navigator.of(context)
+                              .pushReplacementNamed("/verification_fail");
                         }
                       }
                     },
@@ -128,7 +119,7 @@ class _InitRegistrationScreenState extends State<InitRegistrationScreen> {
                       }),
                     ),
                     child: const Text(
-                      "safe",
+                      "verify",
                       style: TextStyle(color: dutyWhite),
                     ),
                   ),
