@@ -6,8 +6,6 @@ import 'package:location/location.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/duty_dialogs.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/application/smoke_provider.dart';
-import 'package:p12_basic_widgets/features/plant_smoke/domain/enum_additional_info.dart';
-import 'package:p12_basic_widgets/features/plant_smoke/domain/enum_smoke_specification.dart';
 import 'package:p12_basic_widgets/features/show_map/application/map_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -79,7 +77,6 @@ class _MapScreenState extends State<MapScreen> {
   }
 
   Future<void> showSmokePlantedDialog() async {
-    debugPrint("BAAAAAAAAMMMM");
     bool? success = await dutyDialog.smokePlanted(context);
     if (success ?? false) {
       setState(() {});
@@ -218,9 +215,7 @@ class _MapScreenState extends State<MapScreen> {
                       GestureDetector(
                         onTap: () {
                           _moveToCurrentLocation();
-                          smokeProvider.createSmokeSingal(
-                              SmokeSpecification.evacuation,
-                              [AdditionalInformation.drugs]);
+                          //  smokeProvider.createSmokeSingal();
                         },
                         child: const Icon(Icons.adjust, color: dutyBlack),
                       )

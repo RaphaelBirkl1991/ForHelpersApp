@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/data/firebase/firebase_smoke_repository.dart';
-import 'package:p12_basic_widgets/features/plant_smoke/domain/enum_additional_info.dart';
-import 'package:p12_basic_widgets/features/plant_smoke/domain/enum_smoke_specification.dart';
+import 'package:p12_basic_widgets/features/plant_smoke/domain/smoke_sign.dart';
 
 class SmokeProvider extends ChangeNotifier {
   final repository = FirebaseSmokeRepository();
@@ -17,10 +16,9 @@ class SmokeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> createSmokeSingal(SmokeSpecification specification,
-      List<AdditionalInformation> additionalInfo) async {
+  Future<void> createSmokeSingal(SmokeSign smokeSign) async {
     debugPrint("\nSMOKE PROVIDER CREATE SMOKESIGNAL\n");
-    repository.createSmokeSign(specification, additionalInfo);
+    repository.createSmokeSign(smokeSign);
   }
 
   Future<void> deleteSmokeSignal() async {

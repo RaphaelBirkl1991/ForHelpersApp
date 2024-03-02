@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/duty_dialogs.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/application/smoke_provider.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/domain/enum_additional_info.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/domain/enum_smoke_specification.dart';
+import 'package:p12_basic_widgets/features/plant_smoke/domain/smoke_sign.dart';
 import 'package:p12_basic_widgets/features/show_map/application/map_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -38,6 +40,14 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
   Widget build(BuildContext context) {
     final mapProvider = Provider.of<MapProvider>(context);
     final smokeProvider = Provider.of<SmokeProvider>(context);
+    final dummySmokeSign = SmokeSign(
+        "123456",
+        12.00,
+        12.00,
+        SmokeSpecification.tracing,
+        [AdditionalInformation.drugs, AdditionalInformation.weapons],
+        "nices Sign o.O",
+        Timestamp.now());
 
     return Drawer(
       child: ListView(
@@ -175,8 +185,7 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
                         try {
                           // await widget.databaseSmokeRepository.createSmokeSign(specification!, buildAddInfo());
 
-                          smokeProvider.createSmokeSingal(
-                              specification!, buildAddInfo());
+                          smokeProvider.createSmokeSingal(dummySmokeSign);
                         } finally {
                           setState(() {
                             isLoading = false;
