@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:p12_basic_widgets/config/configuration_porvider.dart';
+import 'package:p12_basic_widgets/config/palette.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/data/database_smoke_repository.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/domain/smoke_sign.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +23,7 @@ class FirebaseSmokeRepository implements DatabaseSmokeRepository {
   @override
   Future<void> deleteSmokeSign(context) async {
     try {
-      print("DELETE SMOKESIGNAL FB SMOKE_REPO");
+      print("${ansiGreen}DELETE SMOKESIGNAL FB SMOKE_REPO$ansiGreenEnd");
       String currentUserId =
           Provider.of<ConfigurationProvider>(context, listen: false).userId;
       final querySnapshot = await _instance
