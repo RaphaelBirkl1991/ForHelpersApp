@@ -4,8 +4,8 @@ import 'package:p12_basic_widgets/features/plant_smoke/domain/enum_smoke_specifi
 
 class SmokeSign {
   final String userId;
-  final Future<double?> longitude;
-  final Future<double?> latitude;
+  final double longitude;
+  final double latitude;
   final SmokeSpecification? specification;
   final List<AdditionalInformation> addititonalInfo;
   final String message;
@@ -70,34 +70,32 @@ class SmokeSign {
   //     map['message'],
   //     map['timestamp'],
   //   );
+  //}
+
+  // Future<Map<String, dynamic>> toMap() async {
+  //   final double? long = longitude;
+  //   final double? lat = latitude;
+
+  //   return {
+  //     "user_id": userId,
+  //     "longitude": long,
+  //     "latitude": lat,
+  //     "specification": specification?.toString() ?? "",
+  //     "additional_info": addititonalInfo.map((e) => e.toString()).toList(),
+  //     "message": message,
+  //     "timestamp": timestamp,
+  //   };
   // }
 
-  Future<Map<String, dynamic>> toMap() async {
-    final double? long = await longitude;
-    final double? lat = await latitude;
-
+  Map<String, dynamic> toMap() {
     return {
       "user_id": userId,
-      "longitude": long,
-      "latitude": lat,
-      "specification": specification?.toString() ?? "",
+      "longitude": longitude,
+      "latitude": latitude,
+      "specification": specification.toString(),
       "additional_info": addititonalInfo.map((e) => e.toString()).toList(),
       "message": message,
       "timestamp": timestamp,
     };
   }
-
-  // Map<String, dynamic> toMap() {
-  //   return {
-  //     "user_id": userId,
-  //     "longitude": longitude,
-  //     "latitude": latitude,
-  //     "specification": specification.toString(),
-  //     "additional_info": addititonalInfo != null
-  //         ? addititonalInfo.map((e) => e.toString()).toList()
-  //         : [],
-  //     "message": message,
-  //     "timestamp": timestamp,
-  //   };
-  // }
 }

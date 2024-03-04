@@ -1,7 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:location/location.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/duty_dialogs.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/application/smoke_provider.dart';
@@ -22,7 +19,7 @@ class DrawerSmokeScreen extends StatefulWidget {
 
 class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
   int selectedValue = -1;
-  SmokeSpecification? specification;
+  SmokeSpecification? _specification;
   bool isDelinquentsChecked = false;
   bool isDrugAbuseChecked = false;
   bool isWeaponsInvolvedChecked = false;
@@ -72,7 +69,7 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
                   setState(() {
                     selectedValue = value;
 
-                    specification = SmokeSpecification.pendingViolence;
+                    _specification = SmokeSpecification.pendingViolence;
                   });
                 }
               }),
@@ -88,7 +85,7 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
                 if (value != null) {
                   setState(() {
                     selectedValue = value;
-                    specification = SmokeSpecification.firstAid;
+                    _specification = SmokeSpecification.firstAid;
                   });
                 }
               }),
@@ -104,7 +101,7 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
                 if (value != null) {
                   setState(() {
                     selectedValue = value;
-                    specification = SmokeSpecification.evacuation;
+                    _specification = SmokeSpecification.evacuation;
                   });
                 }
               }),
@@ -120,7 +117,7 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
                 if (value != null) {
                   setState(() {
                     selectedValue = value;
-                    specification = SmokeSpecification.tracing;
+                    _specification = SmokeSpecification.tracing;
                   });
                 }
               }),
@@ -170,15 +167,18 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
             children: [
               const Spacer(),
               ElevatedButton(
-                onPressed: isSpecificationSelected(specification)
+                onPressed: _specification != null
                     ? () async {
                         setState(() {
                           isLoading = true;
                         });
                         try {
-                          // await widget.databaseSmokeRepository.createSmokeSign(specification!, buildAddInfo());
-
-                          await smokeProvider.createSmokeSingal(equipSign());
+                          //  final currentSpecification = specification;
+                          if (_specification != null) {
+                            final currentSpecification = _specification!;
+                            await smokeProvider.createSmokeSignal(
+                                currentSpecification, buildAddInfo(), "");
+                          }
                         } finally {
                           setState(() {
                             isLoading = false;
@@ -230,13 +230,13 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
     );
   }
 
-  static bool isSpecificationSelected(SmokeSpecification? specification) {
-    if (specification != null) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  // static bool isSpecificationSelected(SmokeSpecification? specification) {
+  //   if (specification != null) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
 
   List<AdditionalInformation> buildAddInfo() {
     List<AdditionalInformation> addInfoList = [];
@@ -253,66 +253,20 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
     return addInfoList;
   }
 
-  String getCurrentUserId() {
-    User? user = FirebaseAuth.instance.currentUser;
-    return user?.uid ?? "";
-  }
+  // SmokeSpecification getCurrentSpecification() {
+  //   return specification;
+  // }
 
-  Future<double?> getCurrentLongitude() async {
-    Location location = Location();
-    bool serviceEnabled;
-    PermissionStatus permission;
-    serviceEnabled = await location.serviceEnabled();
-    if (!serviceEnabled) {
-      serviceEnabled = await location.requestService();
-    }
-    if (!serviceEnabled) {
-      return null;
-    }
-    permission = await location.hasPermission();
-    if (permission == PermissionStatus.denied) {
-      permission = await location.requestPermission();
-      if (permission != PermissionStatus.granted) {
-        return null;
-      }
-    }
-    return null;
-  }
-
-  Future<double?> getCurrentLatitude() async {
-    Location location = Location();
-    bool serviceEnabled;
-    PermissionStatus permission;
-    serviceEnabled = await location.serviceEnabled();
-    if (!serviceEnabled) {
-      serviceEnabled = await location.requestService();
-    }
-    if (!serviceEnabled) {
-      return null;
-    }
-    permission = await location.hasPermission();
-    if (permission == PermissionStatus.denied) {
-      permission = await location.requestPermission();
-      if (permission != PermissionStatus.granted) {
-        return null;
-      }
-    }
-    return null;
-  }
-
-  SmokeSpecification? getCurrentSpecification() {
-    return specification;
-  }
-
-  SmokeSign equipSign() {
-    final userId = getCurrentUserId();
-    final longitude = getCurrentLongitude();
-    final latitude = getCurrentLatitude();
-    final specification = getCurrentSpecification();
-    final addititonalInfo = buildAddInfo();
-    const message = "";
-    final timestamp = Timestamp.now();
-    return SmokeSign(userId, longitude, latitude, specification,
-        addititonalInfo, message, timestamp);
-  }
+  // SmokeSign equipSign() {
+  //   // final userId = getCurrentUserId();
+  //   //  final longitude = getCurrentLongitude();
+  //   //  debugPrint("$ansiGreen longitude: $longitude $ansiGreenEnd");
+  //   //  final latitude = getCurrentLatitude();
+  //   final specification = getCurrentSpecification();
+  //   final addititonalInfo = buildAddInfo();
+  //   const message = "";
+  //   //   final timestamp = Timestamp.now();
+  //   return SmokeSign(
+  //       userId, 0.00, 0.00, specification, addititonalInfo, message, timestamp);
+  // }
 }
