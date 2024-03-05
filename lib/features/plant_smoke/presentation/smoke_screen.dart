@@ -7,11 +7,8 @@ import 'package:p12_basic_widgets/features/plant_smoke/presentation/smoke_drawer
 import 'package:provider/provider.dart';
 
 class SmokeSignalScreen extends StatefulWidget {
-  //  final FirebaseSmokeRepository databaseSetSmokeRepository;
-
   const SmokeSignalScreen({
     super.key,
-    //  required this.databaseSetSmokeRepository,
   });
 
   @override
@@ -31,11 +28,12 @@ class _SmokeSignalScreenState extends State<SmokeSignalScreen> {
     return Consumer<SmokeProvider>(
       builder:
           (BuildContext context, SmokeProvider smokeProvider, Widget? child) {
+        if (smokeProvider.latestSmokeSign != null) {
+          dutyDialog.alarmActive(context);
+        }
         return Scaffold(
           key: _scaffoldKey,
-          drawer: const DrawerSmokeScreen(
-              // databaseSmokeRepository: widget.databaseSetSmokeRepository,
-              ),
+          drawer: const DrawerSmokeScreen(),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [

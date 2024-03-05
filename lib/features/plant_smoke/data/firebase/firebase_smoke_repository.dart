@@ -1,16 +1,47 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:p12_basic_widgets/config/configuration_porvider.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
-import 'package:p12_basic_widgets/features/plant_smoke/data/database_smoke_repository.dart';
+import 'package:p12_basic_widgets/features/plant_smoke/data/smoke_repository.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/domain/smoke_sign.dart';
 import 'package:provider/provider.dart';
 
-class FirebaseSmokeRepository implements DatabaseSmokeRepository {
+class FirebaseSmokeRepository implements SmokeRepository {
   final FirebaseFirestore _instance = FirebaseFirestore.instance;
 
   @override
+  Stream<List<SmokeSign>> get smokeSign {
+    return FirebaseFirestore.instance
+        .collection("SmokeSign")
+        .snapshots()
+        .map((snapshot) {
+      log("${ansiGreen}COLLECTION CHANGED$ansiGreenEnd");
+      return snapshot.docs.map((entry) {
+        log("${ansiGreen}DOKUMENT CHANGED$ansiGreenEnd");
+        return SmokeSign.fromMap(entry.data());
+      }).toList();
+    });
+  }
+
+  // static void get() {
+  //   //  var logger = Logger();
+  //   FirebaseFirestore.instance
+  //       .collection("SmokeSign")
+  //       .snapshots()
+  //       .listen((snapshot) {
+  //     if (snapshot.docs.isNotEmpty) {
+  // debugPrint(
+  //     "${ansiGreen}LISTENER TRIGGERED SMOKESIGNAL IS NOT EMPTY$ansiGreenEnd");
+  // logger.d("in start Listening");
+  // Gib dem Repo bescheid das dem Notfier das dem UI
+  //     }
+  //   });
+  // }
+
+  @override
   Future<void> createSmokeSign(SmokeSign sign) async {
-    Map<String, dynamic> smokeMap = await sign.toMap();
+    Map<String, dynamic> smokeMap = sign.toMap();
     print(smokeMap);
     DocumentReference docRef =
         await _instance.collection("SmokeSign").add(smokeMap);

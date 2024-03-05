@@ -12,8 +12,6 @@ class DutyDialogs {
     return showDialog<bool>(
         context: context,
         builder: ((context) {
-          // return Consumer<MapProvider>(builder:
-          //     (BuildContext context, MapProvider mapProvider, Widget? child) {
           return AlertDialog(
               icon: Icon(
                 Icons.mobile_friendly,
@@ -36,13 +34,10 @@ class DutyDialogs {
               ]);
         }));
   }
-  //   ),
-  // );
 
   // CONFIRM SMOKE DELETION
   Future<void> confirmSmokeDeletetion(
     BuildContext context,
-    // FirebaseSmokeRepository firebaseSmokeRepository
   ) async {
     return showDialog<void>(
       context: context,
@@ -63,8 +58,6 @@ class DutyDialogs {
                     onPressed: () async {
                       smokeProvider.stopSendingMode();
                       mapProvider.setMarkerColorBlue();
-                      // await firebaseSmokeRepository.deleteSmokeSign();
-                      //  mapProvider.setMarkerColorBlue();
                       smokeProvider.deleteSmokeSignal(context);
                       Navigator.of(context).pop();
                     },
@@ -221,7 +214,7 @@ class DutyDialogs {
   }
 
   // SMOKE DETECTED
-  Future<void> smokeDetected(BuildContext context) async {
+  static Future<void> smokeDetected(context) async {
     return showDialog<void>(
       context: context,
       builder: ((context) {

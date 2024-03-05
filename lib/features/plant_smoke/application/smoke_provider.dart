@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
+import 'package:p12_basic_widgets/config/palette.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/data/firebase/firebase_smoke_repository.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/domain/enum_additional_info.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/domain/enum_smoke_specification.dart';
@@ -12,6 +13,21 @@ import 'package:p12_basic_widgets/features/plant_smoke/domain/smoke_sign.dart';
 class SmokeProvider extends ChangeNotifier {
   final repository = FirebaseSmokeRepository();
   bool isSmokeActive = false;
+  SmokeSign? _latestSmokeSign;
+
+  SmokeSign? get latestSmokeSign => _latestSmokeSign;
+
+  SmokeProvider() {
+    listenToSmokeSigns();
+  }
+
+  void listenToSmokeSigns() {
+    repository.smokeSign.listen((event) {
+      _latestSmokeSign = event.lastOrNull;
+      log("${ansiGreen}NEW EVENT$ansiGreenEnd");
+      notifyListeners();
+    });
+  }
 
   void activateSendingMode() {
     isSmokeActive = true;

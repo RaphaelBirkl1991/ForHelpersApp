@@ -7,10 +7,12 @@ environment:
   sdk: '>=3.2.1 <4.0.0'
 
 dependencies:
+  alarm: ^3.0.12
   ansicolor: ^2.0.2
   cloud_firestore: ^4.15.5
   firebase_auth: ^4.17.6
   firebase_core: ^2.25.4
+  firebase_messaging: ^14.7.17
   flutter:
     sdk: flutter
   flutter_map: ^6.1.0
@@ -20,6 +22,7 @@ dependencies:
   google_fonts: ^6.1.0
   latlong2: ^0.9.0
   location: ^5.0.3
+  logger: ^2.1.0
   provider: ^6.1.1
   shared_preferences: ^2.2.2
   test: ^1.24.9

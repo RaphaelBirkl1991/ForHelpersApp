@@ -53,24 +53,24 @@ class SmokeSign {
   //     this.message = "",
   //     required this.timestamp});
 
-  // factory SmokeSign.fromMap(Map<String, dynamic> map) {
-  //   return SmokeSign(
-  //     map['user_id'],
-  //     // LocationData.fromMap(map['locationData']),
-  //     map["longitude"],
-  //     map["latitude"],
-  //     map['specification'] != null
-  //         ? SmokeSpecification.values
-  //             .firstWhere((e) => e.toString() == map['specification'])
-  //         : null,
-  //     (map['additional_info'] as List<dynamic>?)
-  //         ?.map((e) => AdditionalInformation.values
-  //             .firstWhere((element) => element.toString() == e))
-  //         .toList(),
-  //     map['message'],
-  //     map['timestamp'],
-  //   );
-  //}
+  factory SmokeSign.fromMap(Map<String, dynamic> map) {
+    return SmokeSign(
+      map['user_id'],
+      // LocationData.fromMap(map['locationData']),
+      map["longitude"],
+      map["latitude"],
+      map['specification'] != null
+          ? SmokeSpecification.values
+              .firstWhere((e) => e.toString() == map['specification'])
+          : null,
+      (map['additional_info'] as List<dynamic>? ?? [])
+          .map((e) => AdditionalInformation.values
+              .firstWhere((element) => element.toString() == e))
+          .toList(),
+      map['message'],
+      map['timestamp'],
+    );
+  }
 
   // Future<Map<String, dynamic>> toMap() async {
   //   final double? long = longitude;
