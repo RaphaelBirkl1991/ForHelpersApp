@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
-import 'package:p12_basic_widgets/features/show_settings/application/settings_provider.dart';
+import 'package:p12_basic_widgets/features/show_settings/application/settings_notifier.dart';
 import 'package:p12_basic_widgets/features/show_settings/domain/enum_color_sheme.dart';
 import 'package:provider/provider.dart';
 
@@ -20,11 +20,11 @@ class _SchemeSection extends State<SchemeSection> {
 
   @override
   Widget build(BuildContext context) {
-    final settingsProvider = Provider.of<SettingsProvider>(context);
+    final settingsProvider = Provider.of<SettingsNotifier>(context);
     final schemeFuture = settingsProvider.getColorMode();
     //   final schemeFuture = widget.databaseSettingsRepository.getColorMode();
 
-    return Consumer<SettingsProvider>(builder: (context, SettingsProvider, _) {
+    return Consumer<SettingsNotifier>(builder: (context, SettingsProvider, _) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -113,7 +113,7 @@ class _SchemeSection extends State<SchemeSection> {
   }
 
   void saveScheme() async {
-    final settingsProvider = Provider.of<SettingsProvider>(context);
+    final settingsProvider = Provider.of<SettingsNotifier>(context);
     setState(() {
       isSchmeBtnLoading = true;
     });

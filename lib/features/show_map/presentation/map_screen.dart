@@ -5,8 +5,8 @@ import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/duty_dialogs.dart';
-import 'package:p12_basic_widgets/features/plant_smoke/application/smoke_provider.dart';
-import 'package:p12_basic_widgets/features/show_map/application/map_provider.dart';
+import 'package:p12_basic_widgets/features/plant_smoke/application/smoke_notifier.dart';
+import 'package:p12_basic_widgets/features/show_map/application/map_notifier.dart';
 import 'package:provider/provider.dart';
 
 class MapScreen extends StatefulWidget {
@@ -85,9 +85,9 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final SmokeProvider smokeProvider = Provider.of<SmokeProvider>(context);
-    final MapProvider mapProvider =
-        Provider.of<MapProvider>(context, listen: false);
+    final SmokeNotifier smokeProvider = Provider.of<SmokeNotifier>(context);
+    final MapNotifier mapProvider =
+        Provider.of<MapNotifier>(context, listen: false);
     if (_locationData == null) {
       return Scaffold(
         appBar: AppBar(
@@ -236,7 +236,7 @@ class _MapScreenState extends State<MapScreen> {
   }
 
   void _saveMarkerCoordinates(
-      double latitude, double longitude, MapProvider mapProvider) {
+      double latitude, double longitude, MapNotifier mapProvider) {
     debugPrint("\nNo Provider: \tlat: $latitude \tlong: $longitude");
     mapProvider.updateMarkerCoordinates(latitude, longitude);
     debugPrint(

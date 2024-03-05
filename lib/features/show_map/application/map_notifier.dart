@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
 
-class MapProvider extends ChangeNotifier {
+class MapNotifier extends ChangeNotifier {
   double _markerLat = 0;
   double _markerLong = 0;
   Color _markerColor = Colors.black;

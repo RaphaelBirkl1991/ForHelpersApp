@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
-import 'package:p12_basic_widgets/features/show_settings/application/settings_provider.dart';
+import 'package:p12_basic_widgets/features/show_settings/application/settings_notifier.dart';
 import 'package:p12_basic_widgets/features/show_settings/domain/enum_language.dart';
 import 'package:provider/provider.dart';
 
@@ -21,7 +21,7 @@ class _LanguageSection extends State<LanguageSection> {
   @override
   Widget build(BuildContext context) {
     //  final languageFuture = widget.databaseSettingsRepository.getLanguage();
-    return Consumer<SettingsProvider>(builder: (context, settingsProvider, _) {
+    return Consumer<SettingsNotifier>(builder: (context, settingsProvider, _) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -112,7 +112,7 @@ class _LanguageSection extends State<LanguageSection> {
 
   saveLanguage() async {
     final settingsProvider =
-        Provider.of<SettingsProvider>(context, listen: false);
+        Provider.of<SettingsNotifier>(context, listen: false);
     setState(() {
       isLangBtnLoading = true;
     });

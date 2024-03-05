@@ -9,23 +9,25 @@ import 'package:p12_basic_widgets/features/plant_smoke/data/firebase/firebase_sm
 import 'package:p12_basic_widgets/features/plant_smoke/domain/enum_additional_info.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/domain/enum_smoke_specification.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/domain/smoke_sign.dart';
+import 'package:vibration/vibration.dart';
 
-class SmokeProvider extends ChangeNotifier {
+class SmokeNotifier extends ChangeNotifier {
   final repository = FirebaseSmokeRepository();
   bool isSmokeActive = false;
   SmokeSign? _latestSmokeSign;
 
   SmokeSign? get latestSmokeSign => _latestSmokeSign;
 
-  SmokeProvider() {
+  SmokeNotifier() {
     listenToSmokeSigns();
   }
 
   void listenToSmokeSigns() {
     repository.smokeSign.listen((event) {
-      _latestSmokeSign = event.lastOrNull;
+      _latestSmokeSign = event.last;
       log("${ansiGreen}NEW EVENT$ansiGreenEnd");
       notifyListeners();
+      _vibrate();
     });
   }
 
@@ -134,6 +136,21 @@ class SmokeProvider extends ChangeNotifier {
     } else {
       log("anderer fehler");
       return 0.00;
+    }
+  }
+
+  void _vibrate() async {
+    bool? hasVibrator;
+    try {
+      hasVibrator = await Vibration.hasVibrator();
+    } catch (e) {
+      print(e);
+    }
+
+    if (hasVibrator ?? true) {
+      Vibration.vibrate(duration: 2000); // Vibrieren für 500 Millisekunden
+    } else {
+      print('Das Gerät hat keine Vibrationsfunktion.');
     }
   }
 }

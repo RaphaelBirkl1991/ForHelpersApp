@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/custom_navbar.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/duty_dialogs.dart';
-import 'package:p12_basic_widgets/features/plant_smoke/application/smoke_provider.dart';
+import 'package:p12_basic_widgets/features/plant_smoke/application/smoke_notifier.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/presentation/smoke_drawer.dart';
 import 'package:provider/provider.dart';
 
@@ -25,12 +25,12 @@ class _SmokeSignalScreenState extends State<SmokeSignalScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    return Consumer<SmokeProvider>(
+    return Consumer<SmokeNotifier>(
       builder:
-          (BuildContext context, SmokeProvider smokeProvider, Widget? child) {
-        if (smokeProvider.latestSmokeSign != null) {
-          dutyDialog.alarmActive(context);
-        }
+          (BuildContext context, SmokeNotifier smokeProvider, Widget? child) {
+        //   if (smokeProvider.latestSmokeSign != null) {
+        //     dutyDialog.alarmActive(context);
+        //   }
         return Scaffold(
           key: _scaffoldKey,
           drawer: const DrawerSmokeScreen(),
@@ -43,11 +43,18 @@ class _SmokeSignalScreenState extends State<SmokeSignalScreen> {
               const Spacer(),
               const Spacer(),
               Center(
-                child: Text(
-                  "Specify Signal and \nkeep trigger pressed \nto set smokesign",
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-              ),
+                  child: smokeProvider.latestSmokeSign != null
+                      ? Text(
+                          "${smokeProvider.latestSmokeSign?.specification.toString().split(".").last.toUpperCase()}\n\n"
+                          "${smokeProvider.latestSmokeSign?.addititonalInfo.map((e) => e.toString().split(".").last).join("\n")}\n\n"
+                          "${smokeProvider.latestSmokeSign?.timestamp.toDate()}\n\n",
+                          //  "${DateFormat('HH:mm:ss').format(smokeProvider.latestSmokeSign!.timestamp.toDate())}",
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        )
+                      : Text(
+                          "Specify Signal and \nkeep trigger pressed \nto set smokesign",
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        )),
               const Spacer(),
               Center(
                 child: smokeProvider.isSmokeActive

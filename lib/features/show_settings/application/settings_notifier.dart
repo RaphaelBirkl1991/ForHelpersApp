@@ -4,7 +4,7 @@ import 'package:p12_basic_widgets/features/show_settings/data/mock/mock_settings
 import 'package:p12_basic_widgets/features/show_settings/domain/enum_color_sheme.dart';
 import 'package:p12_basic_widgets/features/show_settings/domain/enum_language.dart';
 
-class SettingsProvider extends ChangeNotifier {
+class SettingsNotifier extends ChangeNotifier {
   late MockSettingsRepository _mockSettingsRepository;
   final _mockSettingsService = MockSettingsService();
 

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/duty_dialogs.dart';
-import 'package:p12_basic_widgets/features/plant_smoke/application/smoke_provider.dart';
+import 'package:p12_basic_widgets/features/plant_smoke/application/smoke_notifier.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/domain/enum_additional_info.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/domain/enum_smoke_specification.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/domain/smoke_sign.dart';
-import 'package:p12_basic_widgets/features/show_map/application/map_provider.dart';
+import 'package:p12_basic_widgets/features/show_map/application/map_notifier.dart';
 import 'package:provider/provider.dart';
 
 class DrawerSmokeScreen extends StatefulWidget {
@@ -35,8 +35,8 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final mapProvider = Provider.of<MapProvider>(context, listen: false);
-    final smokeProvider = Provider.of<SmokeProvider>(context, listen: false);
+    final mapProvider = Provider.of<MapNotifier>(context, listen: false);
+    final smokeProvider = Provider.of<SmokeNotifier>(context, listen: false);
     final SmokeSign smokeSign;
 
     return Drawer(

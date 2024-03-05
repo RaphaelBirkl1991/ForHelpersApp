@@ -3,7 +3,7 @@ import 'package:p12_basic_widgets/config/palette.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/custom_navbar.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/duty_dialogs.dart';
 import 'package:p12_basic_widgets/features/infrastructure/presentation/text_provider.dart';
-import 'package:p12_basic_widgets/features/plant_alarm/application/alarm_provider.dart';
+import 'package:p12_basic_widgets/features/plant_alarm/application/alarm_notifier.dart';
 import 'package:provider/provider.dart';
 
 class AlarmSignalScreen extends StatefulWidget {
@@ -38,9 +38,9 @@ class _AlarmSignalScreenState extends State<AlarmSignalScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AlarmProvider>(
+    return Consumer<AlarmNotifier>(
       builder:
-          (BuildContext context, AlarmProvider alarmProvider, Widget? child) {
+          (BuildContext context, AlarmNotifier alarmProvider, Widget? child) {
         return Scaffold(
           backgroundColor: alarmProvider.isAlarmActive ? dutyBgRed : dutyWhite,
           body: Column(

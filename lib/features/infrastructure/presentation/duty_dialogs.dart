@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
-import 'package:p12_basic_widgets/features/plant_smoke/application/smoke_provider.dart';
+import 'package:p12_basic_widgets/features/plant_smoke/application/smoke_notifier.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/presentation/smoke_drawer.dart';
-import 'package:p12_basic_widgets/features/show_map/application/map_provider.dart';
+import 'package:p12_basic_widgets/features/show_map/application/map_notifier.dart';
 import 'package:provider/provider.dart';
 
 class DutyDialogs {
   // SMOKE PLANTED
   Future<bool?> smokePlanted(BuildContext context) async {
-    final mapProvider = Provider.of<MapProvider>(context, listen: false);
+    final mapProvider = Provider.of<MapNotifier>(context, listen: false);
     return showDialog<bool>(
         context: context,
         builder: ((context) {
@@ -42,9 +42,9 @@ class DutyDialogs {
     return showDialog<void>(
       context: context,
       builder: ((context) {
-        return Consumer2<SmokeProvider, MapProvider>(
-          builder: (BuildContext context, SmokeProvider smokeProvider,
-              MapProvider mapProvider, Widget? child) {
+        return Consumer2<SmokeNotifier, MapNotifier>(
+          builder: (BuildContext context, SmokeNotifier smokeProvider,
+              MapNotifier mapProvider, Widget? child) {
             return AlertDialog(
                 icon: Icon(
                   Icons.mobile_friendly,
