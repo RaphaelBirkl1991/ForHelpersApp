@@ -1,14 +1,30 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/config/configuration_porvider.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/data/smoke_repository.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/domain/smoke_sign.dart';
+import 'package:p12_basic_widgets/platform_channel.dart';
 import 'package:provider/provider.dart';
 
 class FirebaseSmokeRepository implements SmokeRepository {
   final FirebaseFirestore _instance = FirebaseFirestore.instance;
+
+  FirebaseSmokeRepository() {
+    subscribeToSmokeSigns();
+  }
+
+  void subscribeToSmokeSigns() {
+    debugPrint("IN SUBSCRIBE TO SMOKE SIGNS");
+    _instance.collection("SmokeSign").snapshots().listen((snapshot) {
+      if (snapshot.docs.isNotEmpty) {
+        debugPrint("SMOKESIGNS COLLECTION IS NOT EMPTY");
+        PlatformChannel.nativeSetAlarm();
+      }
+    });
+  }
 
   @override
   Stream<List<SmokeSign>> get smokeSign {

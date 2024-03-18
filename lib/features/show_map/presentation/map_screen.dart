@@ -85,7 +85,8 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final SmokeNotifier smokeProvider = Provider.of<SmokeNotifier>(context);
+    final SmokeNotifier smokeProvider =
+        Provider.of<SmokeNotifier>(context, listen: false);
     final MapNotifier mapProvider =
         Provider.of<MapNotifier>(context, listen: false);
     if (_locationData == null) {
@@ -116,20 +117,22 @@ class _MapScreenState extends State<MapScreen> {
                 backgroundColor: dutyUnselectedGrey,
                 interactionOptions: const InteractionOptions(
                     flags: InteractiveFlag.all & ~InteractiveFlag.rotate),
-                onLongPress: isGeoMarkerActive
+                onTap: isGeoMarkerActive
                     ? (tapPosition, point) {
-                        _saveMarkerCoordinates(
-                            point.latitude, point.longitude, mapProvider);
-                        tapMarker = Marker(
-                          point: point,
-                          width: 80,
-                          height: 80,
-                          child: Icon(
-                            Icons.location_on,
-                            color: mapProvider.markerColor,
-                            size: 45,
-                          ),
-                        );
+                        setState(() {
+                          _saveMarkerCoordinates(
+                              point.latitude, point.longitude, mapProvider);
+                          tapMarker = Marker(
+                            point: point,
+                            width: 80,
+                            height: 80,
+                            child: Icon(
+                              Icons.location_on,
+                              color: mapProvider.markerColor,
+                              size: 45,
+                            ),
+                          );
+                        });
                       }
                     : null,
               ),
@@ -173,7 +176,7 @@ class _MapScreenState extends State<MapScreen> {
             ),
             Positioned(
               right: 0,
-              top: (MediaQuery.of(context).size.height - 70) /
+              top: (MediaQuery.of(context).size.height - 240) /
                   2, // Vertikal zentriert
               child: Container(
                   width: 65,
