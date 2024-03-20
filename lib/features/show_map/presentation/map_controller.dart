@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
-import 'package:p12_basic_widgets/features/show_map/application/map_service.dart';
 
 class MapController extends ChangeNotifier {
-  final mapService = MapService();
+  // final mapService = MapService();
 
   // final intelligenceController = Provider.of<IntelligenceController>();
   double _markerLat = 0;

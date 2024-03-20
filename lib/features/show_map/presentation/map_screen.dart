@@ -95,11 +95,11 @@ class _MapScreenState extends State<MapScreen> {
       );
     } else {
       return Scaffold(
-        appBar: AppBar(
-          title: _locationData != null
-              ? Text("${_locationData!.latitude}, ${_locationData!.longitude}")
-              : const Text("Loading..."),
-        ),
+        // appBar: AppBar(
+        //   title: _locationData != null
+        //       ? Text("${_locationData!.latitude}, ${_locationData!.longitude}")
+        //       : const Text("Loading..."),
+        // ),
         body: Stack(
           children: [
             FlutterMap(

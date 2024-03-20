@@ -12,6 +12,7 @@ class SettingsNotifier extends ChangeNotifier {
   }
 
   setLanguage(Language language) {
+    debugPrint("IN SETTTINGS NOTIFIER SET LANGUAGE");
     _firebaseSettingsRepo.setLanguage(language);
   }
 
@@ -20,6 +21,7 @@ class SettingsNotifier extends ChangeNotifier {
   }
 
   Future<void> setColorMode(ColorMode colorMode) {
+    debugPrint("DETTINGS NOTIFIER: SET_COLOR MODE");
     return _firebaseSettingsRepo.setColorMode(colorMode);
   }
 }

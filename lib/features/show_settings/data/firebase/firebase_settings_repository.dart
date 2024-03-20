@@ -45,6 +45,7 @@ class FirebaseSettingsRepository implements DatabaseSettingsRepository {
 
   @override
   Future<void> setColorMode(ColorMode mode) async {
+    print("FIREBASE SETTINGS REPO SET COLOR MODE");
     final settingsColRef = _firestore.collection("Settings");
     if (mode == ColorMode.lightmode) {
       await settingsColRef.doc("colorMode").update({

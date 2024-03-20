@@ -20,7 +20,8 @@ class _SchemeSection extends State<SchemeSection> {
 
   @override
   Widget build(BuildContext context) {
-    final settingsProvider = Provider.of<SettingsNotifier>(context);
+    final settingsProvider =
+        Provider.of<SettingsNotifier>(context, listen: false);
     final schemeFuture = settingsProvider.getColorMode();
     //   final schemeFuture = widget.databaseSettingsRepository.getColorMode();
 
@@ -113,7 +114,9 @@ class _SchemeSection extends State<SchemeSection> {
   }
 
   void saveScheme() async {
-    final settingsProvider = Provider.of<SettingsNotifier>(context);
+    debugPrint("IN SCHEME SECTION: SAVE SCHEME");
+    final settingsProvider =
+        Provider.of<SettingsNotifier>(context, listen: false);
     setState(() {
       isSchmeBtnLoading = true;
     });

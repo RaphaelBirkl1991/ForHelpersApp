@@ -111,6 +111,7 @@ class _LanguageSection extends State<LanguageSection> {
   }
 
   saveLanguage() async {
+    debugPrint("IN SAVE LANGUAGE");
     final settingsProvider =
         Provider.of<SettingsNotifier>(context, listen: false);
     setState(() {
