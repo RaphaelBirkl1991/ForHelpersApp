@@ -9,6 +9,7 @@ environment:
 dependencies:
   alarm: ^3.0.12
   ansicolor: ^2.0.2
+  audioplayers: ^5.2.1
   cloud_firestore: ^4.15.5
   firebase_auth: ^4.17.6
   firebase_core: ^2.25.4

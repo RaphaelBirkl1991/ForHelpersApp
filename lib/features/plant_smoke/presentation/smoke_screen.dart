@@ -61,6 +61,7 @@ class _SmokeSignalScreenState extends State<SmokeSignalScreen> {
                     ? ElevatedButton(
                         onPressed: () {
                           dutyDialog.confirmSmokeDeletetion(context);
+                          setState(() {});
                           //context
                           // widget.databaseSetSmokeRepository
                         },

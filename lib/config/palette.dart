@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // DUTY PALETTE
 const dutyWhite = Colors.white;
 
-const dutyGreen = Color.fromARGB(0, 19, 143, 83);
+const dutyGreen = Color.fromARGB(255, 19, 143, 83);
 const dutyBlue = Color(0xFF010536);
 const dutyRed = Color.fromARGB(255, 114, 4, 4);
 const dutyBgRed = Color.fromRGBO(255, 179, 179, 0.85);

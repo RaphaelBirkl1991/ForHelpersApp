@@ -65,9 +65,8 @@ class _MapScreenState extends State<MapScreen> {
   }
 
   void toggleGeoMarker() {
-    setState(() {
-      isGeoMarkerActive = !isGeoMarkerActive;
-    });
+    isGeoMarkerActive = !isGeoMarkerActive;
+    setState(() {});
   }
 
   void destroyGeoMarker() {
@@ -85,10 +84,8 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final SmokeNotifier smokeProvider =
-        Provider.of<SmokeNotifier>(context, listen: false);
-    final MapNotifier mapProvider =
-        Provider.of<MapNotifier>(context, listen: false);
+    final SmokeNotifier smokeProvider = Provider.of<SmokeNotifier>(context);
+    final MapNotifier mapProvider = Provider.of<MapNotifier>(context);
     if (_locationData == null) {
       return Scaffold(
         appBar: AppBar(
@@ -155,19 +152,6 @@ class _MapScreenState extends State<MapScreen> {
                     markers: tapMarker != null ? [tapMarker!] : [],
                   ),
                 ),
-
-                //   MarkerLayer(markers: [
-                //     Marker(
-                //         point: _locationData != null
-                //             ? LatLng(_locationData!.latitude ?? 30,
-                //                 _locationData!.longitude ?? 40)
-                //             : const LatLng(30, 40),
-                //         child: const Icon(
-                //           Icons.local_activity_outlined,
-                //           color: dutyRed,
-                //         ),),
-                //   ]
-                //   ),
                 CurrentLocationLayer(
                   alignPositionOnUpdate: AlignOnUpdate.never,
                   alignDirectionOnUpdate: AlignOnUpdate.never,
@@ -200,17 +184,9 @@ class _MapScreenState extends State<MapScreen> {
                             toggleGeoMarker();
                           },
                           child: isGeoMarkerActive
-                              ? const Icon(Icons.location_on, color: dutyGreen)
+                              ? const Icon(Icons.location_on)
                               : const Icon(Icons.location_off,
                                   color: dutyUnselectedGrey)),
-                      // GestureDetector(
-                      //     onTap: () {
-                      //       destroyGeoMarker();
-                      //     },
-                      //     child: Icon(
-                      //       Icons.exposure_minus_1_sharp,
-                      //       color: isGeoMarkerActive ? dutyRed : null,
-                      //     )),
                       GestureDetector(
                         onTap: () {},
                         child: const Icon(Icons.turn_right_outlined,
@@ -219,7 +195,6 @@ class _MapScreenState extends State<MapScreen> {
                       GestureDetector(
                         onTap: () {
                           _moveToCurrentLocation();
-                          //  smokeProvider.createSmokeSingal();
                         },
                         child: const Icon(Icons.adjust, color: dutyBlack),
                       )
