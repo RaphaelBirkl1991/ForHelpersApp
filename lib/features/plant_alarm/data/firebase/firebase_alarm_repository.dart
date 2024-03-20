@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:location/location.dart';
 import 'package:p12_basic_widgets/features/plant_alarm/data/database_alarm_repository.dart';
@@ -17,7 +18,7 @@ class FirebaseAlarmRepository implements DatabaseAlarmRepository {
       // LatLng(locationData!.latitude!, locationData!.longitude!);
       Position position = await Geolocator.getCurrentPosition();
     } catch (e) {
-      print("sth. went wrong");
+      debugPrint("sth. went wrong");
     }
   }
 

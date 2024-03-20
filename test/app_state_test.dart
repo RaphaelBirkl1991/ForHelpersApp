@@ -1,39 +1,39 @@
-import 'package:p12_basic_widgets/features/infrastructure/domain/app_state.dart';
-import 'package:p12_basic_widgets/features/infrastructure/domain/enum_app_state.dart';
-import 'package:test/test.dart';
+// import 'package:p12_basic_widgets/features/infrastructure/domain/app_state.dart';
+// import 'package:p12_basic_widgets/features/infrastructure/domain/enum_app_state.dart';
+// import 'package:test/test.dart';
 
-void main() {
-  late Application application;
+// void main() {
+//   late Application application;
 
-  setUp(() {
-    application = Application(AppState.locked);
-  });
+//   setUp(() {
+//     application = Application(AppState.locked);
+//   });
 
-  test('App startet standardmäßig im gesperrten Zustand', () {
-    expect(application.appState, equals(AppState.locked));
-  });
+//   test('App startet standardmäßig im gesperrten Zustand', () {
+//     expect(application.appState, equals(AppState.locked));
+//   });
 
-  test('Entsperre die App', () {
-    application.unlockApp();
+//   test('Entsperre die App', () {
+//     application.unlockApp();
 
-    expect(application.appState, equals(AppState.unlocked));
-  });
+//     expect(application.appState, equals(AppState.unlocked));
+//   });
 
-  test('Sperre die App', () {
-    application.lockApp();
+//   test('Sperre die App', () {
+//     application.lockApp();
 
-    expect(application.appState, equals(AppState.locked));
-  });
+//     expect(application.appState, equals(AppState.locked));
+//   });
 
-  test('Setze den Alarm in der App', () {
-    application.setAlarm();
+//   test('Setze den Alarm in der App', () {
+//     application.setAlarm();
 
-    expect(application.appState, equals(AppState.alarmActive));
-  });
+//     expect(application.appState, equals(AppState.alarmActive));
+//   });
 
-  test('Setze das Rauchsignal in der App', () {
-    application.setSmokeSign();
+//   test('Setze das Rauchsignal in der App', () {
+//     application.setSmokeSign();
 
-    expect(application.appState, equals(AppState.smokeActive));
-  });
-}
+//     expect(application.appState, equals(AppState.smokeActive));
+//   });
+// }

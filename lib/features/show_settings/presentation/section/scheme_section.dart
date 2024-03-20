@@ -24,92 +24,92 @@ class _SchemeSection extends State<SchemeSection> {
     final schemeFuture = settingsProvider.getColorMode();
     //   final schemeFuture = widget.databaseSettingsRepository.getColorMode();
 
-    return Consumer<SettingsNotifier>(builder: (context, SettingsProvider, _) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          FutureBuilder(
-            future: schemeFuture,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (snapshot.hasError) {
-                return const Text("An error occured");
-              } else {
-                final scheme = snapshot.data!;
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Color Schemes",
-                      style: TextStyle(fontSize: 25),
-                    ),
-                    const SizedBox(height: 15),
-                    RadioListTile(
-                      title: const Text('Default'),
-                      activeColor: Theme.of(context).primaryColor,
-                      value: 1,
-                      groupValue: _selectedValue,
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedValue = value as int;
-                        });
-                      },
-                      controlAffinity: ListTileControlAffinity.trailing,
-                    ),
-                    RadioListTile(
-                      title: const Text('Darkmode'),
-                      activeColor: Theme.of(context).primaryColor,
-                      value: 2,
-                      groupValue: _selectedValue,
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedValue = value as int;
-                        });
-                      },
-                      controlAffinity: ListTileControlAffinity.trailing,
-                    ),
-                    const SizedBox(height: 15),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        ElevatedButton(
-                          onPressed: schmeBtnEnabled(scheme)
-                              ? null
-                              : () {
-                                  saveScheme();
-                                },
-                          style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.resolveWith<Color>(
-                              (states) {
-                                if (states.contains(MaterialState.disabled)) {
-                                  return Colors.grey;
-                                }
-                                return Theme.of(context).primaryColor;
+    //  return Consumer<SettingsNotifier>(builder: (context, SettingsProvider, _) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        FutureBuilder(
+          future: schemeFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (snapshot.hasError) {
+              return const Text("An error occured");
+            } else {
+              final scheme = snapshot.data!;
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Color Schemes",
+                    style: TextStyle(fontSize: 25),
+                  ),
+                  const SizedBox(height: 15),
+                  RadioListTile(
+                    title: const Text('Default'),
+                    activeColor: Theme.of(context).primaryColor,
+                    value: 1,
+                    groupValue: _selectedValue,
+                    onChanged: (value) {
+                      setState(() {
+                        _selectedValue = value as int;
+                      });
+                    },
+                    controlAffinity: ListTileControlAffinity.trailing,
+                  ),
+                  RadioListTile(
+                    title: const Text('Darkmode'),
+                    activeColor: Theme.of(context).primaryColor,
+                    value: 2,
+                    groupValue: _selectedValue,
+                    onChanged: (value) {
+                      setState(() {
+                        _selectedValue = value as int;
+                      });
+                    },
+                    controlAffinity: ListTileControlAffinity.trailing,
+                  ),
+                  const SizedBox(height: 15),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      ElevatedButton(
+                        onPressed: schmeBtnEnabled(scheme)
+                            ? null
+                            : () {
+                                saveScheme();
                               },
-                            ),
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.resolveWith<Color>(
+                            (states) {
+                              if (states.contains(MaterialState.disabled)) {
+                                return Colors.grey;
+                              }
+                              return Theme.of(context).primaryColor;
+                            },
                           ),
-                          child: isSchmeBtnLoading
-                              ? const CircularProgressIndicator(
-                                  color: dutyWhite)
-                              : const Text(
-                                  "save",
-                                  style: TextStyle(color: dutyWhite),
-                                ),
                         ),
-                      ],
-                    ),
-                  ],
-                );
-              }
-            },
-          ),
-        ],
-      );
-    });
+                        child: isSchmeBtnLoading
+                            ? const CircularProgressIndicator(color: dutyWhite)
+                            : const Text(
+                                "save",
+                                style: TextStyle(color: dutyWhite),
+                              ),
+                      ),
+                    ],
+                  ),
+                ],
+              );
+            }
+          },
+        ),
+      ],
+    );
+    //  }
+    //   );
   }
 
   void saveScheme() async {
