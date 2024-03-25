@@ -160,12 +160,15 @@ class _MapScreenState extends State<MapScreen> {
             ),
             Positioned(
               right: 0,
-              top: (MediaQuery.of(context).size.height - 240) /
+              top: (MediaQuery.of(context).size.height - 80) /
                   2, // Vertikal zentriert
               child: Container(
-                  width: 65,
-                  height: 240,
-                  color: dutyWhite,
+                  width: 50,
+                  height: 220,
+                  decoration: BoxDecoration(
+                    color: dutyWhite,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
