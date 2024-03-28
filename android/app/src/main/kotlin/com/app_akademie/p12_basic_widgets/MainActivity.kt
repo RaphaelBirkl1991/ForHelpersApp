@@ -1,4 +1,4 @@
-package com.example.p12_basic_widgets
+package com.app_akademie.for_helpers
 
 import android.content.Context
 import android.media.MediaPlayer
