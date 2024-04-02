@@ -24,8 +24,9 @@ class SmokeNotifier extends ChangeNotifier {
 
   void listenToSmokeSigns() {
     repository.smokeSign.listen((event) {
-      _latestSmokeSign = event.last;
+      _latestSmokeSign = event.lastOrNull;
       log("${ansiGreen}NEW EVENT$ansiGreenEnd");
+      setSmokeMarker(_latestSmokeSign);
       notifyListeners();
       _vibrate();
     });
@@ -39,6 +40,11 @@ class SmokeNotifier extends ChangeNotifier {
   void stopSendingMode() {
     isSmokeActive = false;
     notifyListeners();
+  }
+
+  void setSmokeMarker(latestSmokeSign) {
+    final lat = latestSmokeSign?.latitude;
+    final long = latestSmokeSign?.longitude;
   }
 
   Future<void> createSmokeSignal(
@@ -66,6 +72,8 @@ class SmokeNotifier extends ChangeNotifier {
   Future<void> deleteSmokeSignal(context) async {
     debugPrint("\nSMOKE PROVIDER DELETE SMOKESIGNAL\n");
     repository.deleteSmokeSign(context);
+    _latestSmokeSign = null;
+    notifyListeners();
   }
 
   String getCurrentUserId() {

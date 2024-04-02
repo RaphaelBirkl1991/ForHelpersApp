@@ -28,9 +28,10 @@ class _SmokeSignalScreenState extends State<SmokeSignalScreen> {
     return Consumer<SmokeNotifier>(
       builder:
           (BuildContext context, SmokeNotifier smokeProvider, Widget? child) {
-        //   if (smokeProvider.latestSmokeSign != null) {
-        //     dutyDialog.alarmActive(context);
-        //   }
+        smokeProvider.addListener(() {
+          setState(() {});
+        });
+
         return Scaffold(
           key: _scaffoldKey,
           drawer: const DrawerSmokeScreen(),
@@ -62,8 +63,6 @@ class _SmokeSignalScreenState extends State<SmokeSignalScreen> {
                         onPressed: () {
                           dutyDialog.confirmSmokeDeletetion(context);
                           setState(() {});
-                          //context
-                          // widget.databaseSetSmokeRepository
                         },
                         style: ButtonStyle(
                             minimumSize:

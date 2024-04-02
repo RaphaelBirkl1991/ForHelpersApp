@@ -10,7 +10,6 @@ import 'package:p12_basic_widgets/features/show_map/application/map_notifier.dar
 import 'package:provider/provider.dart';
 
 class MapScreen extends StatefulWidget {
-  // final FirebaseSmokeRepository databaseSetSmokeRepository;
   const MapScreen({super.key});
 
   @override
@@ -26,6 +25,12 @@ class _MapScreenState extends State<MapScreen> {
   bool isOnDuty = false;
   final dutyDialog = DutyDialogs();
   Marker? tapMarker;
+  Marker testMarker = const Marker(
+      point: LatLng(48.59476, 10.98699),
+      child: Icon(Icons.pin_drop),
+      width: 40.00,
+      height: 40.00);
+
   bool isGeoMarkerActive = false;
 
   @override
@@ -85,7 +90,18 @@ class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     final SmokeNotifier smokeProvider = Provider.of<SmokeNotifier>(context);
+    smokeProvider.addListener(() {
+      print("$ansiGreen BEFORE SET STATE ! smokeprovider$ansiGreenEnd");
+      setState(() {});
+    });
     final MapNotifier mapProvider = Provider.of<MapNotifier>(context);
+    final LatLng? smokeLocation = smokeProvider.latestSmokeSign != null
+        ? LatLng(
+            smokeProvider.latestSmokeSign!.latitude,
+            smokeProvider.latestSmokeSign!.longitude,
+          )
+        : null;
+
     if (_locationData == null) {
       return Scaffold(
         appBar: AppBar(
@@ -95,11 +111,6 @@ class _MapScreenState extends State<MapScreen> {
       );
     } else {
       return Scaffold(
-        // appBar: AppBar(
-        //   title: _locationData != null
-        //       ? Text("${_locationData!.latitude}, ${_locationData!.longitude}")
-        //       : const Text("Loading..."),
-        // ),
         body: Stack(
           children: [
             FlutterMap(
@@ -149,15 +160,38 @@ class _MapScreenState extends State<MapScreen> {
                     dutyDialog.showSmokeDialog(destroyGeoMarker, context);
                   },
                   child: MarkerLayer(
-                    markers: tapMarker != null ? [tapMarker!] : [],
+                    markers: [
+                      //  testMarker,
+                      if (smokeLocation != null)
+                        // set the Marker for the smoke Signal
+                        Marker(
+                            point: smokeLocation,
+                            child: const Icon(Icons.location_on_rounded,
+                                color: Colors.red),
+                            width: 80,
+                            height: 80),
+
+                      if (tapMarker != null) tapMarker!
+                    ],
+                    // markers: tapMarker != null
+                    //     ? [tapMarker!, testMarker]
+                    //     : [testMarker],
                   ),
                 ),
+                // const MarkerLayer(markers: [
+                //   Marker(
+                //       point: LatLng(48.44, 11.07),
+                //       child: Text("Funny Marker"),
+                //       width: 40.00,
+                //       height: 40.00)
+                // ]),
                 CurrentLocationLayer(
                   alignPositionOnUpdate: AlignOnUpdate.never,
                   alignDirectionOnUpdate: AlignOnUpdate.never,
                 ),
               ],
             ),
+            //SideTool
             Positioned(
               right: 0,
               top: (MediaQuery.of(context).size.height - 80) /
