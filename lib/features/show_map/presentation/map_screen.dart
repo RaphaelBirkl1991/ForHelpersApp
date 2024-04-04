@@ -90,10 +90,10 @@ class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     final SmokeNotifier smokeProvider = Provider.of<SmokeNotifier>(context);
-    smokeProvider.addListener(() {
-      print("$ansiGreen BEFORE SET STATE ! smokeprovider$ansiGreenEnd");
-      setState(() {});
-    });
+    // smokeProvider.addListener(() {
+    //   print("$ansiGreen BEFORE SET STATE ! smokeprovider$ansiGreenEnd");
+    //   setState(() {});
+    // });
     final MapNotifier mapProvider = Provider.of<MapNotifier>(context);
     final LatLng? smokeLocation = smokeProvider.latestSmokeSign != null
         ? LatLng(
@@ -111,6 +111,11 @@ class _MapScreenState extends State<MapScreen> {
       );
     } else {
       return Scaffold(
+        appBar: AppBar(
+            title: Text(
+          "${mapProvider.markerLong} ${mapProvider.markerLat} ${smokeProvider.isMarkerSet}",
+          style: const TextStyle(fontSize: 16),
+        )),
         body: Stack(
           children: [
             FlutterMap(
@@ -127,6 +132,12 @@ class _MapScreenState extends State<MapScreen> {
                     flags: InteractiveFlag.all & ~InteractiveFlag.rotate),
                 onTap: isGeoMarkerActive
                     ? (tapPosition, point) {
+                        _saveMarkerCoordinates(
+                            point.latitude, point.longitude, mapProvider);
+                        smokeProvider.useMarkerCoordinates();
+                        print(
+                            "$ansiGreen isMarkerSet: ${smokeProvider.isMarkerSet} expected: true$ansiGreenEnd");
+                        print("$ansiGreen in: on tap $ansiGreenEnd");
                         setState(() {
                           _saveMarkerCoordinates(
                               point.latitude, point.longitude, mapProvider);
@@ -252,8 +263,10 @@ class _MapScreenState extends State<MapScreen> {
 
   void _saveMarkerCoordinates(
       double latitude, double longitude, MapNotifier mapProvider) {
+    final smokeNotifier = SmokeNotifier();
     debugPrint("\nNo Provider: \tlat: $latitude \tlong: $longitude");
     mapProvider.updateMarkerCoordinates(latitude, longitude);
+    smokeNotifier.useMarkerCoordinates();
     debugPrint(
         "Provider: \tlat: ${mapProvider.markerLat} \tlong: ${mapProvider.markerLong}\n");
   }

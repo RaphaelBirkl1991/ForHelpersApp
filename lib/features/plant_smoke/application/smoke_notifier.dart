@@ -9,12 +9,17 @@ import 'package:p12_basic_widgets/features/plant_smoke/data/firebase/firebase_sm
 import 'package:p12_basic_widgets/features/plant_smoke/domain/enum_additional_info.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/domain/enum_smoke_specification.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/domain/smoke_sign.dart';
+import 'package:p12_basic_widgets/features/show_map/application/map_notifier.dart';
+import 'package:provider/provider.dart';
 import 'package:vibration/vibration.dart';
 
 class SmokeNotifier extends ChangeNotifier {
   final repository = FirebaseSmokeRepository();
   bool isSmokeActive = false;
+  bool isMarkerSet = false;
   SmokeSign? _latestSmokeSign;
+
+  //  final mapNotifier = MapNotifier();
 
   SmokeSign? get latestSmokeSign => _latestSmokeSign;
 
@@ -48,14 +53,28 @@ class SmokeNotifier extends ChangeNotifier {
   }
 
   Future<void> createSmokeSignal(
+    double? markerLong,
+    double? markerLat,
     SmokeSpecification specification,
     List<AdditionalInformation> additionalInfo,
     String message,
   ) async {
     debugPrint("\nSMOKE PROVIDER CREATE SMOKESIGNAL\n");
     final String userId = getCurrentUserId();
-    final double latitude = await getCurrentLatitude();
-    final double longitude = await getCurrentLongitude();
+    // final double latitude = await getCurrentLatitude();
+    // final double longitude = await getCurrentLongitude();
+    final double? longitude;
+    final double? latitude;
+
+// TODO: isMarkerSet unnötig geht über null check
+
+    markerLong == null
+        ? longitude = await getCurrentLongitude()
+        : longitude = markerLong;
+    markerLat == null
+        ? latitude = await getCurrentLatitude()
+        : latitude = markerLat;
+
     final timestamp = Timestamp.now();
     final smokeSign = SmokeSign(
       userId,
@@ -70,9 +89,13 @@ class SmokeNotifier extends ChangeNotifier {
   }
 
   Future<void> deleteSmokeSignal(context) async {
+    final mapNotifier = Provider.of<MapNotifier>(context, listen: false);
     debugPrint("\nSMOKE PROVIDER DELETE SMOKESIGNAL\n");
     repository.deleteSmokeSign(context);
     _latestSmokeSign = null;
+
+    mapNotifier.setMarkerLat(null);
+    mapNotifier.setMarkerLong(null);
     notifyListeners();
   }
 
@@ -80,6 +103,26 @@ class SmokeNotifier extends ChangeNotifier {
     User? user = FirebaseAuth.instance.currentUser;
     return user?.uid ?? "";
   }
+
+  void useMarkerCoordinates() {
+    isMarkerSet = true;
+    print("$ansiGreen isMarkerSet: $isMarkerSet $ansiGreenEnd");
+    notifyListeners();
+  }
+
+  void useCurrentCoordinates() {
+    isMarkerSet = false;
+    print("$ansiGreen isMarkerSet: $isMarkerSet $ansiGreenEnd");
+    notifyListeners();
+  }
+
+  // Future<double> getMarkerLongitude() async {
+  //   return mapNotifier.markerLong;
+  // }
+
+  // Future<double> getMarkerLatitude() async {
+  //   return mapNotifier.markerLat;
+  // }
 
 //  TODO: move to location repo requst location service
   Future<double> getCurrentLongitude() async {
@@ -156,7 +199,7 @@ class SmokeNotifier extends ChangeNotifier {
     }
 
     if (hasVibrator ?? true) {
-      Vibration.vibrate(duration: 2000); // Vibrieren für 500 Millisekunden
+      Vibration.vibrate(duration: 200);
     } else {
       print('Das Gerät hat keine Vibrationsfunktion.');
     }

@@ -6,6 +6,8 @@ import 'package:p12_basic_widgets/features/show_map/application/map_notifier.dar
 import 'package:provider/provider.dart';
 
 class DutyDialogs {
+  final smokeNotifier = SmokeNotifier();
+
   // SMOKE PLANTED
   Future<bool?> smokePlanted(BuildContext context) async {
     final mapProvider = Provider.of<MapNotifier>(context, listen: false);
@@ -59,6 +61,7 @@ class DutyDialogs {
                       smokeProvider.stopSendingMode();
                       mapProvider.setMarkerColorBlue();
                       smokeProvider.deleteSmokeSignal(context);
+                      smokeNotifier.useCurrentCoordinates();
                       Navigator.of(context).pop();
                     },
                     child: const Text(
@@ -250,6 +253,7 @@ class DutyDialogs {
     );
   }
 
+// SHOW SMOKE DIALOG
   Future<void> showSmokeDialog(
       Function destroyGeoMarker, BuildContext context) {
     return showDialog(
@@ -263,12 +267,13 @@ class DutyDialogs {
               TextButton(
                   onPressed: () {
                     Navigator.pop(context);
+                    smokeNotifier.useMarkerCoordinates();
+
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: ((context) => (const DrawerSmokeScreen(
-                                // databaseSmokeRepository: FirebaseSmokeRepository(),
-                                )))));
+                            builder: ((context) =>
+                                (const DrawerSmokeScreen()))));
                   },
                   child: const Text(
                     "set Smoke",
@@ -277,6 +282,7 @@ class DutyDialogs {
               TextButton(
                   onPressed: () {
                     destroyGeoMarker();
+                    smokeNotifier.useCurrentCoordinates();
                     Navigator.of(context).pop();
                   },
                   child: const Text("destroy GeoPoint",

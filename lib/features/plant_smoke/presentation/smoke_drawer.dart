@@ -176,7 +176,9 @@ class _DrawerSmokeScreenState extends State<DrawerSmokeScreen> {
                           //  final currentSpecification = specification;
                           if (_specification != null) {
                             final currentSpecification = _specification!;
-                            await smokeProvider.createSmokeSignal(
+                            double? long = mapProvider.markerLong;
+                            double? lat = mapProvider.markerLat;
+                            await smokeProvider.createSmokeSignal(long, lat,
                                 currentSpecification, buildAddInfo(), "");
                           }
                         } finally {
