@@ -32,4 +32,20 @@ class SettingsNotifier extends ChangeNotifier {
   void setMapStyleDefault(MapNotifier mapNotifier) {
     mapNotifier.setMapStyleDefault();
   }
+
+  void setMapStyleTransportDark(MapNotifier mapNotifier) {
+    mapNotifier.setMapStyleTransportDark();
+  }
+
+  void setMapStyleLandscape(MapNotifier mapNotifier) {
+    mapNotifier.setMapStyleLandscape();
+  }
+
+  void setMapStyleOutdoors(MapNotifier mapNotifier) {
+    mapNotifier.setMapStyleOutdoor();
+  }
+
+  void setMapStyleHighContrast(MapNotifier mapNotifier) {
+    mapNotifier.setMapStyleHighContrast();
+  }
 }

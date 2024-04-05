@@ -63,4 +63,22 @@ class MapNotifier extends ChangeNotifier {
         "https://tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png?apikey=6a80985164084c78894e55b4f69f2db5";
     notifyListeners();
   }
+
+  void setMapStyleLandscape() {
+    mapUrl =
+        "https://tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey=6a80985164084c78894e55b4f69f2db5";
+    notifyListeners();
+  }
+
+  void setMapStyleOutdoor() {
+    mapUrl =
+        "https://tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey=6a80985164084c78894e55b4f69f2db5";
+    notifyListeners();
+  }
+
+  void setMapStyleHighContrast() {
+    mapUrl =
+        "https://tile.thunderforest.com/mobile-atlas/{z}/{x}/{y}.png?apikey=6a80985164084c78894e55b4f69f2db5";
+    notifyListeners();
+  }
 }
