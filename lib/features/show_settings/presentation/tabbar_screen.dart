@@ -7,10 +7,7 @@ import 'package:p12_basic_widgets/features/show_settings/presentation/settings_c
 import 'package:provider/provider.dart';
 
 class TabBarScreen extends StatelessWidget {
-  //  final DatabaseSettingsRepository databaseSettingsRepository;
-
   const TabBarScreen({super.key});
-  //  required this.databaseSettingsRepository,
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +35,11 @@ class TabBarScreen extends StatelessWidget {
             ),
             body: const TabBarView(
               children: <Widget>[
+                // SingleChildScrollView(
+                //  child:
                 SettingsColumn(),
-                //  databaseSettingsRepository: databaseSettingsRepository
+                //  ),
+
                 DocumentationColumn(),
                 AboutScreen(),
               ],

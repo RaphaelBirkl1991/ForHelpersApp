@@ -25,11 +25,6 @@ class _MapScreenState extends State<MapScreen> {
   bool isOnDuty = false;
   final dutyDialog = DutyDialogs();
   Marker? tapMarker;
-  Marker testMarker = const Marker(
-      point: LatLng(48.59476, 10.98699),
-      child: Icon(Icons.pin_drop),
-      width: 40.00,
-      height: 40.00);
 
   bool isGeoMarkerActive = false;
 
@@ -74,12 +69,6 @@ class _MapScreenState extends State<MapScreen> {
     setState(() {});
   }
 
-  void destroyGeoMarker() {
-    setState(() {
-      tapMarker = null;
-    });
-  }
-
   Future<void> showSmokePlantedDialog() async {
     bool? success = await dutyDialog.smokePlanted(context);
     if (success ?? false) {
@@ -90,10 +79,6 @@ class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     final SmokeNotifier smokeProvider = Provider.of<SmokeNotifier>(context);
-    // smokeProvider.addListener(() {
-    //   print("$ansiGreen BEFORE SET STATE ! smokeprovider$ansiGreenEnd");
-    //   setState(() {});
-    // });
     final MapNotifier mapProvider = Provider.of<MapNotifier>(context);
     final LatLng? smokeLocation = smokeProvider.latestSmokeSign != null
         ? LatLng(
@@ -158,9 +143,13 @@ class _MapScreenState extends State<MapScreen> {
 
               // LAYERS
               children: [
-                TileLayer(
-                  urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-                ),
+                TileLayer(urlTemplate: mapProvider.mapUrl
+
+                    //  "https://tile.thunderforest.com/neighbourhood/{z}/{x}/{y}.png?apikey=6a80985164084c78894e55b4f69f2db5"
+                    //   "https://tile.thunderforest.com/pioneer/{z}/{x}/{y}.png?apikey=6a80985164084c78894e55b4f69f2db5",
+                    //     "https://tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png?apikey=6a80985164084c78894e55b4f69f2db5",
+                    //  urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                    ),
                 const RichAttributionWidget(
                   attributions: [
                     TextSourceAttribution('OpenStreetMap contributors'),
@@ -184,18 +173,8 @@ class _MapScreenState extends State<MapScreen> {
 
                       if (tapMarker != null) tapMarker!
                     ],
-                    // markers: tapMarker != null
-                    //     ? [tapMarker!, testMarker]
-                    //     : [testMarker],
                   ),
                 ),
-                // const MarkerLayer(markers: [
-                //   Marker(
-                //       point: LatLng(48.44, 11.07),
-                //       child: Text("Funny Marker"),
-                //       width: 40.00,
-                //       height: 40.00)
-                // ]),
                 CurrentLocationLayer(
                   alignPositionOnUpdate: AlignOnUpdate.never,
                   alignDirectionOnUpdate: AlignOnUpdate.never,
@@ -269,5 +248,11 @@ class _MapScreenState extends State<MapScreen> {
     smokeNotifier.useMarkerCoordinates();
     debugPrint(
         "Provider: \tlat: ${mapProvider.markerLat} \tlong: ${mapProvider.markerLong}\n");
+  }
+
+  void destroyGeoMarker() {
+    setState(() {
+      tapMarker = null;
+    });
   }
 }

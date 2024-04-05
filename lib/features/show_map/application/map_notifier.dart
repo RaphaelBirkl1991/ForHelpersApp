@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:p12_basic_widgets/config/palette.dart';
 
 class MapNotifier extends ChangeNotifier {
   double? _markerLat;
   double? _markerLong;
   Color _markerColor = Colors.black;
-
+  Marker? tapMarker;
+//  String mapUrl = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
+  String mapUrl =
+      "https://tile.thunderforest.com/pioneer/{z}/{x}/{y}.png?apikey=6a80985164084c78894e55b4f69f2db5";
   double? get markerLat => _markerLat;
   double? get markerLong => _markerLong;
 
@@ -35,6 +39,28 @@ class MapNotifier extends ChangeNotifier {
   void updateMarkerCoordinates(double lat, double long) {
     _markerLat = lat;
     _markerLong = long;
+    notifyListeners();
+  }
+
+  void destroyTapMarker() {
+    tapMarker = null;
+    notifyListeners();
+  }
+
+  void setMapStylePioneer() {
+    mapUrl =
+        "https://tile.thunderforest.com/pioneer/{z}/{x}/{y}.png?apikey=6a80985164084c78894e55b4f69f2db5";
+    notifyListeners();
+  }
+
+  void setMapStyleDefault() {
+    mapUrl = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
+    notifyListeners();
+  }
+
+  void setMapStyleTransportDark() {
+    mapUrl =
+        "https://tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png?apikey=6a80985164084c78894e55b4f69f2db5";
     notifyListeners();
   }
 }

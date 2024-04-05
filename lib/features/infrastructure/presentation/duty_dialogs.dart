@@ -3,10 +3,12 @@ import 'package:p12_basic_widgets/config/palette.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/application/smoke_notifier.dart';
 import 'package:p12_basic_widgets/features/plant_smoke/presentation/smoke_drawer.dart';
 import 'package:p12_basic_widgets/features/show_map/application/map_notifier.dart';
+import 'package:p12_basic_widgets/features/show_map/presentation/map_screen.dart';
 import 'package:provider/provider.dart';
 
 class DutyDialogs {
   final smokeNotifier = SmokeNotifier();
+  final mapScreen = const MapScreen();
 
   // SMOKE PLANTED
   Future<bool?> smokePlanted(BuildContext context) async {
@@ -25,8 +27,11 @@ class DutyDialogs {
               actions: <Widget>[
                 TextButton(
                     onPressed: () {
+                      // hier will ich die Methode destroyTapMarker() auslösen
                       mapProvider.setMarkerColorYellow();
+
                       debugPrint("BEFORE POP");
+
                       Navigator.of(context).pop(true);
                     },
                     child: const Text(
