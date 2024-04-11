@@ -117,26 +117,28 @@ class _MapScreenState extends State<MapScreen> {
                     flags: InteractiveFlag.all & ~InteractiveFlag.rotate),
                 onTap: isGeoMarkerActive
                     ? (tapPosition, point) {
-                        _saveMarkerCoordinates(
-                            point.latitude, point.longitude, mapProvider);
-                        smokeProvider.useMarkerCoordinates();
+                        // _saveMarkerCoordinates(
+                        //     point.latitude, point.longitude, mapProvider);
+                        //  smokeProvider.useMarkerCoordinates();
                         print(
                             "$ansiGreen isMarkerSet: ${smokeProvider.isMarkerSet} expected: true$ansiGreenEnd");
                         print("$ansiGreen in: on tap $ansiGreenEnd");
-                        setState(() {
-                          _saveMarkerCoordinates(
-                              point.latitude, point.longitude, mapProvider);
-                          tapMarker = Marker(
-                            point: point,
-                            width: 80,
-                            height: 80,
-                            child: Icon(
-                              Icons.location_on,
-                              color: mapProvider.markerColor,
-                              size: 45,
-                            ),
-                          );
-                        });
+                        setState(
+                          () {
+                            _saveMarkerCoordinates(
+                                point.latitude, point.longitude, mapProvider);
+                            tapMarker = Marker(
+                              point: point,
+                              width: 80,
+                              height: 80,
+                              child: Icon(
+                                Icons.location_on,
+                                color: mapProvider.markerColor,
+                                size: 45,
+                              ),
+                            );
+                          },
+                        );
                       }
                     : null,
               ),
@@ -183,7 +185,7 @@ class _MapScreenState extends State<MapScreen> {
             ),
             //SideTool
             Positioned(
-              right: 0,
+              right: 8,
               top: (MediaQuery.of(context).size.height - 80) /
                   2, // Vertikal zentriert
               child: Container(
@@ -252,6 +254,8 @@ class _MapScreenState extends State<MapScreen> {
 
   void destroyGeoMarker() {
     setState(() {
+      MapNotifier mapNotifier = MapNotifier();
+      mapNotifier.destroyTapMarker();
       tapMarker = null;
     });
   }

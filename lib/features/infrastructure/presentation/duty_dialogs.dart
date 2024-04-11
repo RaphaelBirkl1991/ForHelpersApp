@@ -28,8 +28,8 @@ class DutyDialogs {
                 TextButton(
                     onPressed: () {
                       // hier will ich die Methode destroyTapMarker() auslösen
-                      mapProvider.setMarkerColorYellow();
-
+                      // mapProvider.setMarkerColorYellow();
+                      mapProvider.destroyTapMarker();
                       debugPrint("BEFORE POP");
 
                       Navigator.of(context).pop(true);

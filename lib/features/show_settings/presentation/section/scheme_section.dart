@@ -81,6 +81,7 @@ class _SchemeSection extends State<SchemeSection> {
                             ? null
                             : () {
                                 saveScheme();
+                                settingsProvider.changeThemeData();
                               },
                         style: ButtonStyle(
                           backgroundColor:

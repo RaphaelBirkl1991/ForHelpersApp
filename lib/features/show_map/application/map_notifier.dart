@@ -8,8 +8,7 @@ class MapNotifier extends ChangeNotifier {
   Color _markerColor = Colors.black;
   Marker? tapMarker;
 //  String mapUrl = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
-  String mapUrl =
-      "https://tile.thunderforest.com/pioneer/{z}/{x}/{y}.png?apikey=6a80985164084c78894e55b4f69f2db5";
+  String mapUrl = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
   double? get markerLat => _markerLat;
   double? get markerLong => _markerLong;
 
@@ -36,7 +35,7 @@ class MapNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateMarkerCoordinates(double lat, double long) {
+  void updateMarkerCoordinates(double? lat, double? long) {
     _markerLat = lat;
     _markerLong = long;
     notifyListeners();
@@ -44,6 +43,9 @@ class MapNotifier extends ChangeNotifier {
 
   void destroyTapMarker() {
     tapMarker = null;
+    _markerLat = null;
+    _markerLong = null;
+    updateMarkerCoordinates(null, null);
     notifyListeners();
   }
 

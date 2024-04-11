@@ -9,7 +9,7 @@ class AppOnboarding extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: AppTheme.themeData,
+        theme: AppTheme.themeDataLightMode,
         home: const InitSplashScreen(),
         routes: {
           "/registration": (context) => const InitRegistrationScreen(),

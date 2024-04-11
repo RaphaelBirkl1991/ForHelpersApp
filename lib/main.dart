@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:p12_basic_widgets/app.dart';
-import 'package:p12_basic_widgets/config/app_theme.dart';
 import 'package:p12_basic_widgets/config/configuration_porvider.dart';
 import 'package:p12_basic_widgets/features/initial_use/applicatiopn/init_use_provider.dart';
 import 'package:p12_basic_widgets/features/plant_alarm/application/alarm_notifier.dart';
@@ -26,7 +25,11 @@ void main() async {
         ChangeNotifierProvider(create: (context) => ConfigurationProvider()),
         ChangeNotifierProvider(create: (context) => SettingsNotifier()),
       ],
-      child: MaterialApp(theme: AppTheme.themeData, home: const App()),
+      builder: (context, child) {
+        final settingNotifier = Provider.of<SettingsNotifier>(context);
+        return MaterialApp(
+            theme: settingNotifier.currentTheme, home: const App());
+      },
     ),
   );
   // Future<void> onDidReceiveLocalNotification(
