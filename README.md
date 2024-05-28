@@ -6,13 +6,35 @@
 
 ### This repo is created for an tasksheet but I will also use it to keep track of the actual status of the 4H-App
 
-## 2. The Tasksheet
+## 2. The App
 
-### The main goals are
+### 2.1 Set a Marker on the Map
 
-### A: create the login screens for the own app in flutter
+![set_marker](assets/md-assets/n_set_marker.png)
 
-### B: simulate the Database with an Database Repository
+### 2.2 Manipulate the Marker
+
+![manipulate_marker](assets/md-assets/n_manipulate_marker.png)
+
+### 2.3 Specify your Signal
+
+![specify_signal](assets/md-assets/n_specify_signal.png)
+
+### 2.4 Plant Signal
+
+![plant_signal](assets/md-assets/n_signal_planted.png)
+
+### 2.5 Signal Mode
+
+![signal_mode](assets/md-assets/n_signal_mode.png)
+
+### 2.6 Inform other Devices
+
+![inform_other_devices](assets/md-assets/n_inform_other_devices.png)
+
+### 2.7 Emergency properly handled? Delete your Signal
+
+![delete_signal](assets/md-assets/n_delete_signal.png)
 
 ## 3. The Screens
 

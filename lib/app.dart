@@ -6,6 +6,7 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("IN APP BUILD");
     return const SplashScreen();
   }
 }

@@ -88,19 +88,19 @@ class _MapScreenState extends State<MapScreen> {
         : null;
 
     if (_locationData == null) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text("loading..."),
-        ),
-        body: const Center(child: CircularProgressIndicator()),
+      return const Scaffold(
+        // appBar: AppBar(
+        //   title: const Text("loading..."),
+        // ),
+        body: Center(child: CircularProgressIndicator()),
       );
     } else {
       return Scaffold(
-        appBar: AppBar(
-            title: Text(
-          "${mapProvider.markerLong} ${mapProvider.markerLat} ${smokeProvider.isMarkerSet}",
-          style: const TextStyle(fontSize: 16),
-        )),
+        // appBar: AppBar(
+        //     title: Text(
+        //   "${mapProvider.markerLong} ${mapProvider.markerLat} ${smokeProvider.isMarkerSet}",
+        //   style: const TextStyle(fontSize: 16),
+        // )),
         body: Stack(
           children: [
             FlutterMap(
